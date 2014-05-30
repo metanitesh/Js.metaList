@@ -1,0 +1,46 @@
+body{
+	background: url("../images/10.jpg");
+}
+
+#lists{
+	position: absolute;
+	width: 270px;
+	left: 0;
+	bottom: 0;
+	top:0;
+	background: #eee url("../images/sidebar.png");
+}
+
+#tasks{
+	position: absolute;
+	left: 270px;
+	top:0px;
+	bottom: 0px;
+	right: 370px;
+}
+
+#details{
+	position: absolute;
+	right: 0;
+	top:0;
+	bottom:0;
+	width: 360px;
+	background: #fff;
+
+}
+.logo_container{
+	background: url("../images/sidebar_logo.png");
+	height: 37px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+	border-bottom:1px solid #afafaf;
+}
+.logo{
+	background: url("../images/logo.png");
+	width: 78px;
+	height: 18px;
+}
+
+.addTask{
+	top:6px;
+	position: absolute;
+}
