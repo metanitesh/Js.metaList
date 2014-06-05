@@ -1,0 +1,25 @@
+#sidebar{
+	float: left;
+	width: 21%;
+	height: 800px;
+	background-color: #eee;
+	box-sizing: border-box; 
+}
+
+#main-content{
+	float: left;
+	width: 50%;
+	height: 800px;
+	padding-right: 10px;
+	padding-left: 10px;
+	box-sizing: border-box; 
+
+	
+}	
+#detail{
+	float: right;
+	width:28%;
+	height: 800px;
+	background-color: #444;
+
+}
