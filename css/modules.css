@@ -6,10 +6,89 @@
 	padding-top:10px; 
 	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
 	border-bottom:1px solid #afafaf;
+	text-align: center;
+	font-weight: bold;
 }
 .logo{
 	background: url("../images/logo.png");
 	width: 78px;
 	height: 18px;
 	margin: 0 auto;
+
 }
+
+
+/*list module*/
+
+.list{
+	background : url("../images/divider.png") center bottom repeat-x;
+	padding: 8px;	
+	cursor: pointer;
+}
+
+
+.list .title{
+	margin-left: 15px;
+	text-overflow: ellipsis;
+}
+
+/* list states*/
+.list-active{
+	background: url("../images/list-active.jpg");
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+	background-position: bottom; 
+	height: 20px;
+}
+
+/*icon module*/
+.icon {
+	display: inline-block;
+	background-image: url("../images/icons.png");
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.icon-list {
+	background-position: -621px -254px;
+	width: 20px;
+	height: 20px
+}
+
+.icon-delete {
+	background-position: -591px -192px;
+	width: 20px;
+	height: 20px;
+}
+
+/*add task module*/
+
+.add-task-container{
+	padding-top: 20px;
+}
+
+.add-task{
+	
+	display: block;
+	background: none;
+	border:none;
+
+	width: 90%;
+	margin: 0 auto;
+	padding: 10px 0;
+	
+	
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: rgba(0, 0, 0, 0.8) 0px 1px 2px;
+	-webkit-font-smoothing: antialiased;
+	text-indent: 20px;
+	
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.298039) 0px, rgba(0, 0, 0, 0.0980392) 100%);
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 4px 0px inset, rgba(255, 255, 255, 0.4) 0px 1px 0px 0px;
+	border-radius: 4px;
+	outline: none;	
+
+}	
