@@ -18,7 +18,7 @@
 }
 
 
-/*list module*/
+/*list-item module*/
 
 .list{
 	background : url("../images/divider.png") center bottom repeat-x;
@@ -41,6 +41,9 @@
 	height: 20px;
 }
 
+
+/*add list module*/
+
 /*icon module*/
 .icon {
 	display: inline-block;
@@ -61,6 +64,23 @@
 	height: 20px;
 }
 
+.icon-task-checkbox{
+	background-position: -495px -394px;
+	width: 20px;
+	height: 18px;	
+}
+
+.icon-task-checked{
+	background-position: -515px -394px;
+	width: 20px;
+	height: 18px;
+}
+.icon-task-separator {
+	background-position: -517px -34px;
+	width: 2px;
+	height: 33px;
+}
+
 /*add task module*/
 
 .add-task-container{
@@ -77,9 +97,7 @@
 	margin: 0 auto;
 	padding: 10px 0;
 	
-	
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 13px;
+
 	font-weight: bold;
 	color: #fff;
 	text-shadow: rgba(0, 0, 0, 0.8) 0px 1px 2px;
@@ -92,3 +110,32 @@
 	outline: none;	
 
 }	
+
+/*task-item module*/
+.task-group{
+	width: 89%;
+	margin: 13px auto 0;
+}
+
+.task-item-body{
+
+	margin-bottom:4px;
+	height: 34px;
+	border-radius: 4px;
+	padding-left: 9px;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.08);
+	background:  url("../images/task.png") repeat-x;
+	box-shadow: -42 1px 3px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.task-item-body .task-title{
+	padding-left: 4px;
+}
+
+/* task-item module states */
+.task-done{
+	opacity: .6;
+}
+
+
+
