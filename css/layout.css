@@ -1,15 +1,16 @@
 #sidebar{
 	float: left;
 	width: 21%;
-	height: 800px;
-	background-color: #eee;
+	height: 100%;
+	/*background-color: #eee;*/
+	background: #eee url("../images/sidebar.png");
 	box-sizing: border-box; 
 }
 
 #main-content{
 	float: left;
 	width: 50%;
-	height: 800px;
+	height: 100%;
 	padding-right: 10px;
 	padding-left: 10px;
 	box-sizing: border-box; 
@@ -17,9 +18,10 @@
 	
 }	
 #detail{
-	float: right;
+	float: left;
 	width:28%;
-	height: 800px;
-	background-color: #444;
+	height: 100%;
+	padding: 18px 18px 18px 0;
+	box-sizing: border-box;
 
 }

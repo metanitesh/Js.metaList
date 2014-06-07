@@ -223,19 +223,28 @@ divider module
  comment module 
 **************/
 .comment-container{
-	margin-top: 50px;
+	width: 90%;
+	margin: 40px auto 0;
+
 
 }
 
+.comment{
+	background : url("../images/divider.png") center bottom repeat-x;
+	padding: 8px 12px;	
+	cursor: pointer;			
+}
+
 .add-comment{
+	margin-top: 50px;
 	display: block;
 	background: none;
 	border:none;
 
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 	padding: 5px 0;
-	
+	margin-top: 20px;	
 
 
 	text-shadow: 0 1px 0 #fff;
