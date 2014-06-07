@@ -1,0 +1,10 @@
+.hidden{
+	display: none;
+}
+
+.text-color-flip{
+	-webkit-font-smoothing: antialiased;
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+
