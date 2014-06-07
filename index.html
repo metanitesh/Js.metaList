@@ -1,149 +1,147 @@
 <html>
+
 <head>
-	<title>Meta List</title>
-	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/layout.css">
-	<link rel="stylesheet" href="css/modules.css">
-	<link rel="stylesheet" href="css/modules_layouts.css">
-	<link rel="stylesheet" href="css/states.css">
+    <title>Meta List</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/modules.css">
+    <link rel="stylesheet" href="css/states.css">
 </head>
+
 <body>
-	<div class="main-interace">
-		<div id="sidebar">
-			<div class="logo-container">
-				metalist
-			</div>
-			<ul "list-container">
-				<li class="list ">
+    <div class="main-interace">
+        <div id="sidebar">
+            <div class="logo-container">
+                <span>metalist</span>
+            </div>
+            <ul "list-container">
+                <li class="list ">
 
-					<span class="icon icon-list"></span>
-					<span class="icon icon-delete right"></span>
-					<span class="title"> today</span>
+                    <span class="icon icon-list"></span>
+                    <span class="icon icon-delete right"></span>
+                    <span class="title">today</span>
 
-					<span class="input-wrapper hidden">
-						<input type="text" class="edit" maxlength="255">
-					</span>
-				</li>
-				<li class="list ">
+                    
+                </li>
+                <li class="list ">
 
-					<span class="icon icon-list"></span>
-					<span class="icon icon-delete right"></span>
-					<span class="title"> work</span>
+                    <span class="icon icon-list"></span>
+                    <span class="icon icon-delete right"></span>
+                    <span class="title">work</span>
 
-					<span class="input-wrapper hidden">
-						<input type="text" class="edit" maxlength="255">
-					</span>
-				</li>
-				<li class="list ">
+                    
+                </li>
+                <li class="list ">
 
-					<span class="icon icon-list"></span>
-					<span class="icon icon-delete right"></span>
-					<span class="title"> life</span>
+                    <span class="icon icon-list"></span>
+                    <span class="icon icon-delete right"></span>
+                    <span class="title">life</span>
 
-					<span class="input-wrapper hidden">
-						<input type="text" class="edit" maxlength="255">
-					</span>
-				</li>
-				<li class="list list-active">
+                    
+                </li>
+                <li class="list list-active">
 
-					<span class="icon icon-list"></span>
-					<span class="icon icon-delete right"></span>
-					<span class="title"> new list</span>
+                    <span class="icon icon-list icon-list-active"></span>
+                    <span class="icon icon-delete right"></span>
+                    <span class="title">new list</span>
 
-					<span class="input-wrapper hidden">
-						<input type="text" class="edit" maxlength="255">
-					</span>
-				</li>
-				<li class="list">
-					<input type="text" placeholder="+ Add new list">
-				</li>
-			</ul>
-		</div>
-		<div id="main-content">
-			<div class="add-task-container">
-				<input type="text" class="add-task" placeholder="add a new task"/>
-			</div>	
-			<div class="task-group">
-				<ul class="task-remaining">
-					<li class="task-item-body">
-						<span class="icon icon-task-checkbox"></span>
-						<span class="icon icon-task-separator"></span>
-						<span class="task-title">complete this app</span>
-					</li>
+                   
+                </li>
+                <li class="list">
+                    <input type="text" placeholder="+ Add new list">
+                </li>
+            </ul>
+        </div>
+        <div id="main-content">
+            <div class="add-task-container">
+                <input type="text" class="add-task" placeholder="add a new task" />
+            </div>
+            <div class="task-group">
+                <ul class="task-remaining">
+                    <li class="task-item">
+                        <span class="icon icon-task-checkbox"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title">complete this app</span>
+                    </li>
 
-					<li class="task-item-body">
-						<span class="icon icon-task-checkbox"></span>
-						<span class="icon icon-task-separator"></span>
-						<span class="task-title">complete this app</span>
-					</li>
+                    <li class="task-item">
+                        <span class="icon icon-task-checkbox"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title">complete this app</span>
+                    </li>
 
-					<li class="task-item-body">
-						<span class="icon icon-task-checkbox"></span>
-						<span class="icon icon-task-separator"></span>
-						<span class="task-title">complete this app</span>
-					</li>
+                    <li class="task-item">
+                        <span class="icon icon-task-checkbox"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title">complete this app</span>
+                    </li>
 
 
 
-				</ul>
-				<h1 class="text-color-flip"> completed task </h1>
-				<ul class="task-complete">
-					<li class="task-item-body task-done">
-						<span class="icon icon-task-checkbox icon-task-checked"></span>
-						<span class="icon icon-task-separator"></span>
-						<span class="task-title">complete this app</span>
-					</li><li class="task-item-body task-done">
-					<span class="icon icon-task-checkbox icon-task-checked"></span>
-					<span class="icon icon-task-separator"></span>
-					<span class="task-title">complete this app</span>
-				</li><li class="task-item-body task-done">
-				<span class="icon icon-task-checkbox icon-task-checked"></span>
-				<span class="icon icon-task-separator"></span>
-				<span class="task-title">complete this app</span>
-			</li>
-		</ul>
-	</div>
-</div>
-<div id="detail">
-	
+                </ul>
+                <h1 class="text-color-flip">completed task</h1>
 
-	<div class="panel">
-		<div class="panel-title">
-			<span>complete this app</span>
-		</div>
-		
-		<div class="panel-heading">
-			<h1 > contnet </h1>		
-			<p class="divider"></p>
-		</div>
+                <ul class="task-complete">
+                    <li class="task-item task-done">
+                        <span class="icon icon-task-checkbox icon-task-checked"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title">complete this app</span>
+                    </li>
+                    <li class="task-item task-done">
+                        <span class="icon icon-task-checkbox icon-task-checked"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title">complete this app</span>
+                    </li>
+                    <li class="task-item task-done">
+                        <span class="icon icon-task-checkbox icon-task-checked"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title">complete this app</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="detail">
 
-		<div class="note-container">
-				<textarea class="note"></textarea>
-		</div>
-		
 
-		<div class="panel-heading">
-			<h1 > comments </h1>		
-			<p class="divider"></p>
-		</div>
+            <div class="panel">
+                <div class="panel-title">
+                    <span>complete this app</span>
+                </div>
 
-		<div class="comment-container">
-			<ul class="comments">
-				<li class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, sed.</li>
-				<li class="comment">some awesome comment</li>
-				<li class="comment">a little more</li>
-			</ul>
-			<input type="text" class="add-comment" placeholder="add comment"/>
-		</div>
-	</div>
+                <h1 class="panel-heading">
+                    <span>contnet</span>
+                </h1>
 
-</div>
-<div class="clr"></div>
-</div>
-<div class="module-sandbox">
+                <div class="note-container">
+                    <textarea class="note"></textarea>
+                </div>
 
-</div>
-		<!--
+
+
+                <h1 class="panel-heading">
+                    <span>comments</span>
+                </h1>
+
+
+                <div class="comment-container">
+                    <ul class="comments">
+                        <li class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, sed.</li>
+                        <li class="comment">some awesome comment</li>
+                        <li class="comment">a little more</li>
+                    </ul>
+                    <div class="add-comment-container">
+                        <input type="text" class="add-comment"  placeholder="add comment" />                                
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clr"></div>
+    </div>
+    <div class="module-sandbox">
+
+    </div>
+    <!--
 		<div class="main l-fluide">
 				
 										<div id="lists">
@@ -168,6 +166,7 @@
 				
 		</div>
 	-->
-	<script src="lib/jquery-1.11.1.js"></script>
+    <script src="lib/jquery-1.11.1.js"></script>
 </body>
+
 </html>
