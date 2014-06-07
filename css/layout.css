@@ -2,21 +2,18 @@
 	float: left;
 	width: 21%;
 	height: 100%;
-	/*background-color: #eee;*/
 	background: #eee url("../images/sidebar.png");
-	box-sizing: border-box; 
 }
 
 #main-content{
 	float: left;
 	width: 50%;
 	height: 100%;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding:0 10px;
 	box-sizing: border-box; 
-
 	
 }	
+
 #detail{
 	float: left;
 	width:28%;
