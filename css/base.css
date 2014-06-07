@@ -1,8 +1,49 @@
 body{
 	padding: 0;
 	margin: 0;
-	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
+	font-size: 13px;
+	font-weight: 500;
+	text-shadow: 0 1px 0 #fff;
+
 	background: url("../images/10.jpg");
 	background-color: #CE5251;
+	color: #423e3e;
 }
 
+h1{
+	font-size: 13px;
+}
+
+ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	color: #423e3e;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #423e3e;
+}
+
+textarea, input{
+	outline: none;
+	background: transparent;
+	font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
+	border: none;
+	resize: none;
+	line-height: 26px;
+	font-size: 13px;
+	font-weight: 500;
+
+}
+
+pre{
+	font-size: 13px;
+	font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
+	line-height: 26px;
+}
