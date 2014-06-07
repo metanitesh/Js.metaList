@@ -111,7 +111,9 @@
 
 }	
 
-/*task-item module*/
+/***************
+task-item module
+***************/
 .task-group{
 	width: 89%;
 	margin: 13px auto 0;
@@ -138,13 +140,15 @@
 }
 
 
-/*panel module*/
+/************
+ panel module
+*************/
 .panel{
-	height: 100%;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
 	border-radius: 4px;
 	background: #e9e9e9 url("../images/detail.png");
-
+	height: 100%;
+	overflow: scroll;
 }
 
 .panel-title{
@@ -157,20 +161,90 @@
 	border-bottom:1px solid rgba(0,0,0,0.24); 
 }
 
-/* note module*/
-.note{
-	background: #f8f5db;
-	background-image: -webkit-linear-gradient(#dee2d0 1px,transparent 1px);
-	background-size: 100% 26px;
+.panel-heading{
+	position: relative;
+	margin-bottom: 25px; 
+}
 
-    /*background-image: -webkit-linear-gradient(#dee2d0 1px,transparent 1px);*/
-    padding: 8px 15px;
-    margin: 20px;
-    border: 1px solid #cfcfcf;
-    line-height: 26px;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.1),inset 0 1px 0 #f8f5db;
-    min-height: 128px;
+.panel-heading h1{
+	position: absolute;
+	top:5px;
+	width: 100%;
+	font-weight: normal;
+	text-align: center;
+	background-color: #eee;
+}
+
+.panel-heading .divider{
+	position: absolute;
+	top:10px;
+	height: 1px;
+	width: 100%;
 }
 
 
 
+/***********
+ note module
+************/
+.note-container{
+	
+	padding: 20px;
+}
+
+.note{
+		
+	background: #f8f5db;
+	background-image: -webkit-linear-gradient(#dee2d0 1px,transparent 1px);
+	background-size: 100% 26px;
+    padding: 9px 15px;
+    border: 1px solid #cfcfcf;
+    line-height: 26px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1),inset 0 1px 0 #f8f5db;
+	min-height: 237px;
+	box-sizing: border-box;
+}
+
+.note-container textarea{
+	width: 100%;
+
+}
+
+
+/*************
+divider module
+*************/
+.divider{
+	height: 3px;
+	background: url("../images/divider.png") repeat-x
+}
+
+/**************
+ comment module 
+**************/
+.comment-container{
+	margin-top: 50px;
+
+}
+
+.add-comment{
+	display: block;
+	background: none;
+	border:none;
+
+	width: 90%;
+	margin: 0 auto;
+	padding: 5px 0;
+	
+
+
+	text-shadow: 0 1px 0 #fff;
+
+
+	text-indent: 20px;
+	
+   
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 4px 0px inset, rgba(255, 255, 255, 0.4) 0px 0px 0px 0px;
+	border-radius: 4px;
+	outline: none;		
+}
