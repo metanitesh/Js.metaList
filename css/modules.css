@@ -1,4 +1,6 @@
-/*logo module*/
+/************
+ logo module
+************/
 
 .logo-container{
 	background: url("../images/sidebar_logo.png");
@@ -9,16 +11,10 @@
 	text-align: center;
 	font-weight: bold;
 }
-.logo{
-	background: url("../images/logo.png");
-	width: 78px;
-	height: 18px;
-	margin: 0 auto;
 
-}
-
-
-/*list-item module*/
+/****************
+list-item module
+*****************/
 
 .list{
 	background : url("../images/divider.png") center bottom repeat-x;
@@ -29,22 +25,20 @@
 
 .list .title{
 	margin-left: 15px;
-	text-overflow: ellipsis;
+	width:30%;
 }
 
-/* list states*/
+/****** list states  ********/
 .list-active{
-	background: url("../images/list-active.jpg");
+	background: url("../images/list-active.jpg") center bottom;
 	color: #fff;
 	text-shadow: 0 1px 2px rgba(0,0,0,0.45);
-	background-position: bottom; 
-	height: 20px;
 }
 
+/***********
+icon module
+************/
 
-/*add list module*/
-
-/*icon module*/
 .icon {
 	display: inline-block;
 	background-image: url("../images/icons.png");
@@ -56,6 +50,10 @@
 	background-position: -621px -254px;
 	width: 20px;
 	height: 20px
+}
+
+.icon-list-active{
+	background-position: -581px -254px;
 }
 
 .icon-delete {
@@ -81,7 +79,9 @@
 	height: 33px;
 }
 
-/*add task module*/
+/**************
+add task module
+***************/
 
 .add-task-container{
 	padding-top: 20px;
@@ -114,27 +114,27 @@
 /***************
 task-item module
 ***************/
+
 .task-group{
 	width: 89%;
 	margin: 13px auto 0;
 }
 
-.task-item-body{
+.task-item{
 
 	margin-bottom:4px;
 	height: 34px;
 	border-radius: 4px;
 	padding-left: 9px;
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.08);
 	background:  url("../images/task.png") repeat-x;
 	box-shadow: -42 1px 3px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.08);
 }
 
-.task-item-body .task-title{
+.task-item .task-title{
 	padding-left: 4px;
 }
 
-/* task-item module states */
+/**** task-item module states **********/
 .task-done{
 	opacity: .6;
 }
@@ -143,6 +143,7 @@ task-item module
 /************
  panel module
 *************/
+
 .panel{
 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
 	border-radius: 4px;
@@ -162,33 +163,31 @@ task-item module
 }
 
 .panel-heading{
-	position: relative;
-	margin-bottom: 25px; 
+	text-align:center; 
 }
 
-.panel-heading h1{
-	position: absolute;
-	top:5px;
+.panel-heading span{
+	background: #e9e9e9 url("../images/detail.png");
+	padding: 0 4px;
+	text-align:center; 
+}
+
+.panel-heading::after{
+	content: "";
+	height: 3px;
+	background: url("../images/divider.png") repeat-x;
+	display: block;
 	width: 100%;
-	font-weight: normal;
-	text-align: center;
-	background-color: #eee;
-}
-
-.panel-heading .divider{
-	position: absolute;
-	top:10px;
 	height: 1px;
-	width: 100%;
+	margin: -7px;
+	
 }
-
-
 
 /***********
  note module
 ************/
-.note-container{
-	
+
+.note-container{	
 	padding: 20px;
 }
 
@@ -210,10 +209,10 @@ task-item module
 
 }
 
-
 /*************
 divider module
 *************/
+
 .divider{
 	height: 3px;
 	background: url("../images/divider.png") repeat-x
@@ -222,11 +221,10 @@ divider module
 /**************
  comment module 
 **************/
+
 .comment-container{
 	width: 90%;
 	margin: 40px auto 0;
-
-
 }
 
 .comment{
@@ -235,25 +233,42 @@ divider module
 	cursor: pointer;			
 }
 
+.comment:last-child{
+	background:none;
+}
+
+.add-comment-container{
+	margin-top: 20px;		
+}
+
 .add-comment{
-	margin-top: 50px;
-	display: block;
-	background: none;
-	border:none;
-
+	
 	width: 100%;
-	margin: 0 auto;
 	padding: 5px 0;
-	margin-top: 20px;	
-
 
 	text-shadow: 0 1px 0 #fff;
-
-
 	text-indent: 20px;
 	
    
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 4px 0px inset, rgba(255, 255, 255, 0.4) 0px 0px 0px 0px;
 	border-radius: 4px;
-	outline: none;		
+}
+
+
+/*********************
+ module layout helpers
+ *********************/
+
+.clr{
+	clear: both;
+}
+
+.right {
+	float: right;
+}
+
+.text-color-flip{
+	-webkit-font-smoothing: antialiased;
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(0,0,0,0.45);
 }
