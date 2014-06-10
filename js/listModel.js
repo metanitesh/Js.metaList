@@ -12,6 +12,15 @@ List.populate = function(listCollaction){
 	});
 };
 
+List.findById = function(id){
+	var records = this.records;
+	for(var i=0, max=records.length; i<max; i++ ){
+		if(records[i].id === id){
+			return records[i];
+		}
+	}
+};
+
 List.prototype = {
 	
 	init: function() {
