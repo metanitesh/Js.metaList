@@ -45,4 +45,18 @@
 
 	})
 
+	it("should update record if record exist in records collection", function(){
+
+		list.save();
+		var list2 = new List({title: "today"})
+		list2.save();
+
+		expect(List.records.length).toEqual(2);
+
+		list2.title = "year";
+		expect(List.records.length).toEqual(2);
+		expect(List.records[1].title).toEqual("year");
+
+	})
+
 });
