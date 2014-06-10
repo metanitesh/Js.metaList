@@ -5,6 +5,12 @@ var List = function() {
 
 List.records = [];
 
+List.populate = function(listCollaction){
+	listCollaction.forEach(function(item){
+		var model = new List(item);
+		model.save();
+	});
+};
 
 List.prototype = {
 	
