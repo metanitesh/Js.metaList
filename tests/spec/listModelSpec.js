@@ -125,6 +125,21 @@
 
 		});
 
+		it("should get task by id", function(){
+			var task1 = {
+				id:1,
+				title: "take a break"
+			}
 
+			var task2 =  {
+				title: "bring some coffee"
+			}
+			
+			list.addTask(task1);
+			list.addTask(task2);
+
+			var task = list.getTaskById(1)
+			expect(task.title).toEqual(task1.title);
+		});
 
 	});

@@ -86,5 +86,13 @@ List.prototype = {
 		var task = new Task(attr);
 		task.parent = this;
 		task.save(this.id);
+	},
+
+	getTaskById: function(id){
+		for(var i=0; i<this.tasks.length; i++){
+			if(id === this.tasks[i].id){
+				return this.tasks[i];
+			}
+		}
 	}
 };
