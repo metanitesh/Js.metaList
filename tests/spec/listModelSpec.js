@@ -65,6 +65,15 @@
 
 		});
 
+		it("should find a record by id", function(){
+			list2 = new List({title: "places I love"});
+			list2.id = 121;
+			list2.save();
+
+			var rec = List.findById(121);
+			expect(rec).toEqual(list2)
+		})
+
 		it("should populate records from the list collection", function() {
 			List.records = [];	
 			var listCollcection = [{
@@ -99,7 +108,6 @@
 
 			List.populate(listCollcection);
 			expect(List.records.length).toEqual(2);
-			console.log(list)
 		})
 
 	});
