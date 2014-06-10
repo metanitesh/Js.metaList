@@ -1,25 +1,25 @@
 describe("list model", function() {
-	it("should be able to add a new record to list collection", function() {
-		var list = new List();
-		var record = {
-			title: "bucketList",
-			id: 1,
-			tasks: [{
-				title: "play soccer for world league",
-				id: 1,
-				done: false,
-				comments: ["fifa 2014 is about to start", "need to go buy a Brazil T-shirt"]
-			}, {
-				title: "start a school",
-				id: 2,
-				done: true,
-				comments: ["start with being a mentor"]
-			}]
-		};
-
-		list.add(record);
-
-		expect(List.records[0]).toEqual(record)
-
+	var list;
+	beforeEach(function(){
+		list = new List({
+			title : "new"
+		});	
 	});
+
+
+	it("should extend object with user custom attribute", function(){
+
+		list.add({tasks : "drink 2lt water"});
+
+		expect(list.tasks).toEqual("drink 2lt water");
+	});
+
+	it("should genrate 36 digit random Ids", function(){
+		
+
+		var id = list.genrateId();	
+		
+		expect(id.length).toEqual(36);
+	});
+
 });
