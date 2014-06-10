@@ -1,13 +1,14 @@
-describe("list model", function() {
+	describe("list model", function() {
 	var list;
 	beforeEach(function(){
+		List.records = [];
 		list = new List({
 			title : "new"
 		});	
 	});
 
 
-	it("should extend object with user custom attribute", function(){
+	it("should extend object with user's custom attribute", function(){
 
 		list.add({tasks : "drink 2lt water"});
 
@@ -21,5 +22,27 @@ describe("list model", function() {
 		
 		expect(id.length).toEqual(36);
 	});
+
+	it("should add the object in records collection", function(){
+
+		list.save();
+
+		expect(List.records.length).toEqual(1);
+		expect(List.records[0].title).toEqual("new");
+
+	});
+
+	it("should remove object from records collection", function(){
+
+		list.save();
+
+		var list2 = new List({title: "today"})
+		list2.save();
+
+
+		list2.delete()
+		expect(List.records.length).toEqual(1);
+
+	})
 
 });
