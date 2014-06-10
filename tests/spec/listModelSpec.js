@@ -65,8 +65,10 @@
 
 		});
 
-		it("should find a record by id", function(){
-			list2 = new List({title: "places I love"});
+		it("should find a record by id", function() {
+			list2 = new List({
+				title: "places I love"
+			});
 			list2.id = 121;
 			list2.save();
 
@@ -75,7 +77,7 @@
 		})
 
 		it("should populate records from the list collection", function() {
-			List.records = [];	
+			List.records = [];
 			var listCollcection = [{
 				title: "bucketList",
 				id: 1,
@@ -108,6 +110,21 @@
 
 			List.populate(listCollcection);
 			expect(List.records.length).toEqual(2);
-		})
+		});
+
+		it("should add a new task to list's task array", function() {
+
+			list.addTask({
+				title: "take a break"
+			});
+			list.addTask({
+				title: "bring some coffee"
+			});
+			expect(list.tasks.length).toEqual(2);
+			expect(list.tasks[0].title).toEqual("take a break");
+
+		});
+
+
 
 	});
