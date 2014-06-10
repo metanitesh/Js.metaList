@@ -30,7 +30,16 @@ List.prototype = {
 	},
 
 	save: function(){
-		this.constuctor.records.push(this);
+		var records = this.constuctor.records;
+		for(var i=0, max=records.length; i<max; i++){
+			if( this.id === records[i].id){
+				records.pop(records[i]);
+				records.push(this);
+				return records[i];
+			}
+		}
+
+		records.push(this);
 		return this;
 	},
 
@@ -42,7 +51,9 @@ List.prototype = {
 				return records[i];
 			}
 		}
-	}
-	
-	
+	},
+
+
+
+
 }
