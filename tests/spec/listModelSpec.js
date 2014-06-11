@@ -1,3 +1,5 @@
+define(["ListModel"], function(List){
+
 	describe("task-list model", function() {
 		var list;
 		beforeEach(function() {
@@ -107,7 +109,6 @@
 					comments: ["whitewalkers seems to be in no hurry"]
 				}]
 			}];
-
 			List.populate(listCollcection);
 			expect(List.records.length).toEqual(2);
 		});
@@ -143,3 +144,5 @@
 		});
 
 	});
+
+});
