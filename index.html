@@ -14,8 +14,8 @@
             <div class="logo-container">
                 <span>metalist</span>
             </div>
-            <ul "list-container">
-                <li class="list ">
+            <ul class="list-container">
+                <li class="list">
 
                     <span class="icon icon-list"></span>
                     <span class="icon icon-delete right"></span>
@@ -23,34 +23,11 @@
 
 
                 </li>
-                <li class="list ">
-
-                    <span class="icon icon-list"></span>
-                    <span class="icon icon-delete right"></span>
-                    <span class="title">work</span>
-
-
-                </li>
-                <li class="list ">
-
-                    <span class="icon icon-list"></span>
-                    <span class="icon icon-delete right"></span>
-                    <span class="title">life</span>
-
-
-                </li>
-                <li class="list list-active">
-
-                    <span class="icon icon-list icon-list-active"></span>
-                    <span class="icon icon-delete right"></span>
-                    <span class="title">new list</span>
-
-
-                </li>
-                <li class="list">
-                    <input type="text" placeholder="+ Add new list">
-                </li>
+                        
             </ul>
+            <div class="list">
+                    <input type="text" class="add-new-list" placeholder="+ Add new list">
+            </div>
         </div>
         <div id="main-content">
             <div class="add-task-container">
@@ -108,7 +85,7 @@
                 </div>
 
                 <h1 class="panel-heading">
-                    <span>contnet</span>
+                    <span>content</span>
                 </h1>
 
                 <div class="note-container">
@@ -136,8 +113,21 @@
         </div>
         <div class="clr"></div>
     </div>
+    
+   
+    <script type="text/template" id="list-item">
 
-    <script src="lib/jquery-1.11.1.js"></script>
-</body>
+     <li class="list">
+
+                    <span class="icon icon-list"></span>
+                    <span class="icon icon-delete right"  data-id= <%= id%>></span>
+                    <span class="title" data-id= <%= id%> ><%= title %></span>
+
+
+                </li>
+    </script>
+    
+    <script data-main="js/require_config" src="js/lib/require.js"></script>
+   </body>
 
 </html>
