@@ -1,22 +1,22 @@
 define(["jquery"], function() {
 	var Model = function() {
-		var klass = function() {
-
+		var ModelClass = function() {
+			this.init.apply(this,arguments)
 		};
 
-		klass.fn = klass.prototype;
-		klass.fn.parent = klass;
+		ModelClass.fn = ModelClass.prototype;
+		ModelClass.fn.parent = ModelClass;
+		ModelClass.name = "ModelYo"
 
-
-		klass.extend = function(obj) {
-			$.extend(klass, obj);
+		ModelClass.extend = function(obj) {
+			$.extend(ModelClass, obj);
 		};
 
-		klass.include = function(obj) {
-			$.extend(klass.fn, obj);
+		ModelClass.include = function(obj) {
+			$.extend(ModelClass.fn, obj);
 		};
 
-		return klass;
+		return ModelClass;
 	};
 
 	return Model;
