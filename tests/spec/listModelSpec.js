@@ -1,85 +1,137 @@
-define(["ListModel"], function(List){
+define(["ListModel"], function(ListModel) {
 
 	describe("task-list model", function() {
-		var list;
+		var travelList;
 		beforeEach(function() {
-			List.records = [];
-			list = new List({
-				title: "new"
+
+			ListModel.records = {};
+			travelList = new ListModel({
+				title: "locations"
 			});
 		});
 
 
 		it("should extend object with user's custom attribute", function() {
 
-			list.add({
-				tasks: "drink 2lt water"
+			/** when **/
+			travelList.load({
+				tasks: "get accommodation"
 			});
 
-			expect(list.tasks).toEqual("drink 2lt water");
+			/** then **/
+			expect(travelList.tasks).toEqual("get accommodation");
 		});
 
 		it("should genrate 36 digit random Ids", function() {
 
+			/** when **/
+			var id = travelList.genrateId();
 
-			var id = list.genrateId();
-
+			/** then **/
 			expect(id.length).toEqual(36);
 		});
 
-		it("should add the object in records collection", function() {
+		it("should create object in records collection", function() {
+			
+			/** given **/
+			var careerList = new ListModel({
+				id: "123123-12",
+				title: "careers"
+			});
 
-			list.save();
-
-			expect(List.records.length).toEqual(1);
-			expect(List.records[0].title).toEqual("new");
+			/** when **/
+			careerList.create();
+			
+			/** then **/
+			expect(ListModel.records["123123-12"].title).toEqual("careers");
 
 		});
 
-		it("should remove object from records collection", function() {
+		it("should update object in records collection", function() {
 
-			list.save();
-
-			var list2 = new List({
-				title: "today"
+			/** given **/
+			var careerList = new ListModel({
+				id: "123123-12",
+				title: "careers"
 			});
-			list2.save();
+			careerList.create();
 
+			/** when **/
+			careerList.tasks = ["chef", "craftsman"];
+			careerList.update()
 
-			list2.delete();
-			expect(List.records.length).toEqual(1);
+			/** then **/
+			expect(ListModel.records["123123-12"].tasks).toEqual(["chef", "craftsman"]);
 
 		});
 
-		it("should update record if record exist in records collection", function() {
-
-			list.save();
-			var list2 = new List({
-				title: "today"
+		it("should create if object is new or update if object is old", function(){
+			/** given **/
+			var careerList = new ListModel({
+				id: "123123-12",
+				title: "careers"
 			});
-			list2.save();
+			
+			/** when **/
+			careerList.save();	
+			careerList.tasks = ["chef", "craftsman"];
+			careerList.save()
 
-			expect(List.records.length).toEqual(2);
-
-			list2.title = "year";
-			expect(List.records.length).toEqual(2);
-			expect(List.records[1].title).toEqual("year");
-
-		});
-
-		it("should find a record by id", function() {
-			list2 = new List({
-				title: "places I love"
-			});
-			list2.id = 121;
-			list2.save();
-
-			var rec = List.findById(121);
-			expect(rec).toEqual(list2)
+			/** then **/
+			expect(ListModel.records["123123-12"].title).toEqual("careers");
+			expect(ListModel.records["123123-12"].tasks).toEqual(["chef", "craftsman"]);
 		})
 
-		it("should populate records from the list collection", function() {
-			List.records = [];
+		it("should return clone of the object", function(){
+			
+			/** when **/
+			var clone = travelList.clone();
+			
+			/** then **/
+			expect(clone.title).toEqual(travelList.title);
+
+
+		});
+
+		it("should destroy object from records collection", function(){
+			
+			/** given **/
+			var careerList = new ListModel({
+				id: "123123-12",
+				title: "careers"
+			});
+
+			/** when **/
+			careerList.save();
+			
+			/** then **/
+			expect(ListModel.records["123123-12"].title).toEqual("careers");
+
+			/** when **/
+			careerList.destroy();
+
+			/** then **/
+			expect(ListModel.records["123123-12"]).not.toBeDefined();
+
+		});
+
+		it("should find a object by id", function() {
+			/** given **/
+			var careerList = new ListModel({
+				id: "123123-12",
+				title: "chef"
+			});
+			careerList.create();
+
+			/** when **/
+			var record = ListModel.findById("123123-12");
+			
+			/** then **/
+			expect(record).toEqual(careerList);
+		})
+
+		it("should populate object from objects array", function(){
+			/** given **/
 			var listCollcection = [{
 				title: "bucketList",
 				id: 1,
@@ -109,38 +161,13 @@ define(["ListModel"], function(List){
 					comments: ["whitewalkers seems to be in no hurry"]
 				}]
 			}];
-			List.populate(listCollcection);
-			expect(List.records.length).toEqual(2);
-		});
 
-		it("should add a new task to list's task array", function() {
+			/** when **/
+			ListModel.populate(listCollcection);
 
-			list.addTask({
-				title: "take a break"
-			});
-			list.addTask({
-				title: "bring some coffee"
-			});
-			expect(list.tasks.length).toEqual(2);
-			expect(list.tasks[0].title).toEqual("take a break");
-
-		});
-
-		it("should get task by id", function(){
-			var task1 = {
-				id:1,
-				title: "take a break"
-			}
-
-			var task2 =  {
-				title: "bring some coffee"
-			}
-			
-			list.addTask(task1);
-			list.addTask(task2);
-
-			var task = list.getTaskById(1)
-			expect(task.title).toEqual(task1.title);
+			/** then **/
+			expect(ListModel.records[1].title).toEqual("bucketList");
+			expect(ListModel.records[2].title).toEqual("to-1do");
 		});
 
 	});
