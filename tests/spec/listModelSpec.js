@@ -170,6 +170,26 @@ define(["ListModel"], function(ListModel) {
 			expect(ListModel.records[2].title).toEqual("to-do");
 		});
 
+		it("should add Task to list's tasks object", function(){
+			
+			/** when **/
+			travelList.addTask({id: 123423, title: "bali"});
+			
+			/** then **/
+			expect(travelList.tasks[123423].title).toEqual("bali");
+		});
+
+		it("should find task from list's tasks object", function(){
+			
+			/** when **/
+			travelList.addTask({id: 123423, title: "bali"});
+			var task = travelList.findTaskById(123423);
+			
+			/** then **/
+			expect(task.title).toEqual("bali");
+
+		});
+
 	});
 
 });
