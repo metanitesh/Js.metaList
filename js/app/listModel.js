@@ -1,15 +1,22 @@
 define(["Model", "TaskModel"], function(Model, TaskModel) {
 
-	var ListModel = Model.create();
+	window.ListModel = Model.create();
 
 	ListModel.extend({
 
 		records: {},
 
-		populate: function(records) {
-			for (var i = 0, max = records.length; i < max; i++) {
-				var record = new this(records[i]);
-				record.create();
+		populate: function(lisCollection) {
+			for (var i = 0, max = lisCollection.length; i < max; i++) {
+				var list = new this(lisCollection[i]);
+
+				if(list.tasks){
+					
+					for(var taskId in list.tasks){
+						list.addTask(list.tasks[taskId]);
+					}
+				}
+				list.save();
 			}
 		},
 
@@ -49,21 +56,8 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 			}).toUpperCase();
 		},
 
-		create: function() {
-			this.parent.records[this.id] = this.clone();
-		},
-
-		update: function() {
-			this.parent.records[this.id] = this.clone();
-		},
-
-
 		save: function() {
-			if (this.parent.records[this.id]) {
-				this.update();
-			} else {
-				this.create();
-			}
+			this.parent.records[this.id] = this.clone();
 		},
 
 		destroy: function() {
@@ -78,7 +72,7 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 
 			var task = new TaskModel(attr);
 			task.parent = this;
-			task.create();
+			task.save();
 		},
 
 		findTaskById: function(id){
