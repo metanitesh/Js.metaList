@@ -1,33 +1,33 @@
-describe("Task Model", function(){
-	var task;
-	beforeEach(function(){
-	 	task = new Task({name : "get coffee"})
+define(["TaskModel"], function(TaskModel) {
 
-	})	
-	
-	it("should genrate 36 digit random Id", function(){
+	describe("Task-Model spec", function() {
+		var task;
+		beforeEach(function() {
+			task = new TaskModel({ title: "buy milk"});
+		});
+
+
+		it("should add content to task", function() {
+
+			/** when **/
+			task.addContent("buy soya milk if available");
+			
+			/** then **/
+			expect(task.content).toEqual("buy soya milk if available");
+		});
+
+
+		it("should add comment to task", function() {
+
+			/** when **/
+			task.addComment("enough with black coffee");
+			
+			/** then **/
+			expect(task.comments[0]).toEqual("enough with black coffee");
+		});
+
 		
-		var id = task.genrateId();
-		
-		expect(id.length).toEqual(36);
+
 	});
 
-	it("should add attributes to task", function(){
-		expect(task.name).toEqual("get coffee");
-	})
-
-	xit("should register task to it's list", function(){
-		task.save()
-		expect(this.parne)
-	})
-
-	it("should delete it self from list", function(){
-		var list = new List({title: "fav"});
-		list.addTask()
-	})
 });
-
-// var list = new List({title: "fav"})
-// var task = new Task({title: "some"})
-// list.save()
-// list.addTask(task)
