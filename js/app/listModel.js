@@ -1,4 +1,4 @@
-define(["Model", "TaskModel"], function(Model) {
+define(["Model", "TaskModel"], function(Model, TaskModel) {
 
 	var ListModel = Model.create();
 
@@ -31,7 +31,7 @@ define(["Model", "TaskModel"], function(Model) {
 
 			this.load(attr);
 			if (!this.id) this.id = this.genrateId();
-			// if (!this.tasks) this.tasks = {};
+			if (!this.tasks) this.tasks = {};
 
 		},
 
@@ -72,22 +72,19 @@ define(["Model", "TaskModel"], function(Model) {
 
 		clone: function() {
 			return $.extend(true, {}, this);
+		},
+
+		addTask: function(attr) {
+
+			var task = new TaskModel(attr);
+			task.parent = this;
+			task.create();
+		},
+
+		findTaskById: function(id){
+			return this.tasks[id].clone();
 		}
 
-		// addTask: function(attr) {
-
-		// 	var task = new Task(attr);
-		// 	task.parent = this;
-		// 	task.save(this.id);
-		// },
-
-		// getTaskById: function(id) {
-		// 	for (var i = 0; i < this.tasks.length; i++) {
-		// 		if (id === this.tasks[i].id) {
-		// 			return this.tasks[i];
-		// 		}
-		// 	}
-		// }
 	});
 
 	return ListModel;
