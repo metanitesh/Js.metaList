@@ -1,32 +1,52 @@
-var Task = function(){
-	this.init.apply(this, arguments);
-}
+define(["Model"], function(Model) {
 
-Task.prototype = {
-	init: function(obj){
-		// this.parent = listId;
-		this.add(obj);		
-		if(!this.id) this.id = this.genrateId();
-	},
+	var Task = Model.create();
 
-	genrateId: function(){
-		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-			var r = Math.random() * 16 | 0,
-				v = c == 'x' ? r : (r & 0x3 | 0x8);
-			return v.toString(16);
-		}).toUpperCase();
-	},
+	Task.include({
 
-	add: function(attr){
-		$.extend(true, this, attr);
-	},
+		init: function(attrs) {
+			this.load(attrs);
+			if (!this.id) this.id = this.genrateId();
+			if (!this.comments) this.comments = [];
+		},
 
-	save: function(){
-		this.parent.tasks.push(this)
-	},
+		load: function(attr) {
+			$.extend(true, this, attr);
+			return this;
+		},
 
-	delete: function(){
-		this.parent.tasks.pop(this);
-	}
 
-}
+		genrateId: function() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = Math.random() * 16 | 0,
+					v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			}).toUpperCase();
+		},
+
+		save: function() {
+			this.parent.tasks[this.id] = this.clone();
+		},
+
+		clone: function() {
+			return $.extend(true, {}, this);
+		},
+
+		distroy: function() {
+			delete this.parent.tasks[this.id];
+		},
+
+		addComment: function(comment) {
+			this.comments.push(comment);
+		},
+
+		addContent: function(content) {
+			this.content = content;
+			console.log(this)
+		}
+
+	});
+
+	return Task;
+
+});
