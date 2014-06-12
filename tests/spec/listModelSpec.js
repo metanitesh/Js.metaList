@@ -167,7 +167,7 @@ define(["ListModel"], function(ListModel) {
 
 			/** then **/
 			expect(ListModel.records[1].title).toEqual("bucketList");
-			expect(ListModel.records[2].title).toEqual("to-1do");
+			expect(ListModel.records[2].title).toEqual("to-do");
 		});
 
 	});
