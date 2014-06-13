@@ -10,7 +10,7 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 		init: function(el, template) {
 			this.view = $(el);
 			this.view.listContainer = $(".list-container", this.view);
-			this.view.addNewLlist = $(".list-container", this.view);
+			this.view.addNewLlist = $(".add-new-list", this.view);
 			this.view.editList = $(".edit-list", this.view);
 			// this.view.deleteList = $(".delete-list", this.view);
 			
@@ -20,28 +20,39 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			this.document = $(document);
 
 			this.view.on("keypress", this.view.addNewLlist, $.proxy(this.handleSubmit, this));
-			this.view.on("keypress", this.view.addNewLlist, $.proxy(this.handleSubmit, this));
 			
-			this.view.on("click", this.view.editList, $.proxy(this.editList, this));
-			// this.view.on("click", this.view.deleteList, $.proxy(this.deleteList, this));
+			// this.view.on("click", this.view.editList, $.proxy(this.editList, this));
+			this.view.on("click", this.view.deleteList, $.proxy(this.deleteList, this));
 			
 			this.document.on("addList", $.proxy(this.renderALL, this));
+			this.document.on("destroyList", $.proxy(this.renderALL, this));
+			this.document.on("destroyList", $.proxy(this.renderALL, this));
 		},
 
 		events: {
+			"keypress addNewLlist": "handleSubmit",
+			"click deleteList": "deleteList",
+			"click editList": "editList",
 
+			"addList document": "renderALL" 
 		},
 
 		elements: {
-
+			listContainer: ".list-container",
+			addNewLlist: "add-new-list",
+			editList: ".edit-list",
+			deleteList: ".delete-list"
 		},
 
-		editList: function(e){
+		deleteList: function(e){
 			var id = $(e.target).closest('.list').attr("data-id");
 			var model = ListModel.findById(id)
-			console.log(model);
+			model.destroy();
+			$(document).trigger("destroyList");
+
 
 		},
+
 		renderALL: function(){
 			this.view.listContainer.empty();
 			for(id in ListModel.records){
