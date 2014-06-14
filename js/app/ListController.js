@@ -9,8 +9,8 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		init: function(el, template) {
 			this.view = $(el);
-			if(this.template)  $(template);
-			
+			if(template)  this.template = $(template);
+			this.view.document = $(document);
 			
 			this.refreshElement();
 			this.delegateEvent();
@@ -29,14 +29,14 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		events: {
 			"keypress addNewLlist": "handleSubmit",
-			"click deleteList": "deleteList",
-			"click editList": "editList",
+			// "click deleteList": "deleteList",
+			// "click editList": "editList",
 			"addList document": "renderALL" 
 		},
 
 		elements: {
 			listContainer: ".list-container",
-			addNewLlist: "add-new-list",
+			addNewLlist: ".add-new-list",
 			editList: ".edit-list",
 			deleteList: ".delete-list"
 		},
@@ -46,18 +46,25 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 		refreshElement: function(){
 			for(var element in this.elements){
 				if(this.elements.hasOwnProperty(element)){
-					console.log(element);
-					this.view[element] = this.elements[element];
+					this.view[element] = $(this.elements[element]);
 
 				}
 			}
 		},
 
 		delegateEvent: function(){
-			
+			for (var prop in this.events){
+
+				var handler = this.events[prop];
+				var userEvent = prop.split(" ")[0];
+				var selector = prop.split(" ")[1] || this.view;
+				var element =  this.view[selector];
+				// console.log(element, userEvent, this[handler);	
+				this.view.document.on( userEvent, this.view[selector], $.proxy(this[handler], this));
+			}
 		},
 
-		
+
 
 		deleteList: function(e){
 			var id = $(e.target).closest('.list').attr("data-id");
@@ -69,6 +76,7 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 		},
 
 		renderALL: function(){
+			console.log(this.template)
 			this.view.listContainer.empty();
 			for(id in ListModel.records){
 				var template = this.template.clone().html();
