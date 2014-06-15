@@ -9,38 +9,30 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		init: function(el, template) {
 			this.view = $(el);
-			if(template)  this.template = $(template);
-			this.view.document = $(document);
-			
+			if (template) this.template = $(template);
+
 			this.refreshElement();
 			this.delegateEvent();
-
-			// this.view.on("keypress", this.view.addNewLlist, $.proxy(this.handleSubmit, this));
-			
-			// this.view.on("click", this.view.editList, $.proxy(this.editList, this));
-			// this.view.on("click", this.view.deleteList, $.proxy(this.deleteList, this));
-			
-			// this.document.on("addList", $.proxy(this.renderALL, this));
-			// this.document.on("destroyList", $.proxy(this.renderALL, this));
-			// this.document.on("destroyList", $.proxy(this.renderALL, this));
-		},	
-
-		proxy: function(func){
-			return $.proxy(func, this.view);
 		},
-		
 
-		$: function(selector){
+		proxy: function(func) {
+
+			return $.proxy(func, this);
+		},
+
+
+		$: function(selector) {
 			return $(selector, this);
 		},
 
 		eventSplitter: /^(\w+)\s*(.*)$/,
-		
+
 		events: {
 			"keypress addNewLlist": "handleSubmit",
-			// "click deleteList": "deleteList",
-			// "click editList": "editList",
-			"addList document": "renderALL" 
+			"click deleteList": "deleteListHandler",
+			"click editList": "handleEditList",
+			"addList": "renderALL",
+			"destroyList": "renderALL" 
 		},
 
 		elements: {
@@ -48,46 +40,59 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			addNewLlist: ".add-new-list",
 			editList: ".edit-list",
 			deleteList: ".delete-list"
+
 		},
 
 
 
-		refreshElement: function(){
-			for(var element in this.elements){
-				if(this.elements.hasOwnProperty(element)){
+		refreshElement: function() {
+			for (var element in this.elements) {
+				if (this.elements.hasOwnProperty(element)) {
 					this.view[element] = $(this.elements[element]);
 
 				}
 			}
 		},
 
-		delegateEvent: function(){
-			for (var prop in this.events){
+		delegateEvent: function() {
+			for (var prop in this.events) {
 
-				var handler = this.events[prop];
+				var methodName = this.events[prop];
+				var method = this.proxy(this[methodName]);
+
 				var userEvent = prop.split(" ")[0];
-				var selector = prop.split(" ")[1] || this.view;
-				var element =  this.view[selector];
-				// console.log(element, userEvent, this[handler);	
-				this.view.document.on( userEvent, this.view[selector], $.proxy(this[handler], this));
+				var selector = prop.split(" ")[1];
+
+				var element;
+				
+				if (selector) {
+					console.log("in", selector)
+					element = this.elements[selector];
+
+					this.view.on(userEvent, element, method);
+				} else {
+					// console.log("else", selector)
+					this.view.on(userEvent, method)
+				}
+
 			}
 		},
 
 
 
-		deleteList: function(e){
+		deleteListHandler: function(e) {
+			console.log("dele")
 			var id = $(e.target).closest('.list').attr("data-id");
 			var model = ListModel.findById(id)
 			model.destroy();
-			$(document).trigger("destroyList");
+			$(this.view).trigger("destroyList");
 
 
 		},
 
-		renderALL: function(){
-			console.log(this.template)
+		renderALL: function() {
 			this.view.listContainer.empty();
-			for(id in ListModel.records){
+			for (id in ListModel.records) {
 				var template = this.template.clone().html();
 				var item = ListModel.records[id];
 				var html = _.template(template, item);
@@ -106,13 +111,15 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 					this.add({
 						title: newTitle
 					});
+
 					$(e.target).val("");
-					$(document).trigger("addList");
+					$(this.view).trigger("addList");
 				}
 
 			}
 
 		},
+
 		add: function(obj) {
 
 			this.model = new ListModel(obj);
