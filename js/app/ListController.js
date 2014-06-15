@@ -28,12 +28,13 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		events: {
 			"keypress addNewLlist": "addNewListItem",
-			"click deleteList": "deleteListHandler",
-			"click editList": "handleEditListClick",
-			"keypress editInput": "handleEditListSubmit",
-			
+			"click deleteList": "deleteListItem",
+			"click editList": "setUpdateView",
+			"keypress editInput": "updateListItem",
+
 			"listItemCreated": "renderModel",
-			"destroyList": "renderALL"
+			"listItemUpdate": "updateModel",
+			"ListItemDestroyed": "removeModel"
 		},
 
 		elements: {
@@ -47,7 +48,7 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		},
 
-		_isEnterKey: function(e){
+		_isEnterKey: function(e) {
 			var code = (e.keyCode ? e.keyCode : e.which);
 			return (code === 13);
 		},
@@ -56,8 +57,10 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			if (this._isEnterKey(e)) {
 				var target = $(e.target);
 				var title = $.trim(target.val());
-				if (title) {	
-					var listItem = new ListModel({title: title});
+				if (title) {
+					var listItem = new ListModel({
+						title: title
+					});
 					listItem.save();
 
 					target.val("");
@@ -68,14 +71,31 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		},
 
-		
-		renderModel: function(e, model){
+		deleteListItem: function(e) {
+			var id = this.$(e.target).closest('.list').attr("data-id");
+			var model = ListModel.findById(id)
+			model.destroy();
+			this.view.trigger("ListItemDestroyed", id);
+		},
+
+		renderModel: function(e, model) {
 			var html = _.template(this.template, model);
 			this.view.listContainer.append(html);
 		},
 
+		removeModel: function(e, id) {
+			var element = this.view.find("[data-id=" + id + "]");
+			element.remove();
+		},
 
-		renderALL: function(e, data) {
+		updateModel: function(e, model) {
+			var target = this.view.find("[data-id=" + model.id + "]");
+			target.find(".input-wrapper").addClass('hidden');
+			target.closest('.list').find(".title").html(model.title).removeClass('hidden');
+
+		},
+
+		renderALL: function() {
 			this.view.listContainer.empty();
 			for (id in ListModel.records) {
 				var template = this.template.clone().html();
@@ -89,31 +109,41 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 		},
 
 
-		handleEditListSubmit: function(e){
-			if (e.keyCode === 13) {
+		updateListItem: function(e) {
+
+			if (this._isEnterKey(e)) {
+
 				var newTitle = $.trim($(e.target).val());
 				var id = $(e.target).closest('.list').attr("data-id");
 				var model = ListModel.findById(id);
-				if(newTitle){
+
+
+				if (newTitle) {
 					model.title = newTitle;
 					model.save();
-					$(this.view).trigger("addList");
+					$(this.view).trigger("listItemUpdate", model);
 
-				}	
+				}
 
 			}
 		},
 
-		handleEditListClick: function(e){
+		setUpdateView: function(e) {
 			console.log("in");
-			var id = $(e.target).closest('.list').attr("data-id");
-			var model = ListModel.findById(id);
-			
-			console.log(model)
-			$(e.target).closest('.list').find(".input-wrapper").removeClass('hidden');
-			$(e.target).closest('.list').find(".title").addClass('hidden');
+			var target = this.$(e.target);
+			var oldValue = target.closest('.list').find(".title").html();
+
+			target.closest('.list').find(".input-wrapper").removeClass('hidden');
+			target.closest('.list').find(".edit-list-input").val(oldValue);
+			target.closest('.list').find(".title").addClass('hidden');
+
+			// console.log(oldValue);
+			// var id = target.closest('.list').attr("data-id");
+			// var model = ListModel.findById(id);
+
+
 			// this.view.editInputWrapper);
-			this.view.title.addClass('hidden');
+			// this.view.title.addClass('hidden');
 		},
 
 
@@ -136,7 +166,7 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 				var selector = prop.split(" ")[1];
 
 				var element;
-				
+
 				if (selector) {
 					element = this.elements[selector];
 					this.view.on(userEvent, element, method);
@@ -147,21 +177,6 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			}
 		},
 
-
-
-		deleteListHandler: function(e) {
-			var id = $(e.target).closest('.list').attr("data-id");
-			var model = ListModel.findById(id)
-			model.destroy();
-			$(this.view).trigger("destroyList");
-
-
-		},
-
-		
-		
-
-		
 
 
 	});
