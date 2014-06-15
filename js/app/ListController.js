@@ -9,30 +9,30 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		init: function(el, template) {
 			this.view = $(el);
-			if (template) this.template = $(template);
+			if (template) this.template = $(template).html();
 
 			this.refreshElement();
 			this.delegateEvent();
 		},
 
 		proxy: function(func) {
-
 			return $.proxy(func, this);
 		},
 
 
 		$: function(selector) {
-			return $(selector, this);
+			return $(selector, this.view);
 		},
 
 		eventSplitter: /^(\w+)\s*(.*)$/,
 
 		events: {
-			"keypress addNewLlist": "handleSubmit",
+			"keypress addNewLlist": "addNewListItem",
 			"click deleteList": "deleteListHandler",
 			"click editList": "handleEditListClick",
-			// "click editList": "handleEditListClick",
-			"addList": "renderALL",
+			"keypress editInput": "handleEditListSubmit",
+			
+			"listItemCreated": "renderModel",
 			"destroyList": "renderALL"
 		},
 
@@ -40,11 +40,68 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			listContainer: ".list-container",
 			addNewLlist: ".add-new-list",
 			editList: ".edit-list",
-			deleteList: ".delete-list",
 			editInputWrapper: ".input-wrapper",
-			title: ".title",
-			editInput: ".edit-list-input"
+			editInput: ".edit-list-input",
+			deleteList: ".delete-list",
+			title: ".title"
 
+		},
+
+		_isEnterKey: function(e){
+			var code = (e.keyCode ? e.keyCode : e.which);
+			return (code === 13);
+		},
+
+		addNewListItem: function(e) {
+			if (this._isEnterKey(e)) {
+				var target = $(e.target);
+				var title = $.trim(target.val());
+				if (title) {	
+					var listItem = new ListModel({title: title});
+					listItem.save();
+
+					target.val("");
+					this.view.trigger("listItemCreated", listItem);
+				}
+
+			}
+
+		},
+
+		
+		renderModel: function(e, model){
+			var html = _.template(this.template, model);
+			this.view.listContainer.append(html);
+		},
+
+
+		renderALL: function(e, data) {
+			this.view.listContainer.empty();
+			for (id in ListModel.records) {
+				var template = this.template.clone().html();
+				var item = ListModel.records[id];
+				var html = _.template(template, item);
+				this.view.listContainer.append(html);
+
+			}
+
+
+		},
+
+
+		handleEditListSubmit: function(e){
+			if (e.keyCode === 13) {
+				var newTitle = $.trim($(e.target).val());
+				var id = $(e.target).closest('.list').attr("data-id");
+				var model = ListModel.findById(id);
+				if(newTitle){
+					model.title = newTitle;
+					model.save();
+					$(this.view).trigger("addList");
+
+				}	
+
+			}
 		},
 
 		handleEditListClick: function(e){
@@ -63,7 +120,7 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 		refreshElement: function() {
 			for (var element in this.elements) {
 				if (this.elements.hasOwnProperty(element)) {
-					this.view[element] = $(this.elements[element]);
+					this.view[element] = this.$(this.elements[element]);
 
 				}
 			}
@@ -81,13 +138,10 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 				var element;
 				
 				if (selector) {
-					console.log("in", selector)
 					element = this.elements[selector];
-
 					this.view.on(userEvent, element, method);
 				} else {
-					// console.log("else", selector)
-					this.view.on(userEvent, method)
+					this.view.on(userEvent, method);
 				}
 
 			}
@@ -104,42 +158,10 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		},
 
-		renderALL: function() {
-			this.view.listContainer.empty();
-			for (id in ListModel.records) {
-				var template = this.template.clone().html();
-				var item = ListModel.records[id];
-				var html = _.template(template, item);
-				this.view.listContainer.append(html);
+		
+		
 
-			}
-
-
-		},
-
-		handleSubmit: function(e) {
-			if (e.keyCode === 13) {
-				var newTitle = $.trim($(e.target).val());
-
-				if (newTitle) {
-					this.add({
-						title: newTitle
-					});
-
-					$(e.target).val("");
-					$(this.view).trigger("addList");
-				}
-
-			}
-
-		},
-
-		add: function(obj) {
-
-			this.model = new ListModel(obj);
-			this.model.save();
-
-		}
+		
 
 
 	});
