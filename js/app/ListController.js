@@ -30,19 +30,34 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 		events: {
 			"keypress addNewLlist": "handleSubmit",
 			"click deleteList": "deleteListHandler",
-			"click editList": "handleEditList",
+			"click editList": "handleEditListClick",
+			// "click editList": "handleEditListClick",
 			"addList": "renderALL",
-			"destroyList": "renderALL" 
+			"destroyList": "renderALL"
 		},
 
 		elements: {
 			listContainer: ".list-container",
 			addNewLlist: ".add-new-list",
 			editList: ".edit-list",
-			deleteList: ".delete-list"
+			deleteList: ".delete-list",
+			editInputWrapper: ".input-wrapper",
+			title: ".title",
+			editInput: ".edit-list-input"
 
 		},
 
+		handleEditListClick: function(e){
+			console.log("in");
+			var id = $(e.target).closest('.list').attr("data-id");
+			var model = ListModel.findById(id);
+			
+			console.log(model)
+			$(e.target).closest('.list').find(".input-wrapper").removeClass('hidden');
+			$(e.target).closest('.list').find(".title").addClass('hidden');
+			// this.view.editInputWrapper);
+			this.view.title.addClass('hidden');
+		},
 
 
 		refreshElement: function() {
@@ -81,7 +96,6 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 
 		deleteListHandler: function(e) {
-			console.log("dele")
 			var id = $(e.target).closest('.list').attr("data-id");
 			var model = ListModel.findById(id)
 			model.destroy();
