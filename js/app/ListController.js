@@ -25,8 +25,17 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			// this.document.on("destroyList", $.proxy(this.renderALL, this));
 		},	
 
+		proxy: function(func){
+			return $.proxy(func, this.view);
+		},
 		
 
+		$: function(selector){
+			return $(selector, this);
+		},
+
+		eventSplitter: /^(\w+)\s*(.*)$/,
+		
 		events: {
 			"keypress addNewLlist": "handleSubmit",
 			// "click deleteList": "deleteList",
