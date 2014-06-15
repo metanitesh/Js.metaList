@@ -5,8 +5,12 @@ requirejs.config({
         underscore: 'js/lib/underscore',
 
         Model: 'js/app/Model',
-        ListModel: 'js/app/listModel',
-        TaskModel: 'js/app/taskmodel'
+        Controller: 'js/app/Controller',
+        
+        ListModel: 'js/app/listmodel',
+        TaskModel: 'js/app/taskmodel',
+        
+        ListController: 'js/app/listcontroller'
     }
 });
 

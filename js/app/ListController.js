@@ -1,4 +1,4 @@
-define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model, _, $) {
+define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, Model, _, $) {
 
 	var ListController = Model.create();
 
@@ -15,16 +15,7 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			this.delegateEvent();
 		},
 
-		proxy: function(func) {
-			return $.proxy(func, this);
-		},
-
-
-		$: function(selector) {
-			return $(selector, this.view);
-		},
-
-		eventSplitter: /^(\w+)\s*(.*)$/,
+		
 
 		events: {
 			"keypress addNewLlist": "addNewListItem",
@@ -48,10 +39,19 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		},
 
-		_isEnterKey: function(e) {
-			var code = (e.keyCode ? e.keyCode : e.which);
-			return (code === 13);
+		
+
+		_listUpdateState: function(target){
+
+			target.closest('.list').find(".input-wrapper").removeClass('hidden');
+			target.closest('.list').find(".title").addClass('hidden');
 		},
+
+		_listDisplayState: function(target, model){
+			target.find(".input-wrapper").addClass('hidden');
+			target.closest('.list').find(".title").html(model.title).removeClass('hidden');
+		},
+
 
 		addNewListItem: function(e) {
 			if (this._isEnterKey(e)) {
@@ -71,43 +71,11 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 
 		},
 
-		deleteListItem: function(e) {
-			var id = this.$(e.target).closest('.list').attr("data-id");
-			var model = ListModel.findById(id)
-			model.destroy();
-			this.view.trigger("ListItemDestroyed", id);
-		},
-
-		renderModel: function(e, model) {
-			var html = _.template(this.template, model);
-			this.view.listContainer.append(html);
-		},
-
-		removeModel: function(e, id) {
-			var element = this.view.find("[data-id=" + id + "]");
-			element.remove();
-		},
-
-		updateModel: function(e, model) {
-			var target = this.view.find("[data-id=" + model.id + "]");
-			target.find(".input-wrapper").addClass('hidden');
-			target.closest('.list').find(".title").html(model.title).removeClass('hidden');
+		setUpdateView: function(e) {
+			var target = this.$(e.target);
+			this._listUpdateState(target);				
 
 		},
-
-		renderALL: function() {
-			this.view.listContainer.empty();
-			for (id in ListModel.records) {
-				var template = this.template.clone().html();
-				var item = ListModel.records[id];
-				var html = _.template(template, item);
-				this.view.listContainer.append(html);
-
-			}
-
-
-		},
-
 
 		updateListItem: function(e) {
 
@@ -128,55 +96,46 @@ define(["ListModel", "Model", "underscore", "jquery"], function(ListModel, Model
 			}
 		},
 
-		setUpdateView: function(e) {
-			console.log("in");
-			var target = this.$(e.target);
-			var oldValue = target.closest('.list').find(".title").html();
 
-			target.closest('.list').find(".input-wrapper").removeClass('hidden');
-			target.closest('.list').find(".edit-list-input").val(oldValue);
-			target.closest('.list').find(".title").addClass('hidden');
-
-			// console.log(oldValue);
-			// var id = target.closest('.list').attr("data-id");
-			// var model = ListModel.findById(id);
-
-
-			// this.view.editInputWrapper);
-			// this.view.title.addClass('hidden');
+		deleteListItem: function(e) {
+			var id = this.$(e.target).closest('.list').attr("data-id");
+			var model = ListModel.findById(id)
+			model.destroy();
+			this.view.trigger("ListItemDestroyed", id);
 		},
 
-
-		refreshElement: function() {
-			for (var element in this.elements) {
-				if (this.elements.hasOwnProperty(element)) {
-					this.view[element] = this.$(this.elements[element]);
-
-				}
-			}
+		renderModel: function(e, model) {
+			var html = _.template(this.template, model);
+			this.view.listContainer.append(html);
 		},
 
-		delegateEvent: function() {
-			for (var prop in this.events) {
+		removeModel: function(e, id) {
+			var element = this.view.find("[data-id=" + id + "]");
+			element.remove();
+		},
 
-				var methodName = this.events[prop];
-				var method = this.proxy(this[methodName]);
+		updateModel: function(e, model) {
+			var target = this.view.find("[data-id=" + model.id + "]");
+			this._listDisplayState(target, model)
 
-				var userEvent = prop.split(" ")[0];
-				var selector = prop.split(" ")[1];
+		},
 
-				var element;
-
-				if (selector) {
-					element = this.elements[selector];
-					this.view.on(userEvent, element, method);
-				} else {
-					this.view.on(userEvent, method);
-				}
+		renderALL: function() {
+			this.view.listContainer.empty();
+			for (id in ListModel.records) {
+				var template = this.template.clone().html();
+				var item = ListModel.records[id];
+				var html = _.template(template, item);
+				this.view.listContainer.append(html);
 
 			}
-		},
 
+
+		}
+
+		
+
+		
 
 
 	});
