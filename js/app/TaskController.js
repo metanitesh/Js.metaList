@@ -41,24 +41,38 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			deleteTask: ".delete-task"
 		},
 
+		deleteTask:function(e){
+			var id = this.$(e.target).closest('.task-item').data("id");
+			var task = this.list.tasks[id];				
+			task.destroy();
+			console.log(this.tasks)
+			this.renderAllTasks();
+
+		},
+
 		checkTask: function(e){
 			var id = this.$(e.target).closest('.task-item').data("id");
-			var task = this.tasks[id];
-			task.done = true;
-			task.save();
-			
-		},
+			var task = this.list.tasks[id];				
+			task.done = true;	
 
-		destroy: function(){
-			var id = this.$(e.target).closest('.task-item').data("id");
-			var task = this.tasks[id];
-		},
+			
+			task.save();
+			this.renderAllTasks();		
+
+
+			
+		},	
 
 		setupList: function(e, list){
-			// console.log(window)
-			this.parent = list;
-			this.tasks = this.parent.tasks;
+			this.list = list;
 			this.renderAllTasks();
+
+
+			// console.log(window)
+			// this.parentList = list;
+			// this.tasks = this.parentList.tasks;
+
+			// console.log("setup tasks", this.tasks);
 		},
 
 		addNewTask: function(e) {
@@ -66,36 +80,59 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			if (this._isEnterKey(e)) {
 				var target = this.$(e.target);
 				var title = $.trim(target.val());
+
+				console.log("add task: ")
+				console.log(this.list);
+				
 				if (title) {
 					var task = new TaskModel({
 						title : title,
-						parent: this.parent
-					});
+						parent: this.list
+				});
 
-					task.save();
+				task.save();	
+					
+
+
+				// 	task.save();
+
+				// 	console.log(this.parentList, "list");
 					target.val("");
 
-				}
+					
+					this.renderAllTasks();
 
+
+				}
+				
 			}
 		},
 
 		renderAllTasks: function(){
-			for(taskId in this.tasks){
-				var task = this.tasks[taskId];
-				var html = this.renderTask(task);
+			console.log(this.list)
+			// console.log("renderAllTasks", this.parentList.tasks)
+			this.view.taskRemaining.html("");
+			this.view.taskComplete.html("");
+				
 
-				if(task.done){
-					this.view.taskComplete.append(html);
-				}else{
-					this.view.taskRemaining.append(html);
-				}
+			for(taskId in this.list.tasks){
+				var task = this.list.tasks[taskId];
+				this.renderTask(task);
+
+
+				
 			}
 			
 		},
 
 		renderTask: function(task){
-			return _.template(this.template, task);
+			var html = _.template(this.template, task);
+				
+				if(task.done){
+					this.view.taskComplete.append(html);
+				}else{
+					this.view.taskRemaining.append(html);
+				}
 		}, 
 		// _listUpdateState: function(target){
 
