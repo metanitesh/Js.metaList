@@ -14,22 +14,19 @@
             <div class="logo-container">
                 <span>metalist</span>
             </div>
+            <div id="list-view">
             <ul class="list-container">
-                <li class="list">
-
-                    <span class="icon icon-list"></span>
-                    <span class="icon icon-delete right"></span>
-                    <span class="title">today</span>
-
-
-                </li>
+               
                         
             </ul>
             <div class="list">
                     <input type="text" class="add-new-list" placeholder="+ Add new list">
             </div>
+            </div>
         </div>
         <div id="main-content">
+<div id="task-view">
+
             <div class="add-task-container">
                 <input type="text" class="add-task" placeholder="add a new task" />
             </div>
@@ -76,6 +73,7 @@
                     </li>
                 </ul>
             </div>
+            </div>
         </div>
         <div id="detail">
 
@@ -117,16 +115,25 @@
    
     <script type="text/template" id="list-item">
 
-     <li class="list">
+     <li class="list" data-id= <%= id%> >
 
-                    <span class="icon icon-list"></span>
-                    <span class="icon icon-delete right"  data-id= <%= id%>></span>
-                    <span class="title" data-id= <%= id%> ><%= title %></span>
+                    <span class="icon edit-list icon-list"></span>
+                    <span class="icon delete-list icon-delete right"></span>
+                    <span class="title"  ><%= title %></span>
+                    <span class="input-wrapper hidden"> 
+                    <input maxlength="255" class="edit-list-input " type="text" value=<%= title %>> </span>
 
-
-                </li>
+    </li>
     </script>
-    
+    <script type="text/template" id="task-item">
+        <li class="task-item" data-id= <%= id %>>
+                        <span class="icon icon-task-checkbox check-task"></span>
+                        <span class="icon icon-task-separator"></span>
+                        <span class="task-title"><%= title %></span>
+                    </li>
+
+    </script>    
+        
     <script data-main="js/require_config" src="js/lib/require.js"></script>
    </body>
 
