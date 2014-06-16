@@ -1,6 +1,6 @@
-define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, Model, _, $) {
+define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, Controller, _, $) {
 
-	var ListController = Model.create();
+	var ListController = Controller.create();
 
 
 
@@ -13,16 +13,20 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 
 			this.refreshElement();
 			this.delegateEvent();
+			this.delegateCustomEvent();
 		},
 
-		
+
 
 		events: {
 			"keypress addNewLlist": "addNewListItem",
 			"click deleteList": "deleteListItem",
 			"click editList": "setUpdateView",
 			"keypress editInput": "updateListItem",
+			"click title": "showRelatedtask",
+		},
 
+		customEvents: {
 			"listItemCreated": "renderModel",
 			"listItemUpdate": "updateModel",
 			"ListItemDestroyed": "removeModel"
@@ -39,19 +43,24 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 
 		},
 
-		
 
-		_listUpdateState: function(target){
+
+		_listUpdateState: function(target) {
 
 			target.closest('.list').find(".input-wrapper").removeClass('hidden');
 			target.closest('.list').find(".title").addClass('hidden');
 		},
 
-		_listDisplayState: function(target, model){
+		_listDisplayState: function(target, model) {
 			target.find(".input-wrapper").addClass('hidden');
 			target.closest('.list').find(".title").html(model.title).removeClass('hidden');
 		},
 
+		showRelatedtask: function(e) {
+			var id = $(e.target).closest('.list').attr("data-id");
+			var model = ListModel.findById(id);
+			$(document).trigger("showTasks", model);
+		},
 
 		addNewListItem: function(e) {
 			if (this._isEnterKey(e)) {
@@ -73,7 +82,7 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 
 		setUpdateView: function(e) {
 			var target = this.$(e.target);
-			this._listUpdateState(target);				
+			this._listUpdateState(target);
 
 		},
 
@@ -89,7 +98,7 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 				if (newTitle) {
 					model.title = newTitle;
 					model.save();
-					$(this.view).trigger("listItemUpdate", model);
+					this.view.trigger("listItemUpdate", model);
 
 				}
 
@@ -123,20 +132,11 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 		renderALL: function() {
 			this.view.listContainer.empty();
 			for (id in ListModel.records) {
-				var template = this.template.clone().html();
-				var item = ListModel.records[id];
-				var html = _.template(template, item);
-				this.view.listContainer.append(html);
-
-			}
+				this.renderModel(null, ListModel.records[i]);
+			};
 
 
 		}
-
-		
-
-		
-
 
 	});
 
