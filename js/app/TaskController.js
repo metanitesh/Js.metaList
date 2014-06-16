@@ -23,7 +23,8 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 
 			"keypress addTask": "addNewTask",
 			"click checkTask": "checkTask",
-			"click deleteTask": "deleteTask"
+			"click deleteTask": "deleteTask",
+			"click title": "showDetails"
 			// "taskItemCreated": "renderAllTasks"
 		},
 
@@ -32,13 +33,20 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 
 		},
 
-		elements: {
+	elements: {
 			addTask: ".add-task",
 			taskGroup: ".task-group",
 			taskRemaining: ".task-remaining",
 			taskComplete: ".task-complete",
 			checkTask:".check-task",
-			deleteTask: ".delete-task"
+			deleteTask: ".delete-task",
+			title: ".task-title"
+		},
+
+		showDetails: function(e){
+			var id = this.$(e.target).closest('.task-item').data("id");
+			var task = this.list.tasks[id];
+			$(document).trigger('showDetails', task)
 		},
 
 		deleteTask:function(e){
