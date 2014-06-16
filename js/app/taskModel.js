@@ -1,6 +1,6 @@
 define(["Model"], function(Model) {
 
-	var Task = Model.create();
+	window.Task = Model.create();
 
 	Task.include({
 
@@ -8,13 +8,13 @@ define(["Model"], function(Model) {
 			this.load(attrs);
 			if (!this.id) this.id = this.genrateId();
 			if (!this.comments) this.comments = [];
+			if (!this.done) this.done = false;
 		},
 
 		load: function(attr) {
 			$.extend(true, this, attr);
 			return this;
 		},
-
 
 		genrateId: function() {
 			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -26,6 +26,7 @@ define(["Model"], function(Model) {
 
 		save: function() {
 			this.parent.tasks[this.id] = this.clone();
+			this.parent.save();
 		},
 
 		clone: function() {
@@ -42,7 +43,6 @@ define(["Model"], function(Model) {
 
 		addContent: function(content) {
 			this.content = content;
-			console.log(this)
 		}
 
 	});
