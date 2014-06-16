@@ -22,7 +22,8 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		events: {
 
 			"keypress addTask": "addNewTask",
-			"click checkTask": "checkTask"
+			"click checkTask": "checkTask",
+			"click deleteTask": "deleteTask"
 			// "taskItemCreated": "renderAllTasks"
 		},
 
@@ -36,19 +37,22 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			taskGroup: ".task-group",
 			taskRemaining: ".task-remaining",
 			taskComplete: ".task-complete",
-			checkTask:".check-task"
+			checkTask:".check-task",
+			deleteTask: ".delete-task"
 		},
 
 		checkTask: function(e){
 			var id = this.$(e.target).closest('.task-item').data("id");
-			var task = this.list.findTaskById(id);
-			console.log(task);
+			var task = this.tasks[id];
 			task.done = true;
-			console.log(task)
 			task.save();
-			console.log(this.list);	
-			this.list.save();
-		},	
+			
+		},
+
+		destroy: function(){
+			var id = this.$(e.target).closest('.task-item').data("id");
+			var task = this.tasks[id];
+		},
 
 		setupList: function(e, list){
 			// console.log(window)
@@ -63,10 +67,12 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 				var target = this.$(e.target);
 				var title = $.trim(target.val());
 				if (title) {
-					this.list.addTask({title: title});
-					this.list.save();
+					var task = new TaskModel({
+						title : title,
+						parent: this.parent
+					});
 
-					this.view.trigger("taskItemCreated");
+					task.save();
 					target.val("");
 
 				}
@@ -75,9 +81,10 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		},
 
 		renderAllTasks: function(){
-			console.log(this.tasks);	
 			for(taskId in this.tasks){
-				var html = this.renderTask(this.tasks[taskId]);
+				var task = this.tasks[taskId];
+				var html = this.renderTask(task);
+
 				if(task.done){
 					this.view.taskComplete.append(html);
 				}else{
