@@ -1,4 +1,4 @@
-define(["Model"], function(Model) {
+define(["Model", "ListModel"], function(Model, ListModel) {
 
 	window.Task = Model.create();
 
@@ -8,12 +8,12 @@ define(["Model"], function(Model) {
 			this.load(attrs);
 			if (!this.id) this.id = this.genrateId();
 			if (!this.comments) this.comments = [];
+			if (!this.content) this.content = "";
 			if (!this.done) this.done = false;
 		},
 
-		load: function(attr) {
-			$.extend(true, this, attr);
-			return this;
+		load: function(attrs) {
+			$.extend(this, attrs);
 		},
 
 		genrateId: function() {
@@ -25,16 +25,16 @@ define(["Model"], function(Model) {
 		},
 
 		save: function() {
-			this.parent.tasks[this.id] = this.clone();
-			this.parent.save();
+			if(!this.parentList) throw "unkown parent list";
+			this.parentList.tasks[this.id] = this.clone();
 		},
 
 		clone: function() {
-			return $.extend(true, {}, this);
+			return $.extend({}, this);
 		},
 
-		distroy: function() {
-			delete this.parent.tasks[this.id];
+		destroy: function() {
+			delete this.parentList.tasks[this.id];
 		},
 
 		addComment: function(comment) {
