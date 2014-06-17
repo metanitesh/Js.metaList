@@ -17,7 +17,6 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 		},
 
 
-
 		events: {
 			"keypress addNewLlist": "addNewListItem",
 			"click deleteList": "deleteListItem",
