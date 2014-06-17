@@ -56,21 +56,7 @@
                 <h1 class="text-color-flip">completed task</h1>
 
                 <ul class="task-complete">
-                    <li class="task-item task-done">
-                        <span class="icon icon-task-checkbox icon-task-checked"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title">complete this app</span>
-                    </li>
-                    <li class="task-item task-done">
-                        <span class="icon icon-task-checkbox icon-task-checked"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title">complete this app</span>
-                    </li>
-                    <li class="task-item task-done">
-                        <span class="icon icon-task-checkbox icon-task-checked"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title">complete this app</span>
-                    </li>
+                    
                 </ul>
             </div>
             </div>
@@ -99,9 +85,7 @@
 
                 <div class="comment-container">
                     <ul class="comments">
-                        <li class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, sed.</li>
-                        <li class="comment">some awesome comment</li>
-                        <li class="comment">a little more</li>
+                       
                     </ul>
                     <div class="add-comment-container">
                         <input type="text" class="add-comment" placeholder="add comment" />
@@ -126,14 +110,22 @@
     </li>
     </script>
     <script type="text/template" id="task-item">
+        
         <li class="task-item" data-id= <%= id %>>
                         <span class="icon icon-task-checkbox check-task"></span>
                         <span class="icon icon-task-separator"></span>
                         <span class="task-title"><%= title %></span>
+                        <span class="icon icon-delete delete-task right"></span>
+
                     </li>
 
     </script>    
-        
+    <script type="text/template" id="comment-item">
+    <li class="comment">
+        <%=  comment1 %>
+    </li>    
+    </script>
+
     <script data-main="js/require_config" src="js/lib/require.js"></script>
    </body>
 
