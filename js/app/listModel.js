@@ -40,11 +40,11 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 			if (!this.id) this.id = this.genrateId();
 			if (!this.tasks) this.tasks = {};
 
+
 		},
 
 		load: function(attr) {
-			$.extend(true, this, attr);
-			return this;
+			$.extend( this, attr);
 		},
 
 
@@ -65,13 +65,13 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 		},
 
 		clone: function() {
-			return $.extend(true, {}, this);
+			return $.extend( {}, this);
 		},
 
 		addTask: function(attr) {
 
 			var task = new TaskModel(attr);
-			task.parent = this;
+			task.parentList = this;
 			task.save();
 		},
 
