@@ -43,6 +43,8 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		},
 
 		showDetails: function(e) {
+			this.view.find(".task-item").removeClass("task-item-selected")
+			this.$(e.target).closest('.task-item').addClass('task-item-selected')
 			var id = this.$(e.target).closest('.task-item').data("id");
 			var task = this.parentList.findTaskById(id);
 			$(document).trigger('showDetails', task)
@@ -110,6 +112,8 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 
 			if (task.done) {
 				this.view.taskComplete.append(html);
+				this.view.taskComplete.find("li").addClass('task-done')
+				this.view.taskComplete.find(".icon-task-checkbox").addClass('icon-task-checked')
 			} else {
 				this.view.taskRemaining.append(html);
 			}
