@@ -20,9 +20,10 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 		events: {
 			"keypress addNewLlist": "addNewListItem",
 			"click deleteList": "deleteListItem",
-			"click editList": "setUpdateView",
+			// "click editList": "setUpdateView",
 			"keypress editInput": "updateListItem",
 			"click title": "showRelatedtask",
+			"dblclick title": "setUpdateView",
 		},
 
 		customEvents: {
@@ -38,11 +39,40 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 			editInputWrapper: ".input-wrapper",
 			editInput: ".edit-list-input",
 			deleteList: ".delete-list",
-			title: ".title"
+			title: ".title",
+			list:".list"
 
 		},
 
+		states: {
+			activeList: "setupActiveList",
+			editList: "setupEditList"
+		},
 
+		// activeList: function(target){
+		// 	var target = this.$(e.target).closest(".list");
+		// 	target.siblings(".list").removeClass("list-active");
+		// 	target.addClass("list-active");
+		// },
+
+		activeListStyle: function(e){
+			this.view.find(".list").removeClass("list-active");
+			this.view.find(".icon-list").removeClass("icon-list-active");
+			this.view.find(".input-wrapper").addClass("hidden"); 
+			this.view.find(".title").removeClass("hidden"); 
+			
+			var target = this.$(e.target).closest(".list");
+			target.addClass('list-active');
+			target.find(".icon-list").addClass("icon-list-active");
+			// var target = this.$(e.target).closest(".list");
+			// target.siblings(".list").removeClass("list-active");
+			// target.siblings(".list").find(".input-wrapper").addClass('hidden');
+			// target.addClass("list-active");
+		},
+
+		editListStyle: function(e){
+
+		},
 
 		_listUpdateState: function(target) {
 
@@ -56,6 +86,7 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 		},
 
 		showRelatedtask: function(e) {
+			this.activeListStyle(e)
 			var id = $(e.target).closest('.list').attr("data-id");
 			var model = ListModel.findById(id);
 			$(document).trigger("showTasks", model);
