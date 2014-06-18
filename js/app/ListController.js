@@ -86,10 +86,12 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 		},
 
 		showRelatedtask: function(e) {
+
 			this.activeListStyle(e)
 			var id = $(e.target).closest('.list').attr("data-id");
-			var model = ListModel.findById(id);
-			$(document).trigger("showTasks", model);
+			// var model = ListModel.findById(id);
+			location.hash = id;
+			// $(document).trigger("showTasks", model);
 		},
 
 		addNewListItem: function(e) {

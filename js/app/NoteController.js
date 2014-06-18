@@ -15,6 +15,16 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			this.refreshElement();
 			this.delegateEvent();
 			this.delegateCustomEvent();
+			$(window).on("hashchange", $.proxy(function(){
+				ids = location.hash.slice(1).split("/");
+				this.listId = ids[0];
+				this.taskId = ids[1];
+				console.log(ids);
+				if(this.taskId){
+					this.detailSetup();
+
+				}
+			}, this));
 		},
 
 
@@ -26,7 +36,7 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		},
 
 		customEvents: {
-			"showDetails": "detailSetup"
+			// "showDetails": "detailSetup"
 		},
 
 		elements: {
@@ -40,8 +50,11 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			this.task.save();
 		},
 
-		detailSetup: function(e, task){
+		detailSetup: function(){
 
+			var list = ListModel.findById(this.listId);
+			var task = list.findTaskById(this.taskId);
+			
 			this.task = task;	
 			var oldVal = task.content;
 			this.view.textarea.val(oldVal);

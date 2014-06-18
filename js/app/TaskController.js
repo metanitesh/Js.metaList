@@ -15,6 +15,16 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			this.refreshElement();
 			this.delegateEvent();
 			this.delegateCustomEvent();
+
+			$(window).on("hashchange", $.proxy(function(e){
+				var id = location.hash.slice(1).split("/")[0];
+				
+				console.log(id);
+				var parentList = ListModel.findById(id);
+				this.parentList = parentList;
+				this.setupParentList();
+
+			}, this))
 		},
 
 
@@ -47,7 +57,8 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			this.$(e.target).closest('.task-item').addClass('task-item-selected')
 			var id = this.$(e.target).closest('.task-item').data("id");
 			var task = this.parentList.findTaskById(id);
-			$(document).trigger('showDetails', task)
+			// $(document).trigger('showDetails', task)
+			location.hash = location.hash.split("/")[0] + "/" + task.id
 		},
 
 		deleteTask: function(e) {
@@ -68,7 +79,7 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		},
 
 		setupParentList: function(e, parentList) {
-			this.parentList = parentList;
+			// this.parentList = parentList;
 			this.tasks = this.parentList.tasks;
 			this.renderAllTasks();
 		},
