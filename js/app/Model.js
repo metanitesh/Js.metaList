@@ -1,7 +1,5 @@
 define(["jquery"], function() {
-	var Model = function() {
-		
-	};
+	var Model = {};
 
 	Model.create = function(parent){
 		var ModelClass = function() {
@@ -18,14 +16,21 @@ define(["jquery"], function() {
 		ModelClass.fn.parent = ModelClass;
 
 		ModelClass.extend = function(obj) {
+			var extended = obj.extended;
 			$.extend(ModelClass, obj);
+			if(extended) extend();
 		};
 
 		ModelClass.include = function(obj) {
+			var included = obj.inluded;
 			$.extend(ModelClass.fn, obj);
+			if(included) included();
 		};
 
 		return ModelClass;
 	}
+
+
+
 	return Model;
 });

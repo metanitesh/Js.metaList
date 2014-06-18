@@ -1,16 +1,14 @@
-define(["ListController", "ListModel",  "jquery"], function(ListController, ListModel, $){
-	// var life  = new	ListModel({title: "bucketlist"});
-	// life.addTask({title: "skydive", content: "yo baby", comments:["did it"]});
-	// life.addTask({title: "party", content: "on my way", comments:["have to do it"]});
-	// life.save();
-	// console.log(ListModel.records);
+define(["ListController", "TaskController", "NoteController", "CommentController", "ListModel", "TaskModel", "jquery"], function(ListController, TaskController, NoteController, CommentController, ListModel, TaskModel, $){
+
 	$(function(){
-		var listView = new ListController(".list-view", "#list-item");
-		
+
+		listView = new ListController("#list-view", "#list-item");
+		var taskView = new TaskController("#task-view", "#task-item");
+		var detailContentController = new NoteController("#note-view");
+		var commentController = new CommentController("#comment-view", "#comment-item");
 		// $(".list-container").append(listView.addList({title: "some"}))
 		// $(".list-container").append(listView.addList({title: "more"}))
-
-		console.log(ListModel.records);
-
-	})
+		// window.listView = listView;
+		// window.taskView = taskView;
+	});
 });

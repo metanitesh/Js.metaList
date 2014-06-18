@@ -10,9 +10,14 @@ define(["Model", "ListModel"], function(Model, ListModel) {
 			if (!this.comments) this.comments = [];
 			if (!this.content) this.content = "";
 			if (!this.done) this.done = false;
+			for(var i in this){
+				console.log(i)
+
+			}
 		},
 
 		load: function(attrs) {
+
 			$.extend(this, attrs);
 		},
 

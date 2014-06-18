@@ -40,7 +40,7 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 			editInput: ".edit-list-input",
 			deleteList: ".delete-list",
 			title: ".title",
-			list:".list"
+			list: ".list"
 
 		},
 
@@ -55,12 +55,12 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 		// 	target.addClass("list-active");
 		// },
 
-		activeListStyle: function(e){
+		activeListStyle: function(e) {
 			this.view.find(".list").removeClass("list-active");
 			this.view.find(".icon-list").removeClass("icon-list-active");
-			this.view.find(".input-wrapper").addClass("hidden"); 
-			this.view.find(".title").removeClass("hidden"); 
-			
+			this.view.find(".input-wrapper").addClass("hidden");
+			this.view.find(".title").removeClass("hidden");
+
 			var target = this.$(e.target).closest(".list");
 			target.addClass('list-active');
 			target.find(".icon-list").addClass("icon-list-active");
@@ -70,7 +70,7 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 			// target.addClass("list-active");
 		},
 
-		editListStyle: function(e){
+		editListStyle: function(e) {
 
 		},
 
@@ -163,9 +163,10 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 
 		renderALL: function() {
 			this.view.listContainer.empty();
-			for (id in ListModel.records) {
-				this.renderModel(null, ListModel.records[i]);
-			};
+			for (var id in ListModel.records) {
+				console.log(ListModel.records);
+				this.renderModel(null, ListModel.records[id]);
+			}
 
 
 		}
