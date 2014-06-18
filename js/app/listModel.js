@@ -10,9 +10,9 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 			for (var i = 0, max = lisCollection.length; i < max; i++) {
 				var list = new this(lisCollection[i]);
 
-				if(list.tasks){
-					
-					for(var taskId in list.tasks){
+				if (list.tasks) {
+
+					for (var taskId in list.tasks) {
 						list.addTask(list.tasks[taskId]);
 					}
 				}
@@ -29,6 +29,46 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 
 	});
 
+	ListModel.LocalStorage = {
+		saveLocal: function(name) {
+			var result = [];
+			
+			for (var i in ListModel.records) {
+				var ListModelAttr =  {
+					id: ListModel.records[i].id,
+					title: ListModel.records[i].title
+				};
+
+				var tasks = ListModel.records[i].tasks;
+				if (!_.isEmpty(tasks)) {
+										
+					console.log("in");
+					var obj = {};
+					ListModelAttr.tasks = {};
+					for (var j in tasks) {
+						console.log(tasks[j])
+						obj.id = tasks[j].id;
+						obj.content = tasks[j].content;
+						obj.comments = tasks[j].comments;
+						obj.title = tasks[j].title;
+
+						console.log(obj)
+						ListModelAttr.tasks[obj.id] = obj;
+						console.log(ListModelAttr);
+					}
+
+				}
+				result.push(ListModelAttr);
+			}
+			localStorage[name] = JSON.stringify(result);
+		},
+
+		loadLocal: function(name) {
+			var result = JSON.parse(localStorage[name]);
+			ListModel.populate(result);
+		}
+
+	};
 
 	ListModel.include({
 
@@ -44,7 +84,8 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 		},
 
 		load: function(attr) {
-			$.extend( this, attr);
+			this.attributes = attr;
+			$.extend(this, attr);
 		},
 
 
@@ -65,7 +106,7 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 		},
 
 		clone: function() {
-			return $.extend( {}, this);
+			return $.extend({}, this);
 		},
 
 		addTask: function(attr) {
@@ -75,7 +116,7 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 			task.save();
 		},
 
-		findTaskById: function(id){
+		findTaskById: function(id) {
 			return this.tasks[id].clone();
 		}
 
