@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 				template: require('grunt-template-jasmine-requirejs'),
 				templateOptions: {
 					requireConfig: {
-						baseUrl: '',
+						baseUrl: './',
 						paths: {
 							jquery: 'js/lib/jquery-1.11.1',
 							underscore: 'js/lib/underscore',
