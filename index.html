@@ -15,50 +15,32 @@
                 <span>metalist</span>
             </div>
             <div id="list-view">
-            <ul class="list-container">
-               
-                        
-            </ul>
-            <div class="list">
+                <ul class="list-container">
+
+
+                </ul>
+                <div class="list">
                     <input type="text" class="add-new-list" placeholder="+ Add new list">
-            </div>
+                </div>
             </div>
         </div>
         <div id="main-content">
-<div id="task-view">
+            <div id="task-view">
 
-            <div class="add-task-container">
-                <input type="text" class="add-task" placeholder="add a new task" />
-            </div>
-            <div class="task-group">
-                <ul class="task-remaining">
-                    <li class="task-item">
-                        <span class="icon icon-task-checkbox"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title">complete this app</span>
-                    </li>
-
-                    <li class="task-item">
-                        <span class="icon icon-task-checkbox"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title">complete this app</span>
-                    </li>
-
-                    <li class="task-item">
-                        <span class="icon icon-task-checkbox"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title">complete this app</span>
-                    </li>
+                <div class="add-task-container">
+                    <input type="text" class="add-task" placeholder="add a new task" />
+                </div>
+                <div class="task-group">
+                    <ul class="task-remaining">
 
 
+                    </ul>
+                    <h1 class="text-color-flip">completed task</h1>
 
-                </ul>
-                <h1 class="text-color-flip">completed task</h1>
+                    <ul class="task-complete">
 
-                <ul class="task-complete">
-                    
-                </ul>
-            </div>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="detail">
@@ -72,9 +54,9 @@
                     <span>content</span>
                 </h1>
                 <div id="note-view">
-                <div class="note-container">
-                    <textarea class="note"></textarea>
-                </div>
+                    <div class="note-container">
+                        <textarea class="note"></textarea>
+                    </div>
                 </div>
 
 
@@ -84,51 +66,54 @@
                 </h1>
 
                 <div id="comment-view">
-                <div class="comment-container">
-                    <ul class="comments">
-                       
-                    </ul>
-                    <div class="add-comment-container">
-                        <input type="text" class="add-comment" placeholder="add comment" />
+                    <div class="comment-container">
+                        <ul class="comments">
+
+                        </ul>
+                        <div class="add-comment-container">
+                            <input type="text" class="add-comment" placeholder="add comment" />
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
         <div class="clr"></div>
     </div>
     
-   
+
     <script type="text/template" id="list-item">
 
-     <li class="list" data-id= <%= id%> >
+    <li class="list" data-id= <%= id%> >
 
-                    <span class="icon edit-list icon-list"></span>
-                    <span class="icon delete-list icon-delete right"></span>
-                    <span class="title"  ><%= title %></span>
-                    <span class="input-wrapper hidden"> 
-                    <input maxlength="255" class="edit-list-input " type="text" value=<%= title %>> </span>
+    <span class="icon edit-list icon-list"></span>
+    <span class="icon delete-list icon-delete right"></span>
+    <span class="title"  ><%= title %></span>
+    <span class="input-wrapper hidden"> 
+    <input maxlength="255" class="edit-list-input " type="text" value=<%= title %>> </span>
 
     </li>
     </script>
     <script type="text/template" id="task-item">
-        
-        <li class="task-item" data-id= <%= id %>>
-                        <span class="icon icon-task-checkbox check-task"></span>
-                        <span class="icon icon-task-separator"></span>
-                        <span class="task-title"><%= title %></span>
-                        <span class="icon icon-delete delete-task right"></span>
 
-                    </li>
+    <li class="task-item" data-id= <%= id %>>
+    <span class="icon icon-task-checkbox check-task"></span>
+    <span class="icon icon-task-separator"></span>
+    <span class="task-title"><%= title %></span>
+    <span class="icon icon-delete delete-task right"></span>
+
+    </li>
 
     </script>    
     <script type="text/template" id="comment-item">
     <li class="comment">
-        <%=  comment %>
+    <%=  comment %>
     </li>    
     </script>
 
-    <script data-main="js/require_config" src="js/lib/require.js"></script>
-   </body>
+    <script data-main="./require_config" src="js/lib/require.js"></script>
+    <script>
+        require(['./js/app/app']);
+    </script>
+</body>
 
 </html>
