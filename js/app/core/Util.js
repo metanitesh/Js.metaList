@@ -5,11 +5,15 @@ define(["jquery"], function($) {
 
 			var constructor = prototype.constructor;
 
-			constructor.extend = function(obj) {
+			constructor.static = function(obj) {
+				
 				for (var prop in obj) {
-					constructor[prop] = obj[prop];
+					if(obj.hasOwnProperty(prop)){
+						constructor[prop] = obj[prop];
+					}
 				}
 			};
+
 			constructor.prototype = prototype;
 			constructor.prototype.parent = constructor;
 			return constructor;
@@ -18,7 +22,11 @@ define(["jquery"], function($) {
 		extend: function(constructor, keys) {
 			var superType = keys.super = constructor.prototype;
 			var prototype = Object.create(superType);
-			for (var key in keys) prototype[key] = keys[key];
+			for (var key in keys) {
+					if(keys.hasOwnProperty(key)){
+						prototype[key] = keys[key];
+					}
+				}
 			return this.defClass(prototype);
 		}
 	};

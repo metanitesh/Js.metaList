@@ -2,26 +2,22 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 
 	ListModel = util.extend(Model, {
 		constructor: function(attr) {
-
-			if (!attr) throw ("at least required title attribute");
-
+			if (!attr) throw ("Title is required to create new List");
 			this.load(attr);
 			if (!this.id) this.id = this.genrateId();
 			if (!this.tasks) this.tasks = {};
 
-
-
-		},		
+		},
 
 		save: function() {
-			this.parent.records[this.id] = this.clone();
+			this.constructor.records[this.id] = this.clone();
 		},
 
 		destroy: function() {
-			delete this.parent.records[this.id];
+			delete this.constructor.records[this.id];
 		},
 
-		
+
 		addTask: function(attr) {
 
 			var task = new TaskModel(attr);
@@ -34,14 +30,15 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 		}
 	})
 
-	ListModel.extend({
+	ListModel.static({
 
 		records: {},
 
-		populate: function(lisCollection) {
-			for (var i = 0, max = lisCollection.length; i < max; i++) {
-				var list = new this(lisCollection[i]);
+		attributes: ["id", "title"],
 
+		populate: function(listCollection) {
+			for (var listId in listCollection) {
+				var list = new this(listCollection[listId])
 				if (list.tasks) {
 
 					for (var taskId in list.tasks) {
@@ -50,6 +47,7 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 				}
 				list.save();
 			}
+
 		},
 
 		findById: function(id) {
@@ -57,41 +55,23 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 			if (!record) throw "no record found";
 			return record.clone();
 
-		}
+		},
 
-	});
-
-	ListModel.LocalStorage = {
 		saveLocal: function(name) {
-			var result = [];
+			result = {};
 
-			for (var i in ListModel.records) {
-				var ListModelAttr = {
-					id: ListModel.records[i].id,
-					title: ListModel.records[i].title
-				};
+			for (var listId in ListModel.records) {
 
-				var tasks = ListModel.records[i].tasks;
+				result[listId] = ListModel.records[listId].getAttributes();
+				var tasks = ListModel.records[listId].tasks;
 				if (!_.isEmpty(tasks)) {
-
-					console.log("in");
-					var obj = {};
-					ListModelAttr.tasks = {};
-					for (var j in tasks) {
-						console.log(tasks[j])
-						obj.id = tasks[j].id;
-						obj.content = tasks[j].content;
-						obj.comments = tasks[j].comments;
-						obj.title = tasks[j].title;
-
-						console.log(obj)
-						ListModelAttr.tasks[obj.id] = obj;
-						console.log(ListModelAttr);
+					result[listId].tasks = {};
+					for (var taskId in tasks) {
+						result[listId].tasks[taskId] = tasks[taskId].getAttributes();
 					}
-
 				}
-				result.push(ListModelAttr);
 			}
+
 			localStorage[name] = JSON.stringify(result);
 		},
 
@@ -100,8 +80,9 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 			ListModel.populate(result);
 		}
 
-	};
 
-	
+	});
+
+
 	return ListModel;
 });

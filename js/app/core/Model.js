@@ -1,9 +1,9 @@
 define(["util"], function(util) {
 
 	Model = util.defClass({
-		
-		constructor : function(){
-			console.log("model constructor");
+
+		constructor: function() {
+
 		},
 
 		genrateId: function() {
@@ -20,6 +20,17 @@ define(["util"], function(util) {
 
 		clone: function() {
 			return $.extend({}, this);
+		},
+
+		getAttributes: function(){
+			var attributes = this.constructor.attributes;
+			var result = {};
+			
+			for(var i=0, max = attributes.length; i<max; i++){				
+				result[attributes[i]] = this[attributes[i]];
+			}
+
+			return result;
 		}
 
 	});

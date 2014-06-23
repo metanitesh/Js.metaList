@@ -1,20 +1,15 @@
 define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 
-	window.Task = util.extend(Model, {
-		constructor: function(attrs) {
-			this.load(attrs);
+	TaskModel = util.extend(Model, {
+		
+		constructor: function(attr) {
+
+			if (!attr) throw ("Title is required to create a new Task");
+			this.load(attr);
 			if (!this.id) this.id = this.genrateId();
 			if (!this.comments) this.comments = [];
 			if (!this.content) this.content = "";
 			if (!this.done) this.done = false;
-		},
-
-		genrateId: function() {
-			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-				var r = Math.random() * 16 | 0,
-					v = c == 'x' ? r : (r & 0x3 | 0x8);
-				return v.toString(16);
-			}).toUpperCase();
 		},
 
 		save: function() {
@@ -36,7 +31,11 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 		}
 	});
 
+	TaskModel.static({
+		attributes:  ["id", "title", "comments", "content", "done"]
+	})
+
 	
-	return Task;
+	return TaskModel;
 
 });

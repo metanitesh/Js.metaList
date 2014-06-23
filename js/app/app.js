@@ -6,4 +6,5 @@ define(["ListController", "TaskController", "NoteController", "CommentController
 		var detailContentController = new NoteController("#note-view");
 		var commentController = new CommentController("#comment-view", "#comment-item");
 	});
+
 });
