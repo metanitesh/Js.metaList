@@ -1,6 +1,38 @@
-define(["Model", "TaskModel"], function(Model, TaskModel) {
+define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 
-	window.ListModel = Model.create();
+	ListModel = util.extend(Model, {
+		constructor: function(attr) {
+
+			if (!attr) throw ("at least required title attribute");
+
+			this.load(attr);
+			if (!this.id) this.id = this.genrateId();
+			if (!this.tasks) this.tasks = {};
+
+
+
+		},		
+
+		save: function() {
+			this.parent.records[this.id] = this.clone();
+		},
+
+		destroy: function() {
+			delete this.parent.records[this.id];
+		},
+
+		
+		addTask: function(attr) {
+
+			var task = new TaskModel(attr);
+			task.parentList = this;
+			task.save();
+		},
+
+		findTaskById: function(id) {
+			return this.tasks[id].clone();
+		}
+	})
 
 	ListModel.extend({
 
@@ -32,16 +64,16 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 	ListModel.LocalStorage = {
 		saveLocal: function(name) {
 			var result = [];
-			
+
 			for (var i in ListModel.records) {
-				var ListModelAttr =  {
+				var ListModelAttr = {
 					id: ListModel.records[i].id,
 					title: ListModel.records[i].title
 				};
 
 				var tasks = ListModel.records[i].tasks;
 				if (!_.isEmpty(tasks)) {
-										
+
 					console.log("in");
 					var obj = {};
 					ListModelAttr.tasks = {};
@@ -70,57 +102,6 @@ define(["Model", "TaskModel"], function(Model, TaskModel) {
 
 	};
 
-	ListModel.include({
-
-		init: function(attr) {
-
-			if (!attr) throw ("at least required title attribute");
-
-			this.load(attr);
-			if (!this.id) this.id = this.genrateId();
-			if (!this.tasks) this.tasks = {};
-
-
-		},
-
-		load: function(attr) {
-			this.attributes = attr;
-			$.extend(this, attr);
-		},
-
-
-		genrateId: function() {
-			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-				var r = Math.random() * 16 | 0,
-					v = c == 'x' ? r : (r & 0x3 | 0x8);
-				return v.toString(16);
-			}).toUpperCase();
-		},
-
-		save: function() {
-			this.parent.records[this.id] = this.clone();
-		},
-
-		destroy: function() {
-			delete this.parent.records[this.id];
-		},
-
-		clone: function() {
-			return $.extend({}, this);
-		},
-
-		addTask: function(attr) {
-
-			var task = new TaskModel(attr);
-			task.parentList = this;
-			task.save();
-		},
-
-		findTaskById: function(id) {
-			return this.tasks[id].clone();
-		}
-
-	});
-
+	
 	return ListModel;
 });
