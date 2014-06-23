@@ -1,13 +1,9 @@
-define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], function(TaskModel, ListModel, Controller, _, $) {
+define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, ListModel, Controller, util, _, $) {
 
-	var NoteController = Controller.create();
-
-
-
-	NoteController.include({
+	var NoteController = util.extend(Controller, {
 
 
-		init: function(el, template) {
+		constructor: function(el, template) {
 
 			this.view = $(el);
 			if (template) this.template = $(template).html();
@@ -55,7 +51,7 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			var list = ListModel.findById(this.listId);
 			var task = list.findTaskById(this.taskId);
 			
-			this.task = task;	
+			this.task = task;
 			var oldVal = task.content;
 			this.view.textarea.val(oldVal);
 			

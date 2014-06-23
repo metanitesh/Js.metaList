@@ -1,13 +1,9 @@
-define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], function(TaskModel, ListModel, Controller, _, $) {
+define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, ListModel, Controller, util, _, $) {
 
-	var CommentController = Controller.create();
-
-
-
-	CommentController.include({
+	var CommentController = util.extend(Controller, {
 
 
-		init: function(el, template) {
+		constructor: function(el, template) {
 			this.view = $(el);
 			if (template) this.template = $(template).html();
 			this.refreshElement();
@@ -34,7 +30,7 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 
 		addComment: function(e){
 			if(this._isEnterKey(e)){
-				var target = this.$(e.target)
+				var target = this.$(e.target);
 				var val = $.trim(target.val());
 				if(val){
 
@@ -70,5 +66,7 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		}
 	});
 
+
+
 	return CommentController;
-})
+});

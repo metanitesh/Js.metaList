@@ -1,13 +1,9 @@
-define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, Controller, _, $) {
+define(["ListModel", "Controller", "util", "underscore", "jquery"], function(ListModel, Controller, util, _, $) {
 
-	var ListController = Controller.create();
-
-
-
-	ListController.include({
+	var ListController = util.extend(Controller, {
 
 
-		init: function(el, template) {
+		constructor: function(el, template) {
 			this.view = $(el);
 			if (template) this.template = $(template).html();
 
@@ -102,6 +98,8 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 					var listItem = new ListModel({
 						title: title
 					});
+
+					console.log(listItem)
 					listItem.save();
 
 					target.val("");
@@ -157,7 +155,7 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 
 		updateModel: function(e, model) {
 			var target = this.view.find("[data-id=" + model.id + "]");
-			this._listDisplayState(target, model)
+			this._listDisplayState(target, model);
 
 		},
 
@@ -173,5 +171,5 @@ define(["ListModel", "Controller", "underscore", "jquery"], function(ListModel, 
 
 	});
 
-	return ListController
-})
+	return ListController;
+});

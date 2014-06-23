@@ -1,13 +1,8 @@
-define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], function(TaskModel, ListModel, Controller, _, $) {
-
-	var TasKController = Controller.create();
-
+define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, ListModel, Controller, util, _, $) {
+	var TaskController = util.extend(Controller, {
 
 
-	TasKController.include({
-
-
-		init: function(el, template) {
+		constructor: function(el, template) {
 
 			this.view = $(el);
 			if (template) this.template = $(template).html();
@@ -16,15 +11,15 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 			this.delegateEvent();
 			this.delegateCustomEvent();
 
-			$(window).on("hashchange", $.proxy(function(e){
+			$(window).on("hashchange", $.proxy(function(e) {
 				var id = location.hash.slice(1).split("/")[0];
-				
+
 				console.log(id);
 				var parentList = ListModel.findById(id);
 				this.parentList = parentList;
 				this.setupParentList();
 
-			}, this))
+			}, this));
 		},
 
 
@@ -131,5 +126,6 @@ define(["TaskModel", "ListModel", "Controller", "underscore", "jquery"], functio
 		}
 	});
 
-	return TasKController
+
+	return TaskController
 })
