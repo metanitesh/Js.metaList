@@ -1,35 +1,28 @@
-define(["jquery"], function() {
-	var Model = {};
+define(["util"], function(util) {
 
-	Model.create = function(parent){
-		var ModelClass = function() {
-			this.init.apply(this,arguments)
-		};
+	Model = util.defClass({
+		
+		constructor : function(){
+			console.log("model constructor");
+		},
 
-		if(parent){
-			var F = function(){};
-			F.prototype = parent.prototype;
-			ModelClass.prototype = new F();
-		};
+		genrateId: function() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = Math.random() * 16 | 0,
+					v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			}).toUpperCase();
+		},
 
-		ModelClass.fn = ModelClass.prototype;
-		ModelClass.fn.parent = ModelClass;
+		load: function(attr) {
+			$.extend(this, attr);
+		},
 
-		ModelClass.extend = function(obj) {
-			var extended = obj.extended;
-			$.extend(ModelClass, obj);
-			if(extended) extend();
-		};
+		clone: function() {
+			return $.extend({}, this);
+		}
 
-		ModelClass.include = function(obj) {
-			var included = obj.inluded;
-			$.extend(ModelClass.fn, obj);
-			if(included) included();
-		};
-
-		return ModelClass;
-	}
-
+	});
 
 
 	return Model;
