@@ -1,6 +1,6 @@
 define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 
-	TaskModel = util.extend(Model, {
+	var TaskModel = util.extend(Model, {
 		
 		constructor: function(attr) {
 
@@ -13,7 +13,7 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 		},
 
 		save: function() {
-			if(!this.parentList) throw "unkown parent list";
+			if(!this.parentList) throw "Unkown parent list for this task";
 			this.parentList.tasks[this.id] = this.clone();
 		},
 
@@ -33,7 +33,7 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 
 	TaskModel.static({
 		attributes:  ["id", "title", "comments", "content", "done"]
-	})
+	});
 
 	
 	return TaskModel;
