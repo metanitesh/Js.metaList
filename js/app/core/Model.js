@@ -25,8 +25,8 @@ define(["util"], function(util) {
 		getAttributes: function(){
 			var attributes = this.constructor.attributes;
 			var result = {};
-			
-			for(var i=0, max = attributes.length; i<max; i++){				
+
+			for(var i=0, max = attributes.length; i<max; i++){
 				result[attributes[i]] = this[attributes[i]];
 			}
 

@@ -15,7 +15,6 @@ define(["jquery"], function($) {
 			};
 
 			constructor.prototype = prototype;
-			constructor.prototype.parent = constructor;
 			return constructor;
 		},
 
