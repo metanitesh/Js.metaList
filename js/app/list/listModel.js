@@ -1,6 +1,7 @@
 define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 
-	ListModel = util.extend(Model, {
+	var ListModel = util.extend(Model, {
+
 		constructor: function(attr) {
 			if (!attr) throw ("Title is required to create new List");
 			this.load(attr);
@@ -28,7 +29,7 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 		findTaskById: function(id) {
 			return this.tasks[id].clone();
 		}
-	})
+	});
 
 	ListModel.static({
 
@@ -38,7 +39,7 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 
 		populate: function(listCollection) {
 			for (var listId in listCollection) {
-				var list = new this(listCollection[listId])
+				var list = new this(listCollection[listId]);
 				if (list.tasks) {
 
 					for (var taskId in list.tasks) {
@@ -52,7 +53,7 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 
 		findById: function(id) {
 			var record = this.records[id];
-			if (!record) throw "no record found";
+			if (!record) throw "No record found";
 			return record.clone();
 
 		},
