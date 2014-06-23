@@ -1,24 +1,12 @@
-define(["Model", "ListModel"], function(Model, ListModel) {
+define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 
-	window.Task = Model.create();
-
-	Task.include({
-
-		init: function(attrs) {
+	window.Task = util.extend(Model, {
+		constructor: function(attrs) {
 			this.load(attrs);
 			if (!this.id) this.id = this.genrateId();
 			if (!this.comments) this.comments = [];
 			if (!this.content) this.content = "";
 			if (!this.done) this.done = false;
-			for(var i in this){
-				console.log(i)
-
-			}
-		},
-
-		load: function(attrs) {
-
-			$.extend(this, attrs);
 		},
 
 		genrateId: function() {
@@ -34,10 +22,7 @@ define(["Model", "ListModel"], function(Model, ListModel) {
 			this.parentList.tasks[this.id] = this.clone();
 		},
 
-		clone: function() {
-			return $.extend({}, this);
-		},
-
+		
 		destroy: function() {
 			delete this.parentList.tasks[this.id];
 		},
@@ -49,9 +34,9 @@ define(["Model", "ListModel"], function(Model, ListModel) {
 		addContent: function(content) {
 			this.content = content;
 		}
-
 	});
 
+	
 	return Task;
 
 });
