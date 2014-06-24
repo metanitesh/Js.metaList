@@ -17,7 +17,7 @@ define(["Model"], function(Model) {
 			expect(typeof Model).toEqual("function");
 		});
 
-		it("can create staic property", function() {
+		it("can create staic properties", function() {
 
 			/** then **/
 			expect(Model.attributes).toEqual(["id", "title"]);

@@ -33,7 +33,7 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 
 	TaskModel.static({
 		attributes:  ["id", "title", "comments", "content", "done"]
-	});
+	})
 
 	
 	return TaskModel;

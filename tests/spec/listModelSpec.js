@@ -1,4 +1,4 @@
-define(["ListModel"], function(ListModel) {
+define(["ListModel", "TaskModel"], function(ListModel) {
 
 	describe("List Model", function() {
 
@@ -18,7 +18,7 @@ define(["ListModel"], function(ListModel) {
 				expect(typeof travelList.load).toEqual("function");
 			});
 
-			it("can save list in records collection", function() {
+			it("can save list in record collection", function() {
 
 				/** given **/
 				var careerList = new ListModel({
@@ -35,7 +35,7 @@ define(["ListModel"], function(ListModel) {
 			});
 
 
-			it("can destroy list from records collection", function() {
+			it("can destroy list from record collection", function() {
 
 				/** given **/
 				var careerList = new ListModel({
@@ -63,10 +63,12 @@ define(["ListModel"], function(ListModel) {
 				travelList.save();
 
 				/** when **/
+
 				travelList.addTask({
 					id: 123423,
 					title: "bali"
 				});
+
 
 				/** then **/
 				expect(travelList.tasks[123423].title).toEqual("bali");

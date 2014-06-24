@@ -5,58 +5,45 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 
 		constructor: function(el, template) {
 
-			this.view = $(el);
-			if (template) this.template = $(template).html();
-
-			this.refreshElement();
-			this.delegateEvent();
-			this.delegateCustomEvent();
-			$(window).on("hashchange", $.proxy(function(){
-				ids = location.hash.slice(1).split("/");
-				this.listId = ids[0];
-				this.taskId = ids[1];
-				console.log(ids);
-				if(this.taskId){
-					this.detailSetup();
-
-				}
-			}, this));
+			this.super.constructor.apply(this, arguments);
 		},
-
-
 
 		events: {
-
 			"keyup textarea": "saveNote",
-		
-		},
 
-		customEvents: {
-			// "showDetails": "detailSetup"
 		},
 
 		elements: {
 			textarea: ".note",
-		
+
 		},
 
-		saveNote: function(e){
+		routeSetup: function() {
+			this.view.textarea.html("");
+
+			var ids = location.hash.slice(2).split("/");
+			if (ids.length === 2) {
+			
+				var list = ListModel.findById(ids[0]);
+				var task = list.findTaskById(ids[1]);
+
+				this.task = task;
+				var oldVal = task.content;
+				this.view.textarea.val(oldVal);
+			}
+
+
+		},
+		
+
+		saveNote: function(e) {
 			var val = this.$(e.target).val();
 			this.task.content = val;
 			this.task.save();
-		},
-
-		detailSetup: function(){
-
-			var list = ListModel.findById(this.listId);
-			var task = list.findTaskById(this.taskId);
-			
-			this.task = task;
-			var oldVal = task.content;
-			this.view.textarea.val(oldVal);
-			
 		}
+
+		
 	});
 
-	return NoteController
-})
+	return NoteController;
+});

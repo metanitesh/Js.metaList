@@ -46,7 +46,7 @@ define(["TaskModel", "ListModel"], function(TaskModel, ListModel) {
 			expect(task.comments[0]).toEqual("enough with black coffee");
 		});
 
-		it("can save task to records collections", function(){
+		it("can save task to record collections", function(){
 
 			/** when **/
 			task.save();
@@ -57,7 +57,7 @@ define(["TaskModel", "ListModel"], function(TaskModel, ListModel) {
 
 		});
 
-		it("can destroy task from records collections", function(){
+		it("can destroy task from record collections", function(){
 			/** when **/
 			task.save();
 			
