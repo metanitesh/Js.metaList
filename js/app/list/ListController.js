@@ -2,30 +2,23 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 	var ListController = util.extend(Controller, {
 
-
 		constructor: function(el, template) {
-			this.view = $(el);
-			if (template) this.template = $(template).html();
-
-			this.refreshElement();
-			this.delegateEvent();
-			this.delegateCustomEvent();
+			this.super.constructor.apply(this, arguments);
 		},
 
-
 		events: {
-			"keypress addNewLlist": "addNewListItem",
-			"click deleteList": "deleteListItem",
-			// "click editList": "setUpdateView",
-			"keypress editInput": "updateListItem",
-			"click title": "showRelatedtask",
-			"dblclick title": "setUpdateView",
+			"keypress addNewLlist": "addList",
+			"click deleteList": "deleteList",
+			"keypress editInput": "updateList",
+			"click editInput": "stopPropagation",
+			"dblclick list": "setUpdateView",
+			"click list": "updateHash",
 		},
 
 		customEvents: {
-			"listItemCreated": "renderModel",
-			"listItemUpdate": "updateModel",
-			"ListItemDestroyed": "removeModel"
+			"listItemCreated": "render",
+			"listItemUpdate": "update",
+			"ListItemDestroyed": "remove"
 		},
 
 		elements: {
@@ -40,57 +33,57 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 		},
 
-		states: {
-			activeList: "setupActiveList",
-			editList: "setupEditList"
+
+		/***********************************************
+
+				Helper methods  
+		***********************************************/
+
+		_getHtmlElement: function(id) {
+			return this.view.find("[data-id=" + id + "]");
 		},
 
-		// activeList: function(target){
-		// 	var target = this.$(e.target).closest(".list");
-		// 	target.siblings(".list").removeClass("list-active");
-		// 	target.addClass("list-active");
-		// },
+		_getModel: function(e) {
+			var id = this.$(e.target).closest('.list').attr("data-id");
+			var model = ListModel.findById(id);
+			return model;
+		},
 
-		activeListStyle: function(e) {
+		/***********************************************
+
+				States  
+		***********************************************/
+
+		listUpdateState: function(element) {
+			element.closest('.list').find(".input-wrapper").removeClass('hidden');
+			element.closest('.list').find(".title").addClass('hidden');
+		},
+
+		listDisplayState: function(element, model) {
+			element.find(".input-wrapper").addClass('hidden');
+			element.closest('.list').find(".title").html(model.title).removeClass('hidden');
+		},
+
+		listActiveState: function(e) {
 			this.view.find(".list").removeClass("list-active");
 			this.view.find(".icon-list").removeClass("icon-list-active");
 			this.view.find(".input-wrapper").addClass("hidden");
 			this.view.find(".title").removeClass("hidden");
 
-			var target = this.$(e.target).closest(".list");
-			target.addClass('list-active');
-			target.find(".icon-list").addClass("icon-list-active");
-			// var target = this.$(e.target).closest(".list");
-			// target.siblings(".list").removeClass("list-active");
-			// target.siblings(".list").find(".input-wrapper").addClass('hidden');
-			// target.addClass("list-active");
+			var element = this.$(e.target).closest(".list");
+			element.addClass('list-active');
+			element.find(".icon-list").addClass("icon-list-active");
+		
 		},
 
-		editListStyle: function(e) {
 
-		},
 
-		_listUpdateState: function(target) {
+		/***********************************************
 
-			target.closest('.list').find(".input-wrapper").removeClass('hidden');
-			target.closest('.list').find(".title").addClass('hidden');
-		},
+				Model manuplation methods  
+		***********************************************/
 
-		_listDisplayState: function(target, model) {
-			target.find(".input-wrapper").addClass('hidden');
-			target.closest('.list').find(".title").html(model.title).removeClass('hidden');
-		},
-
-		showRelatedtask: function(e) {
-
-			this.activeListStyle(e)
-			var id = $(e.target).closest('.list').attr("data-id");
-			// var model = ListModel.findById(id);
-			location.hash = id;
-			// $(document).trigger("showTasks", model);
-		},
-
-		addNewListItem: function(e) {
+		addList: function(e) {
 			if (this._isEnterKey(e)) {
 				var target = $(e.target);
 				var title = $.trim(target.val());
@@ -99,7 +92,6 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 						title: title
 					});
 
-					console.log(listItem)
 					listItem.save();
 
 					target.val("");
@@ -110,20 +102,10 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 		},
 
-		setUpdateView: function(e) {
-			var target = this.$(e.target);
-			this._listUpdateState(target);
-
-		},
-
-		updateListItem: function(e) {
-
+		updateList: function(e) {
 			if (this._isEnterKey(e)) {
-
 				var newTitle = $.trim($(e.target).val());
-				var id = $(e.target).closest('.list').attr("data-id");
-				var model = ListModel.findById(id);
-
+				var model = this._getModel(e);
 
 				if (newTitle) {
 					model.title = newTitle;
@@ -131,39 +113,62 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 					this.view.trigger("listItemUpdate", model);
 
 				}
-
 			}
 		},
 
+		deleteList: function(e) {
+			e.stopPropagation();
 
-		deleteListItem: function(e) {
-			var id = this.$(e.target).closest('.list').attr("data-id");
-			var model = ListModel.findById(id)
+			var model = this._getModel(e);
 			model.destroy();
-			this.view.trigger("ListItemDestroyed", id);
+			this.view.trigger("ListItemDestroyed", model);
 		},
 
-		renderModel: function(e, model) {
+
+		updateHash: function(e) {
+			this.listActiveState(e)
+			var id = $(e.target).closest('.list').attr("data-id");
+			location.hash = "!/"+id;
+		},
+
+
+		/***********************************************
+
+				DOM manuplation methods 
+		***********************************************/
+
+
+		render: function(e, model) {
 			var html = _.template(this.template, model);
 			this.view.listContainer.append(html);
 		},
 
-		removeModel: function(e, id) {
-			var element = this.view.find("[data-id=" + id + "]");
-			element.remove();
+		remove: function(e, model) {
+			this._getHtmlElement(model.id).remove();
 		},
 
-		updateModel: function(e, model) {
-			var target = this.view.find("[data-id=" + model.id + "]");
-			this._listDisplayState(target, model);
+		update: function(e, model) {
+
+			var element = this._getHtmlElement(model.id);
+			this.listDisplayState(element, model);
+
 
 		},
 
+		setUpdateView: function(e) {
+			var element = this.$(e.target);
+			this.listUpdateState(element);
+
+		},
+
+		stopPropagation: function(e){
+			e.stopPropagation();
+		},
+		
 		renderALL: function() {
 			this.view.listContainer.empty();
 			for (var id in ListModel.records) {
-				console.log(ListModel.records);
-				this.renderModel(null, ListModel.records[id]);
+				this.render(null, ListModel.records[id]);
 			}
 
 
