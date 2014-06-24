@@ -43,9 +43,8 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		},
 
 		routeSetup: function(){
-			var id = location.hash.slice(2).split("/")[0];
-			this.listActiveState(id);
-
+			var routeObj = this.super.routeSetup();
+			this.listActiveState(routeObj.list.id);
 		},
 
 		/***********************************************

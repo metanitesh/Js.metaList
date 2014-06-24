@@ -37,23 +37,16 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 
 		routeSetup: function(e) {
 
-			var ids = location.hash.slice(2).split("/")
-			var listId = ids[0];
+			var routeObj = this.super.routeSetup();			
 
-
-			var parentList = ListModel.findById(listId);
-			this.parentList = parentList;
+			this.parentList = routeObj.list;
 			this.tasks = this.parentList.tasks;
 			this.renderAll();
-
-
-			if (ids.length === 2) {
-				var taskId = ids[1];
-				this.activeState(taskId);
+			
+			if(routeObj.task){
+				this.activeState(routeObj.task.id);
 			}
-
-
-
+			
 		},
 
 		updateHash: function(e) {

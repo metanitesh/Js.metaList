@@ -7,8 +7,6 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			this.super.constructor.apply(this, arguments);
 		},
 
-
-
 		events: {
 
 			"keypress addComment": "addComment"
@@ -21,14 +19,11 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		routeSetup: function(){
+			var routeObj = this.super.routeSetup();
 			this.view.comments.empty();
-			var ids = location.hash.slice(2).split("/");
-			if (ids.length === 2) {
-			
-				var list = ListModel.findById(ids[0]);
-				var task = list.findTaskById(ids[1]);
 
-				this.task = task;
+			if(routeObj.task){
+				this.task = routeObj.task;
 				this.renderAll();
 			}
 		},

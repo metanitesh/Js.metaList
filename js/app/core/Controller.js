@@ -3,7 +3,7 @@ define(["util", "jquery"], function(util, $) {
 	Controller = util.defClass({
 
 		constructor: function(el, template) {
-				
+
 			this.view = $(el);
 			if (template) this.template = $(template).html();
 			this.refreshElement();
@@ -11,7 +11,7 @@ define(["util", "jquery"], function(util, $) {
 			this.delegateCustomEvent();
 
 			$(window).on("hashchange", this.proxy(this.routeSetup));
-			
+
 		},
 
 		proxy: function(func) {
@@ -64,14 +64,31 @@ define(["util", "jquery"], function(util, $) {
 		delegateCustomEvent: function() {
 			for (var customEvent in this.customEvents) {
 
-				if(this.customEvents.hasOwnProperty(customEvent)){
+				if (this.customEvents.hasOwnProperty(customEvent)) {
 					var methodName = this.customEvents[customEvent];
 					var method = this.proxy(this[methodName]);
 					$(document).on(customEvent, method);
 				}
-				
+
 
 			}
+		},
+
+		routeSetup: function() {
+
+			var result = {};
+			var ids = location.hash.slice(2).split("/");
+			var listId = ids[0];
+			var list = ListModel.findById(listId);
+			result.list = list;
+
+			if (ids.length === 2) {
+				var taskId = ids[1];
+				result.task = list.findTaskById(taskId);
+			}
+
+			return result;
+
 		}
 	});
 

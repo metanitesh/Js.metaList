@@ -19,19 +19,15 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		routeSetup: function() {
-			this.view.textarea.html("");
-
-			var ids = location.hash.slice(2).split("/");
-			if (ids.length === 2) {
 			
-				var list = ListModel.findById(ids[0]);
-				var task = list.findTaskById(ids[1]);
+			this.view.textarea.html("");
+			var routeObj = this.super.routeSetup();
 
-				this.task = task;
-				var oldVal = task.content;
+			if(routeObj.task){
+				this.task = routeObj.task;
+				var oldVal = this.task.content;
 				this.view.textarea.val(oldVal);
 			}
-
 
 		},
 		
