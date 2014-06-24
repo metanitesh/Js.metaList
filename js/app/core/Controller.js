@@ -2,10 +2,15 @@ define(["util", "jquery"], function(util, $) {
 
 	Controller = util.defClass({
 
-		constructor: function() {
-			console.log("Controller");
+		constructor: function(el, template) {
+				
+			this.view = $(el);
+			if (template) this.template = $(template).html();
+			this.refreshElement();
+			this.delegateEvent();
+			this.delegateCustomEvent();
 		},
-		
+
 		proxy: function(func) {
 			return $.proxy(func, this);
 		},
@@ -14,8 +19,6 @@ define(["util", "jquery"], function(util, $) {
 		$: function(selector) {
 			return $(selector, this.view);
 		},
-
-		eventSplitter: /^(\w+)\s*(.*)$/,
 
 		_isEnterKey: function(e) {
 			var code = (e.keyCode ? e.keyCode : e.which);
@@ -32,23 +35,25 @@ define(["util", "jquery"], function(util, $) {
 		},
 
 		delegateEvent: function() {
-
 			for (var prop in this.events) {
 
-				var methodName = this.events[prop];
-				var method = this.proxy(this[methodName]);
+				if (this.events.hasOwnProperty(prop)) {
+					var methodName = this.events[prop];
+					var method = this.proxy(this[methodName]);
 
-				var userEvent = prop.split(" ")[0];
-				var selector = prop.split(" ")[1];
+					var userEvent = prop.split(" ")[0];
+					var selector = prop.split(" ")[1];
 
-				var element;
+					var element;
 
-				if (selector) {
-					element = this.elements[selector];
-					this.view.on(userEvent, element, method);
-				} else {
-					this.view.on(userEvent, method);
+					if (selector) {
+						element = this.elements[selector];
+						this.view.on(userEvent, element, method);
+					} else {
+						this.view.on(userEvent, method);
+					}
 				}
+
 
 			}
 		},
@@ -56,109 +61,16 @@ define(["util", "jquery"], function(util, $) {
 		delegateCustomEvent: function() {
 			for (var customEvent in this.customEvents) {
 
-				var methodName = this.customEvents[customEvent];
-				var method = this.proxy(this[methodName])
-				$(document).on(customEvent, method);
+				if(this.customEvents.hasOwnProperty(customEvent)){
+					var methodName = this.customEvents[customEvent];
+					var method = this.proxy(this[methodName]);
+					$(document).on(customEvent, method);
+				}
+				
 
 			}
 		}
 	});
 
 	return Controller;
-})
-
-
-// var Controller = {};
-
-// Controller.create = function(parent) {
-// 	var ControllerClass = function() {
-// 		this.init.apply(this, arguments)
-// 	};
-
-// 	if (parent) {
-// 		var F = function() {};
-// 		F.prototype = parent.prototype;
-// 		ControllerClass.prototype = new F();
-// 	};
-
-// 	ControllerClass.fn = ControllerClass.prototype;
-// 	ControllerClass.fn.parent = ControllerClass;
-
-// 	ControllerClass.extend = function(obj) {
-// 		var extended = obj.extended;
-// 		$.extend(ControllerClass, obj);
-// 		if (extended) extend();
-// 	};
-
-// 	ControllerClass.include = function(obj) {
-// 		var included = obj.inluded;
-// 		$.extend(ControllerClass.fn, obj);
-// 		if (included) included();
-// 	};
-
-
-// 	ControllerClass.include({
-// 		proxy: function(func) {
-// 			return $.proxy(func, this);
-// 		},
-
-
-// 		$: function(selector) {
-// 			return $(selector, this.view);
-// 		},
-
-// 		eventSplitter: /^(\w+)\s*(.*)$/,
-
-// 		_isEnterKey: function(e) {
-// 			var code = (e.keyCode ? e.keyCode : e.which);
-// 			return (code === 13);
-// 		},
-
-// 		refreshElement: function() {
-// 			for (var element in this.elements) {
-// 				if (this.elements.hasOwnProperty(element)) {
-// 					this.view[element] = this.$(this.elements[element]);
-
-// 				}
-// 			}
-// 		},
-
-// 		delegateEvent: function() {
-
-// 			for (var prop in this.events) {
-
-// 				var methodName = this.events[prop];
-// 				var method = this.proxy(this[methodName]);
-
-// 				var userEvent = prop.split(" ")[0];
-// 				var selector = prop.split(" ")[1];
-
-// 				var element;
-
-// 				if (selector) {
-// 					element = this.elements[selector];
-// 					this.view.on(userEvent, element, method);
-// 				} else {
-// 					this.view.on(userEvent, method);
-// 				}
-
-// 			}
-// 		},
-
-// 		delegateCustomEvent: function(){
-// 			for (var customEvent in this.customEvents){
-
-// 				var methodName = this.customEvents[customEvent];
-// 				var method = this.proxy(this[methodName])
-// 				$(document).on(customEvent, method);
-
-// 			}
-// 		}
-// 	});
-// 	return ControllerClass;
-// }
-
-
-
-// return Controller;
-// });
+});
