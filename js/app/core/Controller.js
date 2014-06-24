@@ -9,6 +9,9 @@ define(["util", "jquery"], function(util, $) {
 			this.refreshElement();
 			this.delegateEvent();
 			this.delegateCustomEvent();
+
+			$(window).on("hashchange", this.proxy(this.routeSetup));
+			
 		},
 
 		proxy: function(func) {

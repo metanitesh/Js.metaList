@@ -4,22 +4,7 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 
 		constructor: function(el, template) {
 
-			this.view = $(el);
-			if (template) this.template = $(template).html();
-
-			this.refreshElement();
-			this.delegateEvent();
-			this.delegateCustomEvent();
-
-			$(window).on("hashchange", $.proxy(function(e) {
-				var id = location.hash.slice(1).split("/")[0];
-
-				console.log(id);
-				var parentList = ListModel.findById(id);
-				this.parentList = parentList;
-				this.setupParentList();
-
-			}, this));
+			this.super.constructor.apply(this, arguments);
 		},
 
 
@@ -29,16 +14,13 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			"keypress addTask": "addNewTask",
 			"click checkTask": "checkTask",
 			"click deleteTask": "deleteTask",
-			"click title": "showDetails"
+			"click taskItem": "updateHash"
 		},
 
-		customEvents: {
-			"showTasks": "setupParentList",
-
-		},
 
 		elements: {
 			addTask: ".add-task",
+			taskItem: ".task-item",
 			taskGroup: ".task-group",
 			taskRemaining: ".task-remaining",
 			taskComplete: ".task-complete",
@@ -47,43 +29,76 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			title: ".task-title"
 		},
 
-		showDetails: function(e) {
-			this.view.find(".task-item").removeClass("task-item-selected")
-			this.$(e.target).closest('.task-item').addClass('task-item-selected')
-			var id = this.$(e.target).closest('.task-item').data("id");
-			var task = this.parentList.findTaskById(id);
-			// $(document).trigger('showDetails', task)
-			location.hash = location.hash.split("/")[0] + "/" + task.id
-		},
+		
+		/*********************
 
-		deleteTask: function(e) {
-			var id = this.$(e.target).closest('.task-item').data("id");
-			var task = this.parentList.findTaskById(id);
-			task.destroy();
-			this.renderAllTasks();
+			route handling
+		**********************/
 
-		},
+		routeSetup: function(e) {
 
-		checkTask: function(e) {
-			var id = this.$(e.target).closest('.task-item').data("id");
-			var task = this.parentList.findTaskById(id);
-			task.done = true;
-			task.save();
-			this.renderAllTasks();
+			var ids = location.hash.slice(2).split("/")
+			var listId = ids[0];
 
-		},
 
-		setupParentList: function(e, parentList) {
-			// this.parentList = parentList;
+			var parentList = ListModel.findById(listId);
+			this.parentList = parentList;
 			this.tasks = this.parentList.tasks;
-			this.renderAllTasks();
+			this.renderAll();
+
+
+			if (ids.length === 2) {
+				var taskId = ids[1];
+				this.activeState(taskId);
+			}
+
+
+
 		},
+
+		updateHash: function(e) {
+			var task = this._getTask(e);
+			var listId = location.hash.slice(2).split("/")[0];
+			location.hash = "#/" + listId + "/" + task.id
+
+		},
+
+
+
+		/*************************
+
+			helper and states
+		*************************/
+
+
+		_getTask: function(e) {
+			var id = this.$(e.target).closest('.task-item').data("id");
+			var task = this.parentList.findTaskById(id);
+			return task;
+		},
+
+
+		activeState: function(id) {
+			this.view.find(".task-item").removeClass("task-item-selected")
+			this.$("[data-id=" + id + "]").closest('.task-item').addClass('task-item-selected')
+		},
+
+		completeTaskState: function() {
+			this.view.taskComplete.find("li").addClass('task-done')
+			this.view.taskComplete.find(".icon-task-checkbox").addClass('icon-task-checked')
+		},
+
+
+		/***********************************************
+
+				data manuplation methods  
+		***********************************************/
 
 		addNewTask: function(e) {
 
 			if (this._isEnterKey(e)) {
-				var target = this.$(e.target);
-				var title = $.trim(target.val());
+				var element = this.$(e.target);
+				var title = $.trim(element.val());
 
 				if (title) {
 					var task = new TaskModel({
@@ -92,8 +107,8 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 					});
 
 					task.save();
-					target.val("");
-					this.renderAllTasks();
+					element.val("");
+					this.renderAll();
 
 
 				}
@@ -101,25 +116,44 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			}
 		},
 
-		renderAllTasks: function() {
+		deleteTask: function(e) {
+			var task = this._getTask(e);
+			task.destroy();
+			this.renderAll();
+
+		},
+
+		checkTask: function(e) {
+			var task = this._getTask(e);
+			task.done = true;
+			task.save();
+			this.renderAll();
+
+		},
+
+		/***********************************************
+
+				DOM manuplation methods 
+		***********************************************/
+
+		renderAll: function() {
 			this.view.taskRemaining.html("");
 			this.view.taskComplete.html("");
 
 			for (taskId in this.tasks) {
 				var task = this.tasks[taskId];
-				this.renderTask(task);
+				this.render(task);
 
 			}
 
 		},
 
-		renderTask: function(task) {
+		render: function(task) {
 			var html = _.template(this.template, task);
 
 			if (task.done) {
 				this.view.taskComplete.append(html);
-				this.view.taskComplete.find("li").addClass('task-done')
-				this.view.taskComplete.find(".icon-task-checkbox").addClass('icon-task-checked')
+				this.completeTaskState();
 			} else {
 				this.view.taskRemaining.append(html);
 			}
