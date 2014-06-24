@@ -33,6 +33,20 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 		},
 
+		/***********************************************
+
+				Route handling  
+		***********************************************/
+		updateHash: function(e) {
+			var model = this._getModel(e);
+			location.hash = "/"+model.id;
+		},
+
+		routeSetup: function(){
+			var id = location.hash.slice(2).split("/")[0];
+			this.listActiveState(id);
+
+		},
 
 		/***********************************************
 
@@ -64,13 +78,13 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 			element.closest('.list').find(".title").html(model.title).removeClass('hidden');
 		},
 
-		listActiveState: function(e) {
+		listActiveState: function(id) {
 			this.view.find(".list").removeClass("list-active");
 			this.view.find(".icon-list").removeClass("icon-list-active");
 			this.view.find(".input-wrapper").addClass("hidden");
 			this.view.find(".title").removeClass("hidden");
-
-			var element = this.$(e.target).closest(".list");
+			
+			var element = this.$("[data-id="+id+"]").closest(".list");
 			element.addClass('list-active');
 			element.find(".icon-list").addClass("icon-list-active");
 		
@@ -85,8 +99,8 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 		addList: function(e) {
 			if (this._isEnterKey(e)) {
-				var target = $(e.target);
-				var title = $.trim(target.val());
+				var element = $(e.target);
+				var title = $.trim(element.val());
 				if (title) {
 					var listItem = new ListModel({
 						title: title
@@ -94,7 +108,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 					listItem.save();
 
-					target.val("");
+					element.val("");
 					this.view.trigger("listItemCreated", listItem);
 				}
 
@@ -118,19 +132,13 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 		deleteList: function(e) {
 			e.stopPropagation();
-
 			var model = this._getModel(e);
 			model.destroy();
 			this.view.trigger("ListItemDestroyed", model);
 		},
 
 
-		updateHash: function(e) {
-			this.listActiveState(e)
-			var id = $(e.target).closest('.list').attr("data-id");
-			location.hash = "!/"+id;
-		},
-
+		
 
 		/***********************************************
 
@@ -164,7 +172,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		stopPropagation: function(e){
 			e.stopPropagation();
 		},
-		
+
 		renderALL: function() {
 			this.view.listContainer.empty();
 			for (var id in ListModel.records) {

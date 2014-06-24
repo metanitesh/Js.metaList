@@ -31,6 +31,8 @@ list-item module
 .list .edit-list-input {
 	line-height: 1px;
 }
+
+
 /****** list states  ********/
 
 /*** active ******/
@@ -47,8 +49,14 @@ list-item module
 } 
 
 
-
-/*** edit ******/
+/******************
+add-new-list module
+*******************/
+.add-new-list-container{
+	background : url("../images/divider.png") center bottom repeat-x;
+	padding: 8px;	
+	cursor: pointer;
+}
 
 
 
@@ -145,6 +153,7 @@ task-item module
 
 	margin-bottom:4px;
 	height: 34px;
+	cursor: pointer;
 	border-radius: 4px;
 	padding-left: 9px;
 	background:  url("../images/task.png") repeat-x;
