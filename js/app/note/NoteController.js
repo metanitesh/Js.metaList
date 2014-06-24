@@ -22,10 +22,13 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			
 			this.view.textarea.html("");
 			var routeObj = this.super.routeSetup();
-
+			this.list = routeObj.list;
+			
 			if(routeObj.task){
-				this.task = routeObj.task;
-				var oldVal = this.task.content;
+				this.taskId = routeObj.task.id;
+				var task = this.list.findTaskById(this.taskId);
+
+				var oldVal = task.content;
 				this.view.textarea.val(oldVal);
 			}
 
@@ -33,9 +36,10 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		
 
 		saveNote: function(e) {
+			var task = this.list.findTaskById(this.taskId)
 			var val = this.$(e.target).val();
-			this.task.content = val;
-			this.task.save();
+			task.content = val;
+			task.save();
 		}
 
 		

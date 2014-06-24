@@ -21,9 +21,10 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		routeSetup: function(){
 			var routeObj = this.super.routeSetup();
 			this.view.comments.empty();
-
+			this.list = routeObj.list;
+			
 			if(routeObj.task){
-				this.task = routeObj.task;
+				this.taskId = routeObj.task.id;
 				this.renderAll();
 			}
 		},
@@ -34,8 +35,9 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 				var val = $.trim(target.val());
 				if(val){
 
-					this.task.comments.push(val);
-					this.task.save();
+					var task = this.list.findTaskById(this.taskId)
+					task.comments.push(val);
+					task.save();
 					target.val("");
 
 					this.renderAll();
@@ -45,9 +47,11 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		renderAll: function(){
+
 				this.view.comments.empty();
-				for (var i = 0; i < this.task.comments.length; i++) {
-					var html = this.renderComment(this.task.comments[i]);
+				var task = this.list.findTaskById(this.taskId);
+				for (var i = 0; i < task.comments.length; i++) {
+					var html = this.renderComment(task.comments[i]);
 					this.view.comments.append(html);
 				}
 			
