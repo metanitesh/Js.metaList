@@ -20,7 +20,7 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 
 		routeSetup: function() {
 			
-			this.view.textarea.html("");
+			this.view.textarea.val("");
 			var routeObj = this.super.routeSetup();
 			this.list = routeObj.list;
 			
