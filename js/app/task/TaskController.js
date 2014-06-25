@@ -37,22 +37,38 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 
 		routeSetup: function(e) {
 
-			var routeObj = this.super.routeSetup();			
+			var urlObjects = this.super.getUrlObject();
 
-			this.parentList = routeObj.list;
-			this.tasks = this.parentList.tasks;
-			this.renderAll();
-			
-			if(routeObj.task){
-				this.activeState(routeObj.task.id);
+			this.view.addTask.removeAttr("disabled", "disabled");
+			this.view.addTask.removeClass("disabled")
+
+			if(urlObjects.list){
+				this.parentList = urlObjects.list;
+				this.tasks = this.parentList.tasks;
+				this.renderAll();
 			}
+			
+			if(urlObjects.task){
+				this.activeState(urlObjects.task.id);
+			}
+
+			if(_.isEmpty(urlObjects)){
+				this.view.addTask.attr("disabled", "disabled");
+				this.view.addTask.addClass("disabled")
+			}
+
+
+
 			
 		},
 
 		updateHash: function(e) {
 			var task = this._getTask(e);
-			var listId = location.hash.slice(2).split("/")[0];
-			location.hash = "#/" + listId + "/" + task.id
+			var list = this.parentList;
+
+			this.setUrl(list, task);
+			// var listId = location.hash.slice(2).split("/")[0];
+			// location.hash = "#/" + listId + "/" + task.id
 
 		},
 
@@ -103,7 +119,7 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 					element.val("");
 					this.renderAll();
 
-
+					this.setUrl(this.parentList, task);
 				}
 
 			}

@@ -19,13 +19,25 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		routeSetup: function(){
-			var routeObj = this.super.routeSetup();
 			this.view.comments.empty();
-			this.list = routeObj.list;
+
+			this.view.addComment.attr("disabled", "disabled");
+			this.view.addComment.addClass("disabled");
+
+			var urlObjects = this.super.getUrlObject();
 			
-			if(routeObj.task){
-				this.taskId = routeObj.task.id;
+			if(urlObjects.list){
+				this.list = urlObjects.list;	
+			}	
+			
+			if(urlObjects.task){
+				this.taskId = urlObjects.task.id;
 				this.renderAll();
+			}
+
+			if(urlObjects.list && urlObjects.task){
+				this.view.addComment.removeAttr("disabled")
+				this.view.addComment.removeClass("disabled")
 			}
 		},
 

@@ -4,6 +4,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 		constructor: function(el, template) {
 			this.super.constructor.apply(this, arguments);
+			this.renderALL();
 		},
 
 		events: {
@@ -38,13 +39,21 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 				Route handling  
 		***********************************************/
 		updateHash: function(e) {
-			var model = this._getModel(e);
-			location.hash = "/"+model.id;
+			var list = this._getModel(e);
+			this.setUrl(list);
+			// console.log(model)
+			// if(model.getFirstTask()){
+			// 	location.hash = "/"+model.id+"/"+model.getFirstTask().id;
+			// }else{
+			// 	location.hash = "/"+model.id;
+			// }
 		},
 
 		routeSetup: function(){
-			var routeObj = this.super.routeSetup();
-			this.listActiveState(routeObj.list.id);
+			var urlObject = this.super.getUrlObject();
+			if(urlObject.list){
+				this.listActiveState(urlObject.list.id);
+			}
 		},
 
 		/***********************************************
@@ -109,6 +118,8 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 					element.val("");
 					this.view.trigger("listItemCreated", listItem);
+
+					this.setUrl(listItem);
 				}
 
 			}

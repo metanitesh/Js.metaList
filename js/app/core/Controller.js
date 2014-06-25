@@ -74,16 +74,32 @@ define(["util", "jquery"], function(util, $) {
 			}
 		},
 
-		routeSetup: function() {
+		setUrl: function(list, task) {
+
+			var Url = "";
+			
+			if(list) Url = Url + "/" + list.id;
+			if(task) Url =  Url + "/" + task.id;
+			
+			location.hash = Url;
+		},
+
+		getUrlObject: function() {
 
 			var result = {};
 			var ids = location.hash.slice(2).split("/");
-			var listId = ids[0];
-			var list = ListModel.findById(listId);
-			result.list = list;
 
-			if (ids.length === 2) {
-				var taskId = ids[1];
+			var listId = ids[0];
+			var taskId = ids[1];
+
+
+			if (listId) {
+				var list = ListModel.findById(listId);
+				result.list = list;
+			}
+
+			if (taskId) {
+				var task = list.findTaskById(taskId);
 				result.task = list.findTaskById(taskId);
 			}
 

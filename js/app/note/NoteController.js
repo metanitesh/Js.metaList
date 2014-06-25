@@ -21,16 +21,29 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		routeSetup: function() {
 			
 			this.view.textarea.val("");
-			var routeObj = this.super.routeSetup();
-			this.list = routeObj.list;
-			
-			if(routeObj.task){
-				this.taskId = routeObj.task.id;
-				var task = this.list.findTaskById(this.taskId);
+			this.view.textarea.attr("disabled", "disabled");
+			this.view.textarea.addClass("disabled");
 
+			var urlObjects = this.super.getUrlObject();
+			
+			if(urlObjects.list){
+				this.list = urlObjects.list;
+			}
+			
+			if(urlObjects.task){
+				this.taskId = urlObjects.task.id;
+				var task = this.list.findTaskById(this.taskId);
 				var oldVal = task.content;
 				this.view.textarea.val(oldVal);
 			}
+
+			if(urlObjects.list && urlObjects.task){
+				this.view.textarea.removeAttr("disabled");
+				this.view.textarea.removeClass("disabled");
+			}
+			// }else{
+			// 	// this.view.hide();
+			// }
 
 		},
 		
