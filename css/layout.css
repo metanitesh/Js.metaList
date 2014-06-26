@@ -19,6 +19,12 @@
 	width:28%;
 	height: 100%;
 	padding: 18px 18px 18px 0;
-	box-sizing: border-box;
+	box-sizing: border-box;	
 
+}
+
+#actionbar{
+	position: fixed;
+	bottom: 23px;
+	right: 32%;	
 }

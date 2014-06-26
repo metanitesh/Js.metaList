@@ -293,6 +293,36 @@ divider module
 
 
 /*********************
+  save module
+ *********************/
+.save{
+	background: rgba(0,0,0,0.8);
+	-webkit-font-smoothing: antialiased;
+	color: #e9e9e9;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+	text-align: center;
+	padding: 7px 20px;
+	/*font-weight: 500;*/
+	border-radius: 4px;
+	font-size: 13px;
+	cursor: pointer;
+	opacity: 0.7;
+	text-shadow:none;
+	
+}
+
+.save:hover{
+	color: #423e3e;
+	background: #e9e9e9 url("../images/detail.png");
+	text-shadow: none;
+	
+}
+
+.save:active {
+	background-color: blue;
+}
+
+/*********************
  module layout helpers
  *********************/
 
@@ -309,3 +339,7 @@ divider module
 	color: #fff;
 	text-shadow: 0 1px 2px rgba(0,0,0,0.45);
 }
+
+
+
+
