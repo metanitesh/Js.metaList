@@ -10,7 +10,7 @@ require.config({
 
         ListModel: 'js/app/list/listmodel',
         TaskModel: 'js/app/task/taskmodel',
-        
+        bootstrapData: "js/app/bootstrapData",       
 
         ListController: 'js/app/list/listcontroller',
         TaskController: 'js/app/task/taskController',
