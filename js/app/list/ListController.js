@@ -41,12 +41,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		updateHash: function(e) {
 			var list = this._getModel(e);
 			this.setUrl(list);
-			// console.log(model)
-			// if(model.getFirstTask()){
-			// 	location.hash = "/"+model.id+"/"+model.getFirstTask().id;
-			// }else{
-			// 	location.hash = "/"+model.id;
-			// }
+		
 		},
 
 		routeSetup: function(){
@@ -144,6 +139,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 			e.stopPropagation();
 			var model = this._getModel(e);
 			model.destroy();
+			this.setUrl("");	
 			this.view.trigger("ListItemDestroyed", model);
 		},
 

@@ -29,7 +29,7 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			title: ".task-title"
 		},
 
-		
+
 		/*********************
 
 			route handling
@@ -42,24 +42,23 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			this.view.addTask.removeAttr("disabled", "disabled");
 			this.view.addTask.removeClass("disabled")
 
-			if(urlObjects.list){
+			if (urlObjects.list) {
 				this.parentList = urlObjects.list;
 				this.tasks = this.parentList.tasks;
 				this.renderAll();
 			}
-			
-			if(urlObjects.task){
+
+			if (urlObjects.task) {
 				this.activeState(urlObjects.task.id);
 			}
 
-			if(_.isEmpty(urlObjects)){
+			if (_.isEmpty(urlObjects)) {
 				this.view.addTask.attr("disabled", "disabled");
 				this.view.addTask.addClass("disabled")
 			}
 
 
 
-			
 		},
 
 		updateHash: function(e) {
@@ -126,8 +125,12 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		deleteTask: function(e) {
+			e.stopPropagation();
+
 			var task = this._getTask(e);
 			task.destroy();
+
+			this.setUrl(this.parentList);
 			this.renderAll();
 
 		},
