@@ -1,4 +1,4 @@
-define(["ListModel", "ListController", "func"], function(ListModel, ListController, func) {
+define(["func"], function(func) {
 	F.speed = 100;
 
 	describe('List', function() {
@@ -13,7 +13,6 @@ define(["ListModel", "ListController", "func"], function(ListModel, ListControll
 
 		it('can create a new List', function() {
 
-			/****** then *****/
 			F(".list .title:contains('movies')", 0).visible();
 
 		});
