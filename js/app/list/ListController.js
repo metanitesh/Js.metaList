@@ -41,7 +41,6 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		updateHash: function(e) {
 			var list = this._getModel(e);
 			this.setUrl(list);
-		
 		},
 
 		routeSetup: function(){
@@ -108,12 +107,11 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 					var listItem = new ListModel({
 						title: title
 					});
-
 					listItem.save();
+
 
 					element.val("");
 					this.view.trigger("listItemCreated", listItem);
-
 					this.setUrl(listItem);
 				}
 
@@ -124,9 +122,9 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		updateList: function(e) {
 			if (this._isEnterKey(e)) {
 				var newTitle = $.trim($(e.target).val());
-				var model = this._getModel(e);
-
+				
 				if (newTitle) {
+					var model = this._getModel(e);
 					model.title = newTitle;
 					model.save();
 					this.view.trigger("listItemUpdate", model);
@@ -136,11 +134,13 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		},
 
 		deleteList: function(e) {
-			e.stopPropagation();
+			
 			var model = this._getModel(e);
 			model.destroy();
-			this.setUrl("");	
+			
 			this.view.trigger("ListItemDestroyed", model);
+			this.setUrl("");
+			e.stopPropagation();
 		},
 
 
@@ -162,17 +162,13 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		},
 
 		update: function(e, model) {
-
 			var element = this._getHtmlElement(model.id);
 			this.listDisplayState(element, model);
-
-
 		},
 
 		setUpdateView: function(e) {
 			var element = this.$(e.target);
 			this.listUpdateState(element);
-
 		},
 
 		stopPropagation: function(e){

@@ -1,13 +1,11 @@
-define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, ListModel, Controller, util, _, $) {
+define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, Controller, util, _, $) {
+	
 	var TaskController = util.extend(Controller, {
-
 
 		constructor: function(el, template) {
 
 			this.super.constructor.apply(this, arguments);
 		},
-
-
 
 		events: {
 
@@ -16,7 +14,6 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			"click deleteTask": "deleteTask",
 			"click taskItem": "updateHash"
 		},
-
 
 		elements: {
 			addTask: ".add-task",
@@ -29,34 +26,27 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			title: ".task-title"
 		},
 
-
 		/*********************
 
-			route handling
+			Route handling
 		**********************/
 
 		routeSetup: function(e) {
 
 			var urlObjects = this.super.getUrlObject();
-
-			this.view.addTask.removeAttr("disabled", "disabled");
-			this.view.addTask.removeClass("disabled")
+			this.disableAddTaskState();
 
 			if (urlObjects.list) {
+				this.activeAddTaskState();
+
 				this.parentList = urlObjects.list;
 				this.tasks = this.parentList.tasks;
 				this.renderAll();
 			}
 
 			if (urlObjects.task) {
-				this.activeState(urlObjects.task.id);
+				this.activeTaskState(urlObjects.task.id);
 			}
-
-			if (_.isEmpty(urlObjects)) {
-				this.view.addTask.attr("disabled", "disabled");
-				this.view.addTask.addClass("disabled")
-			}
-
 
 
 		},
@@ -66,18 +56,12 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			var list = this.parentList;
 
 			this.setUrl(list, task);
-			// var listId = location.hash.slice(2).split("/")[0];
-			// location.hash = "#/" + listId + "/" + task.id
-
 		},
-
-
 
 		/*************************
 
-			helper and states
+			Helper and States
 		*************************/
-
 
 		_getTask: function(e) {
 			var id = this.$(e.target).closest('.task-item').data("id");
@@ -86,16 +70,25 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 
-		activeState: function(id) {
-			this.view.find(".task-item").removeClass("task-item-selected")
-			this.$("[data-id=" + id + "]").closest('.task-item').addClass('task-item-selected')
+		activeTaskState: function(id) {
+			this.view.find(".task-item").removeClass("task-item-selected");
+			this.$("[data-id=" + id + "]").closest('.task-item').addClass('task-item-selected');
 		},
 
 		completeTaskState: function() {
-			this.view.taskComplete.find("li").addClass('task-done')
-			this.view.taskComplete.find(".icon-task-checkbox").addClass('icon-task-checked')
+			this.view.taskComplete.find("li").addClass('task-done');
+			this.view.taskComplete.find(".icon-task-checkbox").addClass('icon-task-checked');
 		},
 
+		activeAddTaskState: function() {
+			this.view.addTask.removeAttr("disabled", "disabled");
+			this.view.addTask.removeClass("disabled");
+		},
+
+		disableAddTaskState: function() {
+			this.view.addTask.attr("disabled", "disabled");
+			this.view.addTask.addClass("disabled");
+		},
 
 		/***********************************************
 
@@ -125,7 +118,6 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		deleteTask: function(e) {
-			e.stopPropagation();
 
 			var task = this._getTask(e);
 			task.destroy();
@@ -133,9 +125,12 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 			this.setUrl(this.parentList);
 			this.renderAll();
 
+			e.stopPropagation();
+
 		},
 
 		checkTask: function(e) {
+
 			var task = this._getTask(e);
 			task.done = true;
 			task.save();
@@ -149,10 +144,11 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		***********************************************/
 
 		renderAll: function() {
+
 			this.view.taskRemaining.html("");
 			this.view.taskComplete.html("");
 
-			for (taskId in this.tasks) {
+			for (var taskId in this.tasks) {
 				var task = this.tasks[taskId];
 				this.render(task);
 
@@ -173,5 +169,5 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 	});
 
 
-	return TaskController
-})
+	return TaskController;
+});

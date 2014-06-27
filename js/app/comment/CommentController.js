@@ -8,69 +8,98 @@ define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"],
 		},
 
 		events: {
-
 			"keypress addComment": "addComment"
 		},
 
 		elements: {
 			addComment: ".add-comment",
 			comments: ".comments"
-
 		},
 
-		routeSetup: function(){
-			this.view.comments.empty();
+		/*********************
 
-			this.view.addComment.attr("disabled", "disabled");
-			this.view.addComment.addClass("disabled");
+			Route handling
+		**********************/
+
+		routeSetup: function() {
+
+			this.view.comments.empty();
+			this.addCommentDisabledState();
 
 			var urlObjects = this.super.getUrlObject();
-			
-			if(urlObjects.list){
-				this.list = urlObjects.list;	
-			}	
-			
-			if(urlObjects.task){
+
+			if (urlObjects.list) {
+				this.list = urlObjects.list;
+			}
+
+			if (urlObjects.task) {
+				this.addCommentActiveState();
 				this.taskId = urlObjects.task.id;
 				this.renderAll();
 			}
 
-			if(urlObjects.list && urlObjects.task){
-				this.view.addComment.removeAttr("disabled")
-				this.view.addComment.removeClass("disabled")
-			}
 		},
 
-		addComment: function(e){
-			if(this._isEnterKey(e)){
-				var target = this.$(e.target);
-				var val = $.trim(target.val());
-				if(val){
+		/*************************
 
-					var task = this.list.findTaskById(this.taskId)
-					task.comments.push(val);
+			States
+		*************************/
+
+		addCommentDisabledState: function() {
+			this.view.addComment.attr("disabled", "disabled");
+			this.view.addComment.addClass("disabled");
+		},
+
+		addCommentActiveState: function() {
+			this.view.addComment.removeAttr("disabled");
+			this.view.addComment.removeClass("disabled");
+		},
+
+		/****************************
+
+			Model manuplation methods
+		******************************/
+
+		addComment: function(e) {
+
+			if (this._isEnterKey(e)) {
+				var element = this.$(e.target);
+				var newComment = $.trim(element.val());
+
+				if (newComment) {
+
+					var task = this.list.findTaskById(this.taskId);
+					task.comments.push(newComment);
 					task.save();
-					target.val("");
 
+					element.val("");
 					this.renderAll();
 				}
 			}
-			
+
 		},
 
-		renderAll: function(){
+		/***************************
 
-				this.view.comments.empty();
-				var task = this.list.findTaskById(this.taskId);
-				for (var i = 0; i < task.comments.length; i++) {
-					var html = this.renderComment(task.comments[i]);
-					this.view.comments.append(html);
-				}
-			
+			DOM manuplation methods
+		*****************************/
+
+		renderAll: function() {
+
+			this.view.comments.empty();
+			var task = this.list.findTaskById(this.taskId);
+
+			for (var i = 0; i < task.comments.length; i++) {
+				var html = this.renderComment(task.comments[i]);
+				this.view.comments.append(html);
+			}
+
 		},
 
 		renderComment: function(comment) {
-			var html = _.template(this.template, {comment: comment});
+			var html = _.template(this.template, {
+				comment: comment
+			});
 			return html;
 		}
 	});
