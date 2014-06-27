@@ -1,6 +1,6 @@
-define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
+define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskModel, _) {
 
-	var ListModel = util.extend(Model, {
+	ListModel = util.extend(Model, {
 
 		constructor: function(attr) {
 			if (!attr) throw ("Title is required to create new List");
@@ -20,7 +20,7 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 
 
 		addTask: function(attr) {
-
+			
 			var task = new TaskModel(attr);
 			task.parentList = this;
 			task.save();
@@ -29,11 +29,14 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 		findTaskById: function(id) {
 			return this.tasks[id].clone();
 		}
+		
 	});
 
 	ListModel.static({
 
 		records: {},
+
+		localDb: "metalist",
 
 		attributes: ["id", "title"],
 
@@ -73,11 +76,11 @@ define(["util", "Model", "TaskModel"], function(util, Model, TaskModel) {
 				}
 			}
 
-			localStorage[name] = JSON.stringify(result);
+			localStorage[this.localDb] = JSON.stringify(result);
 		},
 
-		loadLocal: function(name) {
-			var result = JSON.parse(localStorage[name]);
+		loadLocal: function() {
+			var result = JSON.parse(localStorage[this.localDb]);
 			ListModel.populate(result);
 		}
 
