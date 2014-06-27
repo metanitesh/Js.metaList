@@ -23,8 +23,8 @@ module.exports = function(grunt) {
 							ListModel: 'js/app/list/Listmodel',
 							TaskModel: 'js/app/task/Taskmodel',
 
-							ListController: 'js/app/list/listcontroller',
-							TaskController: 'js/app/task/taskController',
+							ListController: 'js/app/list/ListController',
+							TaskController: 'js/app/task/TaskController',
 							NoteController: 'js/app/note/NoteController',
 							CommentController: 'js/app/comment/CommentController',
         					actionbarController: 'js/app/actionbar/actionbarController'

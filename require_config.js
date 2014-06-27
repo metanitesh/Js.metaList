@@ -8,14 +8,15 @@ require.config({
         Model: 'js/app/core/Model',
         Controller: 'js/app/core/Controller',
 
-        ListModel: 'js/app/list/listmodel',
-        TaskModel: 'js/app/task/taskmodel',
-        bootstrapData: "js/app/bootstrapData",       
+        ListModel: 'js/app/list/Listmodel',
+        TaskModel: 'js/app/task/Taskmodel',
+        bootstrapData: "js/app/bootstrapData",
 
-        ListController: 'js/app/list/listcontroller',
-        TaskController: 'js/app/task/taskController',
+        ListController: 'js/app/list/ListController',
+        TaskController: 'js/app/task/TaskController',
         NoteController: 'js/app/note/NoteController',
-        CommentController: 'js/app/comment/CommentController'
+        CommentController: 'js/app/comment/CommentController',
+        actionbarController: 'js/app/actionbar/actionbarController'
     }
 });
 
