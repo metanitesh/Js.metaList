@@ -15,13 +15,13 @@ module.exports = function(grunt) {
 							jquery: 'js/lib/jquery-1.11.1',
 							underscore: 'js/lib/underscore',
 
-							util: 'js/app/core/util',
+							util: 'js/app/core/Util',
 							Model: 'js/app/core/Model',
 							Controller: 'js/app/core/Controller',
 							bootstrapData: "js/app/bootstrapData",
 
-							ListModel: 'js/app/list/Listmodel',
-							TaskModel: 'js/app/task/Taskmodel',
+							ListModel: 'js/app/list/ListModel',
+							TaskModel: 'js/app/task/TaskModel',
 
 							ListController: 'js/app/list/ListController',
 							TaskController: 'js/app/task/taskController',
