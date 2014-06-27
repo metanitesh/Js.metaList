@@ -1,5 +1,5 @@
 define(["func"], function(func) {
-	F.speed = 200;
+	F.speed = 2;
 
 	describe('Comment', function() {
 		

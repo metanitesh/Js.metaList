@@ -1,5 +1,5 @@
 define(["func"], function(func) {
-	F.speed = 100;
+	F.speed = 2;
 
 	describe('Note', function() {
 		var addTask;

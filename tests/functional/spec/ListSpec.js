@@ -1,5 +1,5 @@
 define(["func"], function(func) {
-	F.speed = 100;
+	F.speed = 2;
 
 	describe('List', function() {
 
@@ -64,4 +64,6 @@ define(["func"], function(func) {
 			F(".list .title:contains('Books')", 0).click(performTest);
 		});
 	});
+
+
 });
