@@ -1,5 +1,4 @@
-define(["ListModel", "underscore"], function(ListModel, _) {
-
+define(["ListModel"], function(ListModel) {
 
 	var bootstrapData = {
 		"1A401EF4-5036-4DE1-B8DD-4A19EE40453B": {
@@ -72,11 +71,11 @@ define(["ListModel", "underscore"], function(ListModel, _) {
 		}
 	};
 
-	if (!localStorage.metalist) {
+	if (!localStorage[ListModel.localDb]) {
 		ListModel.populate(bootstrapData);
-		ListModel.saveLocal("metalist");
+		ListModel.saveLocal();
 	}
 
-	ListModel.loadLocal("metalist");
+	ListModel.loadLocal();
 	
-})
+});
