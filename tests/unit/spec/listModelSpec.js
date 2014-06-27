@@ -165,10 +165,10 @@ define(["ListModel", "TaskModel"], function(ListModel) {
 				};
 
 				/** when **/
-				ListModel.saveLocal("test_metaList");
+				ListModel.saveLocal();
 
 				/** then **/
-				expect(localStorage["test_metaList"]).toEqual(JSON.stringify(expectedObj));
+				expect(localStorage[ListModel.localDb]).toEqual(JSON.stringify(expectedObj));
 
 			});
 
@@ -193,8 +193,8 @@ define(["ListModel", "TaskModel"], function(ListModel) {
 				travelList.save();
 				careerList.save();
 
-				ListModel.saveLocal("metaList_test");
-				ListModel.loadLocal("metaList_test");
+				ListModel.saveLocal();
+				ListModel.loadLocal();
 
 				expect(ListModel.records[1].title).toEqual("travelList");
 				expect(ListModel.records[2].title).toEqual("careerList");
