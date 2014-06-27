@@ -20,8 +20,8 @@ module.exports = function(grunt) {
 							Controller: 'js/app/core/Controller',
 							bootstrapData: "js/app/bootstrapData",
 
-							ListModel: 'js/app/list/ListModel',
-							TaskModel: 'js/app/task/TaskModel',
+							ListModel: 'js/app/list/listmodel',
+							TaskModel: 'js/app/task/taskmodel',
 
 							ListController: 'js/app/list/ListController',
 							TaskController: 'js/app/task/taskController',
