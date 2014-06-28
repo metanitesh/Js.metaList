@@ -53,11 +53,6 @@ define(["func"], function(func) {
 			};
 			F(".task-item .task-title:contains('Into The Wild')", 0).visible().click(performTest);
 		});
-		
-
-		
-
-
-
+				
 	});
 });

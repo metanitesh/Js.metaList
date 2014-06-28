@@ -4,12 +4,12 @@ define(["func"], function(func) {
 	describe('List', function() {
 
 		beforeEach(function() {
-			var src = document.getElementById('metaListFrame').src
+			var src = document.getElementById('metaListFrame').src;
 			document.getElementById('metaListFrame').src = src;
 
 			var addList = F('.add-new-list', 0);
 			addList.type('movies [enter]');
-		})
+		});
 
 		it('can create a new List', function() {
 
@@ -17,18 +17,16 @@ define(["func"], function(func) {
 
 		});
 
-
-
 		it("can edit a list item", function() {
 
 			var performTest = function() {
-				F(this).closest(".list").dblclick()
+				F(this).closest(".list").dblclick();
 				F(this).closest(".list").find(".input-wrapper").visible(function() {
 					F(this).find(".edit-list-input").type("Bucket-List [enter]");
 					F(this).invisible();
 					F(this).closest(".list").find(".title").visible();
 				});
-			}
+			};
 
 			F(".list .title:contains('movies')", 0).visible(performTest);
 
@@ -37,9 +35,9 @@ define(["func"], function(func) {
 		it("can delete a list item", function() {
 
 			var performTest = function() {
-				F(this).closest(".list").find(".delete-list").click()
+				F(this).closest(".list").find(".delete-list").click();
 				F(this).closest(".list").invisible();
-			}
+			};
 
 			F(".list .title:contains('movies')", 0).visible(performTest);
 

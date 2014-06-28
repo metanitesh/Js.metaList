@@ -1,7 +1,9 @@
 define(["ListModel", "TaskModel"], function(ListModel) {
 
 	describe("List Model", function() {
-
+		beforeEach(function(){
+			ListModel.localDb = "testMetaList";
+		});
 		describe("instance methods", function() {
 			var travelList;
 			beforeEach(function() {
