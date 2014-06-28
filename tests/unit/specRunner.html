@@ -2,7 +2,38 @@
     <head>
         <title>Jasmine Test Runner</title>
         <link rel="stylesheet" type="text/css" href="../lib/jasmine-1.0.0/jasmine.css">
-        <script data-main="../spec_require_config" src="../../js/lib/require.js"></script>
+        <script data-main="./../../require_config" src="../../js/lib/require.js"></script>
+        <script>
+        require(['./../../require_config.js'], function() {
+            
+            require(['jquery', 'jasmine-html'], function($, jasmine) {
+                var jasmineEnv = jasmine.getEnv();
+                jasmineEnv.updateInterval = 1000;
+
+                var htmlReporter = new jasmine.HtmlReporter();
+
+                jasmineEnv.addReporter(htmlReporter);
+
+                jasmineEnv.specFilter = function(spec) {
+                    return htmlReporter.specFilter(spec);
+                }
+
+                var specs = ['tests/unit/spec/listmodelspec', 'tests/unit/spec/taskmodelspec', 'tests/unit/spec/modelspec', 'tests/unit/spec/utilspec'];
+
+
+
+                $(function() {
+                    require(specs, function(spec) {
+                        jasmineEnv.execute();
+                    });
+                });
+
+
+            });
+        })
+        
+        
+        </script>
     </head>
 
     <body>
