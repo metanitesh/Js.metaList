@@ -83,12 +83,14 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		listActiveState: function(id) {
 			this.view.find(".list").removeClass("list-active");
 			this.view.find(".icon-list").removeClass("icon-list-active");
+			this.view.find(".icon-delete").removeClass("icon-delete-active");
 			this.view.find(".input-wrapper").addClass("hidden");
 			this.view.find(".title").removeClass("hidden");
 			
 			var element = this.$("[data-id="+id+"]").closest(".list");
 			element.addClass('list-active');
 			element.find(".icon-list").addClass("icon-list-active");
+			element.find(".icon-delete").addClass("icon-delete-active")
 		
 		},
 
