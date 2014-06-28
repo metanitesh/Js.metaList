@@ -3,7 +3,7 @@
 ************/
 
 .logo-container{
-	background: url("../images/sidebar_logo.png");
+	background: url("../images/logo_bg.png");
 	height: 27px;
 	padding-top:10px; 
 	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
@@ -24,6 +24,7 @@ list-item module
 
 
 .list .title{
+	text-transform: capitalize;
 	margin-left: 15px;
 	width:30%;
 }
@@ -45,7 +46,7 @@ list-item module
 .list .input-wrapper{
 	background: white;
 	padding: 4px;
-	margin: 10px;
+	/*margin: 10px;*/
 } 
 
 
@@ -66,41 +67,69 @@ icon module
 
 .icon {
 	display: inline-block;
-	background-image: url("../images/icons.png");
+	background-image: url("../images/icon-sprite.png");
 	vertical-align: middle;
 	cursor: pointer;
 }
 
+.icon-gihub{
+	/*display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+*/
+/*	background: url("../images/github_icon_ copy.png");
+	margin-right:5px; 
+
+*/	width:16px;
+	background-position: 0px -174px;
+	
+	margin-right:5px; 
+	margin-top:-3px; 
+
+	height: 16px;
+}
+
 .icon-list {
-	background-position: -621px -254px;
+	background-position: 0px -147px;
+
 	width: 20px;
-	height: 20px
+	height: 16px
 }
 
 .icon-list-active{
-	background-position: -581px -254px;
+	background-position: 0px -122px;
+	width: 20px;
+	height: 16px;
 }
 
 .icon-delete {
-	background-position: -591px -192px;
+	/*background-position: -591px -192px;*/
+	background-position: 0px -60px;
+	width: 20px;
+	height: 20px;
+}
+
+.icon-delete-active {
+	/*background-position: -591px -192px;*/
+	background-position: 0px -90px;
 	width: 20px;
 	height: 20px;
 }
 
 .icon-task-checkbox{
-	background-position: -495px -394px;
+	background-position: 0px 0px;
 	width: 20px;
 	height: 18px;	
 }
 
 .icon-task-checked{
-	background-position: -515px -394px;
+	background-position: 0px -30px;
 	width: 20px;
 	height: 18px;
 }
 .icon-task-separator {
-	background-position: -517px -34px;
-	width: 2px;
+	background-position: 3px -208px;
+	width: 5px;
 	height: 33px;
 }
 
@@ -264,6 +293,11 @@ divider module
 	margin: 40px auto 0;
 }
 
+.comments{
+	height: 230px;
+	overflow: scroll;
+}
+
 .comment{
 	background : url("../images/divider.png") center bottom repeat-x;
 	padding: 8px 12px;	
@@ -321,6 +355,21 @@ divider module
 .save:active {
 	background-color: blue;
 }
+
+/*********************
+ save border
+ *********************/
+.save-frame{
+display: none;	
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border: 10px solid #a2d626;
+}
+
+
 
 /*********************
  module layout helpers

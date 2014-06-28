@@ -9,7 +9,15 @@
 </head>
 
 <body>
+   
+    <div class="mobile_menu">
+        
+        <span class="list_menu"> list </span>
+        <span class="task_menu"> task </span>
+        <span class="detail_menu"> detail </span>
+    </div> 
     <div class="main-interace">
+
         <div id="sidebar">
             <div class="logo-container">
                 <span>metalist</span>
@@ -47,7 +55,7 @@
 
             <div class="panel">
                 <div class="panel-title">
-                    <span>complete this app</span>
+                    <span>Task Detail</span>
                 </div>
 
                 <h1 class="panel-heading">
@@ -55,7 +63,7 @@
                 </h1>
                 <div id="note-view">
                     <div class="note-container">
-                        <textarea class="note"></textarea>
+                        <textarea class="note" disabled></textarea>
                     </div>
                 </div>
 
@@ -71,12 +79,23 @@
 
                         </ul>
                         <div class="add-comment-container">
-                            <input type="text" class="add-comment" placeholder="add comment" />
+                            <input type="text" class="add-comment" placeholder="add comment" disabled/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="actionbar">
+    <div class="save-frame"></div> 
+            
+            <!-- <a class="save">fork me on github</a> -->
+            <a class="save"><span class="icon icon-gihub"></span><span>fork me on gihub</span></a>
+
+            <a class="save locally">save</a>
+            
+        </div>
+
+
         <div class="clr"></div>
     </div>
     
@@ -112,7 +131,9 @@
 
     <script data-main="./require_config" src="js/lib/require.js"></script>
     <script>
-        require(['./js/app/app']);
+    require(['./require_config.js'], function() {
+        require(['./js/app/app.js']);
+    });
     </script>
 </body>
 
