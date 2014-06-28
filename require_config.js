@@ -21,6 +21,7 @@ require.config({
 
         'jasmine': 'tests/lib/jasmine-1.0.0/jasmine',
         'jasmine-html': 'tests/lib/jasmine-1.0.0/jasmine-html',
+        'func': 'tests/lib/funcunit'
     },
     
     shim: {

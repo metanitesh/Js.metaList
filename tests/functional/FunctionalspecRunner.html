@@ -4,20 +4,59 @@
         <title>Jasmine Test Runner</title>
         <style>
 			iframe {
-				border: 0;
-				margin:20px; 
-				width: 1000px;
+				margin: 0px;
+				border: 1px solid #d1d1d1;
+				box-shadow: 0 1px 5px rgba(5,5,5,0.2);
+				margin-left:2%; 
+				box-sizing:border-box; 
+				width: 75%;
 				height: 600px;
 				display: block;
 				overflow: hidden;
 				float:right;
+				min-width: 800px;
+				border-radius: 4px;
 			}
+			
+			.jasmine_reporter{
+			float: left;
+			width: 20%
+		}	
 		</style>
         <link rel="stylesheet" type="text/css" href="../lib/jasmine-1.0.0/jasmine.css">
-        <script data-main="../spec_require_config_func" src="../../js/lib/require.js"></script>
+        <script data-main="./../../require_config" src="../../js/lib/require.js"></script>
+        <script>
+        require(['./../../require_config.js'], function() {
+            
+            require(['jquery', 'jasmine-html'], function($, jasmine) {
+                var jasmineEnv = jasmine.getEnv();
+                jasmineEnv.updateInterval = 1000;
+
+                var htmlReporter = new jasmine.HtmlReporter();
+
+                jasmineEnv.addReporter(htmlReporter);
+
+                jasmineEnv.specFilter = function(spec) {
+                    return htmlReporter.specFilter(spec);
+                }
+
+    			var specs = ['tests/functional/spec/listspec', 'tests/functional/spec/taskspec',  'tests/functional/spec/commentspec', 'tests/functional/spec/notespec'];
+             
+
+
+                $(function() {
+                    require(specs, function(spec) {
+                        jasmineEnv.execute();
+                    });
+                });
+
+
+            });
+        })
+        </script>
     </head>
 
     <body>
-    <iframe src="../../index.html" name="todo"></iframe>
+    <iframe src="../../index.html" id="metaListFrame" name="metaList"></iframe>
     </body>
 </html>
