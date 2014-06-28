@@ -1,3 +1,3 @@
 Js.jQuery.metaList
 ==================
-![alt tag](https://travis-ci.org/metanitesh/Js.jQuery.metaList.svg?branch=master)
+[![Build Status](https://travis-ci.org/metanitesh/Js.jQuery.metaList.svg?branch=master)](https://travis-ci.org/metanitesh/Js.jQuery.metaList)
