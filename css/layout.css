@@ -1,3 +1,7 @@
+#mobile{
+	display: none;
+}
+
 #sidebar{
 	float: left;
 	width: 21%;
@@ -30,39 +34,3 @@
 	right: 32%;	
 }
 
-.mobile_menu{
-		padding: 10px;
-		background: #eee;
-		display: none;
-		text-align: center
-}
-.mobile_menu span{
-	display: inline-block;
-	margin-left:20px;
-	padding: 4px 20px; 
-	border: 1px solid #aaa;
-	border-radius:4px; 
-	cursor: pointer;
-}
-
-
-/*@media only screen and (max-width : 900px) {
-	.mobile_menu{
-		display: block;
-	}
-	#sidebar, #main-content, #detail{
-		position:absolute;
-		text-outline: 40px;
-		left:0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-	}
-	#sidebar{
-		display: none;
-	}
-	#detail{
-		display: none; 
-	}
-}
-*/

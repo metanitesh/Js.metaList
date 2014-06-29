@@ -17,9 +17,10 @@ list-item module
 *****************/
 
 .list{
-	background : url("../images/divider.png") center bottom repeat-x;
+	/*background : url("../images/divider.png") center bottom repeat-x;*/
 	padding: 8px;	
 	cursor: pointer;
+	border-bottom:1px dotted #D4D0D0;
 }
 
 
@@ -41,6 +42,7 @@ list-item module
 	background: url("../images/list-active.jpg") center bottom;
 	color: #fff;
 	text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+	border-bottom: 0px;
 }
 
 .list .input-wrapper{
@@ -54,9 +56,10 @@ list-item module
 add-new-list module
 *******************/
 .add-new-list-container{
-	background : url("../images/divider.png") center bottom repeat-x;
 	padding: 8px;	
 	cursor: pointer;
+	border-bottom:1px dotted #D4D0D0;
+
 }
 
 
@@ -73,14 +76,8 @@ icon module
 }
 
 .icon-gihub{
-	/*display: inline-block;
-	vertical-align: middle;
-	cursor: pointer;
-*/
-/*	background: url("../images/github_icon_ copy.png");
-	margin-right:5px; 
-
-*/	width:16px;
+	
+	width:16px;
 	background-position: 0px -174px;
 	
 	margin-right:5px; 
@@ -240,13 +237,18 @@ task-item module
 
 .panel-heading::after{
 	content: "";
-	height: 3px;
-	background: url("../images/divider.png") repeat-x;
+	height: 1px;
+	border: 1px dotted #D4D0D0;
 	display: block;
 	width: 100%;
-	height: 1px;
-	margin: -7px;
+	margin: -9px;
 	
+}
+
+
+/*****mobile*****/
+@media only screen and (max-width : 900px) {
+
 }
 
 /***********
@@ -299,13 +301,13 @@ divider module
 }
 
 .comment{
-	background : url("../images/divider.png") center bottom repeat-x;
-	padding: 8px 12px;	
+	padding: 8px 12px;
+	border-bottom:1px solid #D4D0D0;
 	cursor: pointer;			
 }
 
 .comment:last-child{
-	background:none;
+	border:0;
 }
 
 .add-comment-container{
@@ -369,6 +371,32 @@ bottom: 0;
 border: 10px solid #a2d626;
 }
 
+
+/*********************
+ mobile menu
+ *********************/
+
+.mobile_menu{
+	padding: 10px 0;
+	background: #eee url("../images/sidebar.png");
+	text-align: center;
+	border-bottom:1px solid #afafaf
+	
+}
+.mobile_menu-item{
+	background: url("../images/task.png"); 
+	display: inline-block;
+	margin-left:20px;
+	padding: 4px 20px; 
+	border: 1px solid #aaa;
+	border-radius:4px; 
+	cursor: pointer;
+
+}
+
+.mobile-menu-active{
+	background-position:bottom; 
+}
 
 
 /*********************
