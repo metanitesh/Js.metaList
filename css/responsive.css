@@ -1,0 +1,43 @@
+@media only screen and (max-width : 600px) {
+	
+	/**layout***/
+	.interface{
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	#mobile{
+		display: block;
+	}
+
+	#sidebar, #main-content, #detail{
+		position:absolute;		
+		width: 100%;
+		height: 100%;
+	}
+
+	#detail{
+		padding: 0;
+	}
+
+
+	/***subtractive css***/
+	
+	#sidebar .logo-container{
+		display: none;
+	}
+
+	#detail .panel{
+		border-radius:0;
+	}
+
+	#detail .panel-title{
+		display: none;	
+	}
+
+	/****states****/
+	.hide-mobile{
+		display: none !important;
+	}
+}
