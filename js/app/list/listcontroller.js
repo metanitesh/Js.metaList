@@ -39,6 +39,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 				Route handling  
 		***********************************************/
 		updateHash: function(e) {
+			$(document).trigger("listItemSelected");
 			var list = this._getModel(e);
 			this.setUrl(list);
 		},
