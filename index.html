@@ -6,27 +6,30 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/modules.css">
     <link rel="stylesheet" href="css/states.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
 </head>
 
 <body>
-   
-    <div class="mobile_menu">
-        
-        <span class="list_menu"> list </span>
-        <span class="task_menu"> task </span>
-        <span class="detail_menu"> detail </span>
-    </div> 
-    <div class="main-interace">
 
+    <div id="mobile">        
+        <div class="logo-container">
+            <span>metalist</span>
+        </div>
+        <div class="mobile_menu">        
+            <span class="mobile_menu-item menu-list"> list </span>
+            <span class="mobile_menu-item menu-task"> task </span>
+            <span class="mobile_menu-item menu-detail"> detail </span>
+        </div> 
+    </div>
+
+    <div class="interface">
         <div id="sidebar">
             <div class="logo-container">
                 <span>metalist</span>
             </div>
             <div id="list-view">
-                <ul class="list-container">
-
-
-                </ul>
+                <ul class="list-container"></ul>
                 <div class="add-new-list-container">
                     <input type="text" class="add-new-list" placeholder="+ Add new list">
                 </div>
@@ -86,7 +89,7 @@
             </div>
         </div>
         <div id="actionbar">
-    <div class="save-frame"></div> 
+            <div class="save-frame"></div> 
             
             <!-- <a class="save">fork me on github</a> -->
             <a class="save"><span class="icon icon-gihub"></span><span>fork me on gihub</span></a>
