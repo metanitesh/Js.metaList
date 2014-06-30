@@ -16,38 +16,38 @@ MetaList implements requireJs to handle dependency injection and async module de
 
 ####Unit tests/ Jasmine
 
-MetaList follows TDD approach and uses jasmine to write unit tests. 
+>MetaList follows TDD approach and uses jasmine to write unit tests. 
 
-Javascript testing is somewhat deferent than server-side testing and writing unit test cases related to controller brings not only trivial value but more hassle instead metaList uses funcUnit to test controller.
+>Javascript testing is somewhat different than server-side testing and writing unit test cases related to controller brings not only trivial value but more hassle instead metaList uses funcUnit to test controller.
 
 - [run unit tests](https://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
 
 ####Functional tests/ Funcunit
 
-MetaList uses funcUnit to write functional test case. FuncUnit allows you to write functional test cases in jasmine with jquery like syntax and run it on iframe.  
+>MetaList uses funcUnit to write functional test case. FuncUnit allows you to write functional test cases in jasmine with jquery like syntax and run it on iframe.  
 
 - [run functional tests](https://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
   
 ####Build/ Grunt 
 
-MetaList utilize grunt as a build tool and uses it to runs unit tests and lint Js files. 
+>MetaList utilize grunt as a build tool and uses it to runs unit tests and lint Js files. 
 
 ####CI/ Travis
 
-CI system can run application's buildFile on multiple environment with every commit and notify back by email if something goes wrong. Although setting up local CI like jenkins could be a potential  hassle travis makes it a breeze for open source github project like metsList.
+>CI system can run application's buildFile on multiple environment with every commit and notify back by email if something goes wrong. Although setting up local CI like jenkins could be a potential  hassle travis makes it a breeze for open source github project like metsList.
 
 
 ####SMACSS
 
-MetaList follows smacss guidelines to architect css in modular fashion and organizes base, layout and module classes separately. Every css module in metalist can be effectively re-used and adopt different layouts.
+>MetaList follows smacss guidelines to architect css in modular fashion and organizes base, layout and module classes separately. Every css module in metalist can be effectively re-used and adopt different layouts.
 
 ####CSS-RWD
-Metalist responds with user friendly version of application on smaller resolution.
+>Metalist responds with user friendly version of application on smaller resolution.
 
 ####DB/ LocalStorage 
-MetaList stores data locally in your browser.
+>MetaList stores data locally in your browser.
 
 ####jQuery/ Uunderscore
-Metalist uses jquery for Dom and Underscore for utility belt.
+>Metalist uses jquery for Dom and Underscore for utility belt.
 
 
