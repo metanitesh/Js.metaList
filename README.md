@@ -8,11 +8,11 @@
 
 ####Object oriented design and MVC ( without any framework ).
 
-MetaList demonstrates how to use MVC pattern to craft your code (without using MV* framework) and abstract it into a reusable library. it also leverages  cleaner and simpler prototypal approach to support multilevel inheritance. 
+>MetaList demonstrates how to use MVC pattern to craft your code (without using MV* framework) and abstract it into a reusable library. it also leverages  cleaner and simpler prototypal approach to support multilevel inheritance. 
 
 ####RequireJs/ AMD 
 
-MetaList implements requireJs to handle dependency injection and async module definition. It also shows how to use requireJs with Jasmine, funcUnit and grunt. 
+>MetaList implements requireJs to handle dependency injection and async module definition. It also shows how to use requireJs with Jasmine, funcUnit and grunt. 
 
 ####Unit tests/ Jasmine
 
