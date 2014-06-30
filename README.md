@@ -1,9 +1,9 @@
 ###Js.metaList [![BuildStatus](https://travis-ci.org/metanitesh/Js.jQuery.metaList.svg?branch=master)](https://travis-ci.org/metanitesh/Js.jQuery.metaList)
 
->MetaList is a javascript application designed for simple content organization. even though it can be used as a product but actual purpose of the application is to demonstrate how to craft production ready javascript application. 
-- [project demo](https://www.niteshsharma.com/jsMetaList)
-- [unit tests](https://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
-- [functional tests](https://www.niteshsharma.com/jsMetaList/unit/specrunner.html)
+>MetaList is a javascript application designed for simple content organization. even though it can be used as a product actual purpose of the application is to demonstrate how to craft production ready javascript application. 
+- [project demo](http://www.niteshsharma.com/jsMetaList)
+- [unit tests](http://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
+- [functional tests](http://www.niteshsharma.com/jsMetaList/unit/specrunner.html)
 
 
 ####Object oriented design and MVC ( without any framework ).
@@ -20,13 +20,13 @@
 
 >Javascript testing is somewhat different than server-side testing and writing unit test cases related to controller brings not only trivial value but more hassle instead metaList uses funcUnit to test controller.
 
-- [run unit tests](https://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
+- [run unit tests](http://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
 
 ####Functional tests/ Funcunit
 
 >MetaList uses funcUnit to write functional test case. FuncUnit allows you to write functional test cases in jasmine with jquery like syntax and run it on iframe.  
 
-- [run functional tests](https://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
+- [run functional tests](http://www.niteshsharma.com/jsMetaList/functional/specrunner.html)
   
 ####Build/ Grunt 
 
