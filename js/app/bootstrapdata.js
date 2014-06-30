@@ -1,4 +1,6 @@
 define(["ListModel"], function(ListModel) {
+	
+	"use strict";
 
 	var bootstrapData = {
 		"1A401EF4-5036-4DE1-B8DD-4A19EE40453B": {
@@ -77,5 +79,5 @@ define(["ListModel"], function(ListModel) {
 	}
 
 	ListModel.loadLocal();
-	
+
 });

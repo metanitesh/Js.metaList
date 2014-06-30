@@ -1,4 +1,6 @@
 define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
+	
+	"use strict";
 
 	var TaskModel = util.extend(Model, {
 		
@@ -17,7 +19,6 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 			this.parentList.tasks[this.id] = this.clone();
 		},
 
-		
 		destroy: function() {
 			delete this.parentList.tasks[this.id];
 		},

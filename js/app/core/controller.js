@@ -1,6 +1,8 @@
-define(["util", "jquery"], function(util, $) {
+define(["ListModel", "util", "jquery"], function(ListModel, util, $) {
 
-	Controller = util.defClass({
+	"use strict";
+
+	var Controller = util.defClass({
 
 		constructor: function(el, template) {
 

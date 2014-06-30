@@ -1,6 +1,8 @@
 define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskModel, _) {
+	
+	"use strict";
 
-	ListModel = util.extend(Model, {
+	var ListModel = util.extend(Model, {
 
 		constructor: function(attr) {
 			if (!attr) throw ("Title is required to create new List");
@@ -62,7 +64,7 @@ define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskM
 		},
 
 		saveLocal: function(name) {
-			result = {};
+			var result = {};
 
 			for (var listId in ListModel.records) {
 

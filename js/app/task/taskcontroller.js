@@ -1,5 +1,7 @@
 define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, Controller, util, _, $) {
 	
+	"use strict";
+		
 	var TaskController = util.extend(Controller, {
 
 		constructor: function(el, template) {

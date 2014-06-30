@@ -1,4 +1,6 @@
 define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, Controller, util, _, $) {
+	
+	"use strict";
 
 	var NoteController = util.extend(Controller, {
 

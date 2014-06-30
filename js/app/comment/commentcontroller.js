@@ -1,5 +1,7 @@
 define(["TaskModel", "ListModel", "Controller", "util", "underscore", "jquery"], function(TaskModel, ListModel, Controller, util, _, $) {
 
+	"use strict";
+	
 	var CommentController = util.extend(Controller, {
 
 

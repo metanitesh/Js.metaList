@@ -1,4 +1,6 @@
 define(["ListModel", "Controller", "util", "underscore", "jquery"], function(ListModel, Controller, util, _, $) {
+	
+	"use strict";
 
 	var ListController = util.extend(Controller, {
 

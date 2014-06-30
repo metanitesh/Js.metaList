@@ -1,6 +1,8 @@
 define(["jquery"], function($) {
+	
+	"use strict";
 
-	util = {
+	var util = {
 		defClass: function(prototype) {
 
 			var constructor = prototype.constructor;

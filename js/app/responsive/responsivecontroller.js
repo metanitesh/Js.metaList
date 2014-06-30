@@ -1,4 +1,6 @@
 define(["util", "Controller", "jquery"], function(util, Controller, $) {
+	
+	"use strict";
 
 	var ResponsiveController = util.extend(Controller, {
 		constructor: function() {

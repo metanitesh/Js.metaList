@@ -1,6 +1,8 @@
 define(["util"], function(util) {
+	
+	"use strict";
 
-	Model = util.defClass({
+	var Model = util.defClass({
 
 		constructor: function() {
 

@@ -16,7 +16,8 @@ require.config({
         TaskController: 'js/app/task/taskcontroller',
         NoteController: 'js/app/note/notecontroller',
         CommentController: 'js/app/comment/commentcontroller',
-        actionbarController: 'js/app/actionbar/actionbarcontroller',
+        ActionbarController: 'js/app/actionbar/actionbarcontroller',
+        ResponsiveController: 'js/app/responsive/responsivecontroller',
 
 
         'jasmine': 'tests/lib/jasmine-1.0.0/jasmine',
