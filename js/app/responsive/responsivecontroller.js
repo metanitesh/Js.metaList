@@ -3,11 +3,10 @@ define(["util", "Controller", "jquery"], function(util, Controller, $) {
 	"use strict";
 
 	var ResponsiveController = util.extend(Controller, {
+		
 		constructor: function() {
 			this.super.constructor.apply(this, arguments);
 			this._hideAll();
-			this.view.mainContent.removeClass("hide-mobile")
-			this.view.mainContent.removeClass("hide-mobile")
 			this.displayTask();
 		},
 		
@@ -17,6 +16,7 @@ define(["util", "Controller", "jquery"], function(util, Controller, $) {
 			"click menuDetail": "displayDetail",
 
 		},
+
 		customEvents: {
 			"listItemSelected": "displayTask",
 			"taskItemSelected": "displayDetail"
@@ -33,49 +33,37 @@ define(["util", "Controller", "jquery"], function(util, Controller, $) {
 			"menuDetail": ".menu-detail",
 		},
 
-		showTaks: function(){
-			this.view.menuItem.removeClass("mobile-menu-active");
-			this._hideAll();
-			this.view.mainContent.removeClass("hide-mobile");
-		},
+		/***********************************************
 
-		showDetail: function(){
-			this.view.menuItem.removeClass("mobile-menu-active");
-
-			this._hideAll();
-			this.view.detail.removeClass("hide-mobile");
-		},
+				DOM methods  
+		***********************************************/
 
 		_hideAll: function(){
 			this.view.sidebar.addClass("hide-mobile");
 			this.view.mainContent.addClass("hide-mobile");
 			this.view.detail.addClass("hide-mobile");
+			this.view.menuItem.removeClass("mobile-menu-active");
 		},
 
-
-
-		displayList: function(e){
-			this.view.menuItem.removeClass("mobile-menu-active");
-			this.view.menuList.addClass("mobile-menu-active");
+		displayList: function(){
 			this._hideAll();
 			this.view.sidebar.removeClass("hide-mobile");
+			this.view.menuList.addClass("mobile-menu-active");
 		},
 
-		displayTask: function(e){
-			this.view.menuItem.removeClass("mobile-menu-active");
-			this.view.menuTask.addClass("mobile-menu-active");
+		displayTask: function(){
 			this._hideAll();
 			this.view.mainContent.removeClass("hide-mobile");
+			this.view.menuTask.addClass("mobile-menu-active");
 		},
 
-		displayDetail:function(e){
-			this.view.menuItem.removeClass("mobile-menu-active");
-			this.view.menuDetail.addClass("mobile-menu-active");
-	
+		displayDetail:function(){
 			this._hideAll();
-			this.view.detail.removeClass("hide-mobile");	
+			this.view.menuDetail.addClass("mobile-menu-active");
+			this.view.detail.removeClass("hide-mobile");
 		}
 
 	});
+
 	return ResponsiveController;
 });
