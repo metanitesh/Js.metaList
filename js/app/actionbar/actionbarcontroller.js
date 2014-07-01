@@ -3,6 +3,7 @@ define(["ListModel", "Controller", "util"], function(ListModel, Controller, util
 	"use strict";
 
 	var ActionbarController = util.extend(Controller, {
+		
 		constructor: function() {
 			this.super.constructor.apply(this, arguments);
 		},

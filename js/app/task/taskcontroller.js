@@ -54,11 +54,11 @@ define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(Tas
 		},
 
 		updateHash: function(e) {
-			$(document).trigger("taskItemSelected");
 			var task = this._getTask(e);
 			var list = this.parentList;
-
 			this.setUrl(list, task);
+
+			$(document).trigger("taskItemSelected");
 		},
 
 		/*************************

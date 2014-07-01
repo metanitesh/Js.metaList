@@ -41,9 +41,10 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 				Route handling  
 		***********************************************/
 		updateHash: function(e) {
-			$(document).trigger("listItemSelected");
 			var list = this._getModel(e);
 			this.setUrl(list);
+
+			$(document).trigger("listItemSelected");
 		},
 
 		routeSetup: function(){
@@ -93,7 +94,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 			var element = this.$("[data-id="+id+"]").closest(".list");
 			element.addClass('list-active');
 			element.find(".icon-list").addClass("icon-list-active");
-			element.find(".icon-delete").addClass("icon-delete-active")
+			element.find(".icon-delete").addClass("icon-delete-active");
 		
 		},
 
@@ -116,7 +117,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 
 
 					element.val("");
-					this.view.trigger("listItemCreated", listItem);
+					$(document).trigger("listItemCreated", listItem);
 					this.setUrl(listItem);
 				}
 
@@ -132,7 +133,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 					var model = this._getModel(e);
 					model.title = newTitle;
 					model.save();
-					this.view.trigger("listItemUpdate", model);
+					$(document).trigger("listItemUpdate", model);
 
 				}
 			}
@@ -143,7 +144,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 			var model = this._getModel(e);
 			model.destroy();
 			
-			this.view.trigger("ListItemDestroyed", model);
+			$(document).trigger("ListItemDestroyed", model);
 			this.setUrl("");
 			e.stopPropagation();
 		},
