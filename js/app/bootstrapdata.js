@@ -18,7 +18,7 @@ define(["ListModel"], function(ListModel) {
 					"id": "508EE1CB-1544-429F-89FE-3739154448E2",
 					"title": "get a haircut",
 					"comments": ["will do this weekend"],
-					"content": "lets go Fifa style",
+					"content": "this could be a good reason to become a monk",
 					"done": true
 				},
 				"F26660FB-C38C-4884-915E-B6F661332292": {
@@ -37,35 +37,35 @@ define(["ListModel"], function(ListModel) {
 				"5C70D44F-2A44-4292-B7AB-38E0D3F47A5F": {
 					"id": "5C70D44F-2A44-4292-B7AB-38E0D3F47A5F",
 					"title": "The Art Spirit",
-					"comments": ["a work of art which inspires comes from no quibbling or uncertain man", "the book is just delight for detail oriented peoples"],
+					"comments": ["a work of art which inspires comes from no quibbling or uncertain man", "the book is pure delight for detail oriented peoples"],
 					"content": "In certain books- some way in the first few\nparagraphs you know that you have met a brother.",
 					"done": false
 				},
 				"3FB6396A-4353-4C48-8701-9A46BF150068": {
 					"id": "3FB6396A-4353-4C48-8701-9A46BF150068",
 					"title": "The Alchemist",
-					"comments": ["I loved this book.", "they even have graphic novel for this"],
+					"comments": ["how to make a great book even better - make a graphic novel"],
 					"content": "It's simple things in life that are most extraordinary. only wise man are able to understand them.\n",
 					"done": true
 				},
 				"477B1634-3707-4B29-9BC0-1424FFCCBFC0": {
 					"id": "477B1634-3707-4B29-9BC0-1424FFCCBFC0",
 					"title": "The Noticer",
-					"comments": ["it's all about prespctive"],
+					"comments": ["get some perspective from an old man"],
 					"content": "If one makes a mistake then an apology is usually sufficient to get things back on keel. However most peoples doest not seems to understand why  their apology have no effect. it is simply because they did not make a mistake. they made a choice.\n\n",
 					"done": true
 				},
 				"7BC0845F-6826-4750-B717-DF99BF446EC8": {
 					"id": "7BC0845F-6826-4750-B717-DF99BF446EC8",
 					"title": "Turning Pro",
-					"comments": ["sequel of resistance by steven pressfield"],
+					"comments": ["much better than war of art"],
 					"content": "They didn't know Dave. He was top hand and a good guy. he would never pull the pin. he was a pro.",
 					"done": true
 				},
 				"558473C8-0F7B-4BCC-811F-E1C906A9A3D8": {
 					"id": "558473C8-0F7B-4BCC-811F-E1C906A9A3D8",
 					"title": "Essentialism",
-					"comments": ["less but better"],
+					"comments": [],
 					"content": "We often think of choice as a thing. But choice is not a thing. our option may be  things. but a choice- a choice is an action.",
 					"done": false
 				}
