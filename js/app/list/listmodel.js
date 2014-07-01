@@ -38,7 +38,7 @@ define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskM
 
 		records: {},
 
-		localDb: "metalist",
+		localDb: "",
 
 		attributes: ["id", "title"],
 

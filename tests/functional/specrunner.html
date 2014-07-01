@@ -28,7 +28,7 @@
         <script>
         require(['./../../require_config.js'], function() {
             
-            require(['jquery', 'jasmine-html'], function($, jasmine) {
+            require(['jquery', 'jasmine-html' ], function($, jasmine) {
                 var jasmineEnv = jasmine.getEnv();
                 jasmineEnv.updateInterval = 1000;
 
@@ -38,10 +38,13 @@
 
                 jasmineEnv.specFilter = function(spec) {
                     return htmlReporter.specFilter(spec);
-                }
+                }                 
+              
+                sessionStorage.testDb = "metaListTest";
+                localStorage.removeItem(sessionStorage.testDb);
 
     			var specs = ['tests/functional/spec/listspec', 'tests/functional/spec/taskspec',  'tests/functional/spec/commentspec', 'tests/functional/spec/notespec'];
-             
+            
 
 
                 $(function() {
@@ -58,5 +61,8 @@
 
     <body>
     <iframe src="../../index.html" id="metaListFrame" name="metaList"></iframe>
+    <script>    
+            
+    </script>
     </body>
 </html>

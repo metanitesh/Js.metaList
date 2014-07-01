@@ -1,4 +1,7 @@
 define(["TaskModel", "ListModel"], function(TaskModel, ListModel) {
+	
+	localStorage.removeItem("metaListTest");
+    ListModel.localDb = "metaListTest";
 
 	describe("Task-Model spec", function() {
 		var task;

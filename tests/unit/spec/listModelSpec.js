@@ -1,9 +1,11 @@
-define(["ListModel", "TaskModel"], function(ListModel) {
-
+define(["ListModel"], function(ListModel) {
+	
+	/**test db setup**/
+	localStorage.removeItem("metaListTest");
+    ListModel.localDb = "metaListTest";
+	
 	describe("List Model", function() {
-		beforeEach(function(){
-			ListModel.localDb = "testMetaList";
-		});
+
 		describe("instance methods", function() {
 			var travelList;
 			beforeEach(function() {
@@ -170,6 +172,7 @@ define(["ListModel", "TaskModel"], function(ListModel) {
 				ListModel.saveLocal();
 
 				/** then **/
+
 				expect(localStorage[ListModel.localDb]).toEqual(JSON.stringify(expectedObj));
 
 			});

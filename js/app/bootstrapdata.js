@@ -72,6 +72,13 @@ define(["ListModel"], function(ListModel) {
 			}
 		}
 	};
+	
+
+	ListModel.localDb = "metalist";
+	
+	if(sessionStorage.testDb){
+		ListModel.localDb = sessionStorage.testDb;
+	}
 
 	if (!localStorage[ListModel.localDb]) {
 		ListModel.populate(bootstrapData);
