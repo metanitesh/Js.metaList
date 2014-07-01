@@ -1,14 +1,20 @@
 define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskModel, _) {
-	
+
 	"use strict";
 
 	var ListModel = util.extend(Model, {
 
 		constructor: function(attr) {
-			if (!attr) throw ("Title is required to create new List");
+			if (!attr) {
+				throw ("Title is required to create new List");
+			}
 			this.load(attr);
-			if (!this.id) this.id = this.genrateId();
-			if (!this.tasks) this.tasks = {};
+			if (!this.id) {
+				this.id = this.genrateId();
+			}
+			if (!this.tasks) {
+				this.tasks = {};
+			}
 
 		},
 
@@ -22,7 +28,7 @@ define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskM
 
 
 		addTask: function(attr) {
-			
+
 			var task = new TaskModel(attr);
 			task.parentList = this;
 			task.save();
@@ -31,7 +37,7 @@ define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskM
 		findTaskById: function(id) {
 			return this.tasks[id].clone();
 		}
-		
+
 	});
 
 	ListModel.static({
@@ -44,21 +50,28 @@ define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskM
 
 		populate: function(listCollection) {
 			for (var listId in listCollection) {
-				var list = new this(listCollection[listId]);
-				if (list.tasks) {
+				if (listCollection.hasOwnProperty(listId)) {
+					var list = new this(listCollection[listId]);
+					if (list.tasks) {
 
-					for (var taskId in list.tasks) {
-						list.addTask(list.tasks[taskId]);
+						for (var taskId in list.tasks) {
+							if (list.tasks.hasOwnProperty(taskId)) {
+								list.addTask(list.tasks[taskId]);
+							}
+						}
 					}
+					list.save();
 				}
-				list.save();
+
 			}
 
 		},
 
 		findById: function(id) {
 			var record = this.records[id];
-			if (!record) throw "No record found";
+			if (!record) {
+				throw "No record found";
+			}
 			return record.clone();
 
 		},
@@ -67,15 +80,21 @@ define(["util", "Model", "TaskModel", "underscore"], function(util, Model, TaskM
 			var result = {};
 
 			for (var listId in ListModel.records) {
+				if (ListModel.records.hasOwnProperty(listId)) {
+					result[listId] = ListModel.records[listId].getAttributes();
+					var tasks = ListModel.records[listId].tasks;
 
-				result[listId] = ListModel.records[listId].getAttributes();
-				var tasks = ListModel.records[listId].tasks;
-				if (!_.isEmpty(tasks)) {
-					result[listId].tasks = {};
-					for (var taskId in tasks) {
-						result[listId].tasks[taskId] = tasks[taskId].getAttributes();
+					if (!_.isEmpty(tasks)) {
+						result[listId].tasks = {};
+						for (var taskId in tasks) {
+
+							if (tasks.hasOwnProperty(taskId)) {
+								result[listId].tasks[taskId] = tasks[taskId].getAttributes();
+							}
+						}
 					}
 				}
+
 			}
 
 			localStorage[this.localDb] = JSON.stringify(result);

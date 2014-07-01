@@ -6,16 +6,16 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 		
 		constructor: function(attr) {
 
-			if (!attr) throw ("Title is required to create a new Task");
+			if (!attr) {throw ("Title is required to create a new Task");}
 			this.load(attr);
-			if (!this.id) this.id = this.genrateId();
-			if (!this.comments) this.comments = [];
-			if (!this.content) this.content = "";
-			if (!this.done) this.done = false;
+			if (!this.id) {this.id = this.genrateId();}
+			if (!this.comments) {this.comments = [];}
+			if (!this.content) {this.content = "";}
+			if (!this.done) {this.done = false;}
 		},
 
 		save: function() {
-			if(!this.parentList) throw "Unkown parent list for this task";
+			if(!this.parentList) {throw "Unkown parent list for this task";}
 			this.parentList.tasks[this.id] = this.clone();
 		},
 
@@ -34,7 +34,7 @@ define([ "util", "Model", "ListModel"], function(util, Model, ListModel) {
 
 	TaskModel.static({
 		attributes:  ["id", "title", "comments", "content", "done"]
-	})
+	});
 
 	
 	return TaskModel;

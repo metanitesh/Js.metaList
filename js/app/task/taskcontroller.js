@@ -67,7 +67,7 @@ define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(Tas
 		*************************/
 
 		_getTask: function(e) {
-			var id = this.$(e.target).closest('.task-item').data("id");
+			var id = this.$(e.target).closest(".task-item").data("id");
 			var task = this.parentList.findTaskById(id);
 			return task;
 		},
@@ -75,12 +75,12 @@ define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(Tas
 
 		activeTaskState: function(id) {
 			this.view.find(".task-item").removeClass("task-item-selected");
-			this.$("[data-id=" + id + "]").closest('.task-item').addClass('task-item-selected');
+			this.$("[data-id=" + id + "]").closest(".task-item").addClass("task-item-selected");
 		},
 
 		completeTaskState: function() {
-			this.view.taskComplete.find("li").addClass('task-done');
-			this.view.taskComplete.find(".icon-task-checkbox").addClass('icon-task-checked');
+			this.view.taskComplete.find("li").addClass("task-done");
+			this.view.taskComplete.find(".icon-task-checkbox").addClass("icon-task-checked");
 		},
 
 		activeAddTaskState: function() {
@@ -152,9 +152,10 @@ define(["TaskModel", "Controller", "util", "underscore", "jquery"], function(Tas
 			this.view.taskComplete.html("");
 
 			for (var taskId in this.tasks) {
-				var task = this.tasks[taskId];
-				this.render(task);
-
+				if(this.tasks.hasOwnProperty(taskId)){
+					var task = this.tasks[taskId];
+					this.render(task);
+				}
 			}
 
 		},

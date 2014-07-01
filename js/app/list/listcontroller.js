@@ -64,7 +64,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		},
 
 		_getModel: function(e) {
-			var id = this.$(e.target).closest('.list').attr("data-id");
+			var id = this.$(e.target).closest(".list").attr("data-id");
 			var model = ListModel.findById(id);
 			return model;
 		},
@@ -75,13 +75,13 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		***********************************************/
 
 		listUpdateState: function(element) {
-			element.closest('.list').find(".input-wrapper").removeClass('hidden');
-			element.closest('.list').find(".title").addClass('hidden');
+			element.closest(".list").find(".input-wrapper").removeClass("hidden");
+			element.closest(".list").find(".title").addClass("hidden");
 		},
 
 		listDisplayState: function(element, model) {
-			element.find(".input-wrapper").addClass('hidden');
-			element.closest('.list').find(".title").html(model.title).removeClass('hidden');
+			element.find(".input-wrapper").addClass("hidden");
+			element.closest(".list").find(".title").html(model.title).removeClass("hidden");
 		},
 
 		listActiveState: function(id) {
@@ -92,7 +92,7 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 			this.view.find(".title").removeClass("hidden");
 			
 			var element = this.$("[data-id="+id+"]").closest(".list");
-			element.addClass('list-active');
+			element.addClass("list-active");
 			element.find(".icon-list").addClass("icon-list-active");
 			element.find(".icon-delete").addClass("icon-delete-active");
 		
@@ -184,7 +184,9 @@ define(["ListModel", "Controller", "util", "underscore", "jquery"], function(Lis
 		renderALL: function() {
 			this.view.listContainer.empty();
 			for (var id in ListModel.records) {
-				this.render(null, ListModel.records[id]);
+				if(ListModel.records.hasOwnProperty(id)){
+					this.render(null, ListModel.records[id]);
+				}
 			}
 
 

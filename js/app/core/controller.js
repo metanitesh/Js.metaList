@@ -7,7 +7,9 @@ define(["ListModel", "util", "jquery"], function(ListModel, util, $) {
 		constructor: function(el, template) {
 
 			this.view = $(el);
-			if (template) this.template = $(template).html();
+			if (template) {
+				this.template = $(template).html();
+			}
 			this.refreshElement();
 			this.delegateEvent();
 			this.delegateCustomEvent();
@@ -79,10 +81,15 @@ define(["ListModel", "util", "jquery"], function(ListModel, util, $) {
 		setUrl: function(list, task) {
 
 			var Url = "";
-			
-			if(list) Url = Url + "/" + list.id;
-			if(task) Url =  Url + "/" + task.id;
-			
+
+			if (list) {
+				Url = Url + "/" + list.id;
+			}
+
+			if (task) {
+				Url = Url + "/" + task.id;
+			}
+
 			location.hash = Url;
 		},
 
@@ -98,12 +105,14 @@ define(["ListModel", "util", "jquery"], function(ListModel, util, $) {
 			if (listId) {
 				var list = ListModel.findById(listId);
 				result.list = list;
+
+				if (taskId) {
+					var task = list.findTaskById(taskId);
+					result.task = list.findTaskById(taskId);
+				}
 			}
 
-			if (taskId) {
-				var task = list.findTaskById(taskId);
-				result.task = list.findTaskById(taskId);
-			}
+
 
 			return result;
 

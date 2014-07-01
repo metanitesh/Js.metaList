@@ -1,5 +1,6 @@
 define(["TaskModel", "ListModel"], function(TaskModel, ListModel) {
 	
+	/**test db setup**/
 	localStorage.removeItem("metaListTest");
     ListModel.localDb = "metaListTest";
 
