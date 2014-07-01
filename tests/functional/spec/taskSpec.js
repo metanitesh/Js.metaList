@@ -1,4 +1,4 @@
-define(["func"], function(func) {
+define(["func"], function(F) {
 	F.speed = 2;
 
 	describe('Task', function() {
@@ -23,12 +23,9 @@ define(["func"], function(func) {
 		});
 
 		it('can create a new task', function() {
-
 			F(".task-item .task-title:contains('Into The Wild')", 0).visible();
 			F(".task-item .task-title:contains('Prestige')", 0).visible();
 			F(".task-item .task-title:contains('Peaceful warrior')", 0).visible();
-
-
 		});
 
 		it('can check off a task', function() {
@@ -42,37 +39,26 @@ define(["func"], function(func) {
 			};
 
 			F(".task-item .task-title:contains('Into The Wild')", 0).visible(performTest);
-
-
 		});
 
 		it("can delete a task", function() {
 			var performTest = function() {
 				F(this).siblings(".delete-task").click(function() {
 					F(".task-complete .task-item .task-title:contains('Into The Wild')", 0).invisible();
-
 				});
-
 			};
 
 			F(".task-item .task-title:contains('Into The Wild')", 0).visible(performTest);
-
 		});
 
 		it("should apply active class to selected task", function() {
 			var performTest = function() {
-
 				F(".task-item .task-title:contains('Prestige')", 0).closest(".task-item").wait(function() {
 					return F(this).hasClass("task-item-selected");
 				});
 
 			};
-
 			F(".task-item .task-title:contains('Prestige')", 0).visible().click(performTest);
-
 		});
-
-
-
 	});
 });

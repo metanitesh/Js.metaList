@@ -1,4 +1,4 @@
-define(["func"], function(func) {
+define(["func"], function(F) {
 	F.speed = 2;
 
 	describe('actionbar', function() {
@@ -12,7 +12,6 @@ define(["func"], function(func) {
 		});
 
 		it('can save data locally', function() {
-
 			F(".list .title:contains('movies')", 0).visible(function() {
 				F(".save", 0).click(function(e) {
 					expect(localStorage[sessionStorage.testDb].match("movie")).toBeTruthy();

@@ -1,4 +1,4 @@
-define(["func"], function(func) {
+define(["func"], function(F) {
 	F.speed = 2;
 
 	describe('List', function() {
@@ -12,13 +12,10 @@ define(["func"], function(func) {
 		});
 
 		it('can create a new List', function() {
-
 			F(".list .title:contains('movies')", 0).visible();
-
 		});
 
 		it("can edit a list item", function() {
-
 			var performTest = function() {
 				F(this).closest(".list").dblclick();
 				F(this).closest(".list").find(".input-wrapper").visible(function() {
@@ -33,7 +30,6 @@ define(["func"], function(func) {
 		});
 
 		it("can delete a list item", function() {
-
 			var performTest = function() {
 				F(this).closest(".list").find(".delete-list").click();
 				F(this).closest(".list").invisible();

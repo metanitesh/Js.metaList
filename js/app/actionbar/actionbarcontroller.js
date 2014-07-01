@@ -22,7 +22,7 @@ define(["ListModel", "Controller", "util"], function(ListModel, Controller, util
 		},
 
 		save: function() {
-			ListModel.saveLocal(ListModel.localDb);
+			ListModel.saveLocal();
 			this.addAnimation();
 		}
 

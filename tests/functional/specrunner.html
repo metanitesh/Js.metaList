@@ -18,10 +18,35 @@
 				border-radius: 4px;
 			}
 			
+            .mobileFrame{
+                min-width: 100px;
+                width: 400px;
+                margin-right: 300px;
+
+            }
+
 			.jasmine_reporter{
-			float: left;
-			width: 20%
-		}	
+			    float: left;
+		  	    width: 20%;
+            }
+
+            .info{
+                text-align: center;
+                color: #8a6d3b;
+                background-color: #fcf8e3;
+                border-color: #faebcc;
+                padding: 15px;
+                margin-bottom: 20px;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+			
+            .info span{
+                color: #8a6d3b;
+                font-family: helvetica;
+                font-size: 13px;
+            }
+
 		</style>
         <link rel="stylesheet" type="text/css" href="../lib/jasmine-1.0.0/jasmine.css">
         <script data-main="./../../require_config" src="../../js/lib/require.js"></script>
@@ -43,10 +68,10 @@
                 sessionStorage.testDb = "metaListTest";
                 localStorage.removeItem(sessionStorage.testDb);
 
-    			var specs = ['tests/functional/spec/listspec', 'tests/functional/spec/taskspec',  'tests/functional/spec/commentspec', 'tests/functional/spec/notespec'];
-            
-
-
+    			var specs = ['tests/functional/spec/listspec', 'tests/functional/spec/taskspec',  'tests/functional/spec/commentspec', 'tests/functional/spec/notespec', 
+                'tests/functional/spec/actionbarspec', 'tests/functional/spec/responsivespec'];
+                
+    
                 $(function() {
                     require(specs, function(spec) {
                         jasmineEnv.execute();
@@ -60,6 +85,11 @@
     </head>
 
     <body>
+    <div class="info">
+        <span>
+            funcunit is relatively new solution for functional tests and still has some bugs. <br>so incase any functioanl tests is failing. try rerunning tests or just run tests for that block only 
+        </span>
+    </div>    
     <iframe src="../../index.html" id="metaListFrame" name="metaList"></iframe>
     <script>    
             

@@ -1,4 +1,4 @@
-define(["func"], function(func) {
+define(["func"], function(F) {
 	F.speed = 2;
 
 	describe('Comment', function() {
@@ -31,7 +31,6 @@ define(["func"], function(func) {
 		});
 
 		it("should display comment for the task", function(){
-			
 			var performTest = function() {
 				F(".task-item .task-title:contains('The Alchemist')", 0).click();
 
