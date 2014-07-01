@@ -1,5 +1,4 @@
 require.config({
-    baseUrl: '/jquey.metaList',
     paths: {
         jquery: 'js/lib/jquery-1.11.1',
         underscore: 'js/lib/underscore',
