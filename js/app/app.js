@@ -13,8 +13,9 @@ define(["ListController", "TaskController", "NoteController", "CommentController
 
 			var responsiveController = new ResponsiveController("body");
 			$(window).trigger("hashchange");
+			$(".loader").hide();
 		});
-	});
+	});	
 
 
 

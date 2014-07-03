@@ -380,6 +380,20 @@ task-item module
 
 
 /*********************
+ loader module
+ *********************/
+
+ .loader{
+ 	position: absolute;
+ 	top:43%;
+ 	left:43%;
+ 	opacity: .2;
+ }
+
+
+
+
+/*********************
  module layout helpers
  *********************/
 
