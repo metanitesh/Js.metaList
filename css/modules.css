@@ -277,7 +277,7 @@ task-item module
  }
 
  .comments{
- 	height: 230px;
+ 	max-height: 29%;
  	overflow: scroll;
  }
 
