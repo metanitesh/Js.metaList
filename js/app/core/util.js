@@ -31,11 +31,11 @@ define(["jquery"], function($) {
 			return this.defClass(prototype);
 		},
 
-		imageLoader : function(imageArr) {
+		imageLoader: function(imageArr) {
 
 			var loadedImages = 0;
 			var images = [];
-			var postAction = function() {}
+			var postAction = function() {};
 			var postLoad = function() {
 				loadedImages++;
 				if (loadedImages === imageArr.length) {
@@ -43,21 +43,24 @@ define(["jquery"], function($) {
 				}
 			};
 
+			var success = function() {
+				postLoad();
+			};
+
+			var fail = function() {
+				postLoad();
+			};
 			for (var i = 0; i < imageArr.length; i++) {
 				var src = "images/" + imageArr[i];
 				images[i] = new Image();
 				images[i].src = src;
-				images[i].onload = function() {
-					postLoad();
-				};
-				images[i].onError = function() {
-					postLoad();
-				};
+				images[i].onload = success;
+				images[i].onError = fail;
+
 			}
 
 			return {
-				done: function(f, someShit) {
-					someShit = 3;
+				done: function(f) {
 					postAction = f || postAction;
 				}
 			};
