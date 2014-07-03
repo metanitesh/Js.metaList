@@ -34,8 +34,7 @@ define(["func"], function(F) {
 			var performTest = function() {
 				F(".task-item .task-title:contains('The Alchemist')", 0).click();
 
-				F(".comment:contains('I loved this book.')",0).visible();
-				F(".comment:contains('they even have graphic novel for this')",0).visible();
+				F(".comment:contains('how to make a great book even better - make a graphic novel')",0).visible();
 			};
 
 			F(".list .title:contains('Books')", 0).click(performTest);
