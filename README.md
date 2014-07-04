@@ -42,12 +42,12 @@
 >MetaList follows smacss guidelines to architect css in modular fashion and organizes base, layout and module classes separately. Every css module in metalist can be effectively re-used and adopt different layouts.
 
 ####CSS-RWD
->Metalist responds with user friendly version of application on smaller resolution.
+>MetaList responds with user friendly version of application on smaller resolution.
 
 ####DB/ LocalStorage 
 >MetaList stores data locally in your browser.
 
 ####jQuery/ Uunderscore
->Metalist uses jquery for Dom and Underscore for utility belt.
+>MetaList uses jquery for Dom and Underscore for utility belt.
 
 
