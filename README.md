@@ -1,4 +1,4 @@
-###Js.metaList [![BuildStatus](https://travis-ci.org/metanitesh/Js.jQuery.metaList.svg?branch=master)](https://travis-ci.org/metanitesh/Js.jQuery.metaList)
+###Js.metaList [![BuildStatus](https://travis-ci.org/metanitesh/Js.metaList.svg?branch=master)](https://travis-ci.org/metanitesh/Js.metaList)
 
 >MetaList is a javascript application designed for easy content organization. even though it can be used as a product actual purpose of the application is to demonstrate how to craft production ready javascript application. 
 - [live demo](http://www.niteshsharma.com/js.metalist)
