@@ -47,7 +47,7 @@
 ####DB/ LocalStorage 
 >MetaList stores data locally in your browser.
 
-####jQuery/ Uunderscore
+####jQuery/ Underscore
 >MetaList uses jquery for Dom and Underscore for utility belt.
 
 
