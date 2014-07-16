@@ -20,14 +20,14 @@
 
 >Javascript testing is somewhat different than server-side testing and writing unit test cases related to controller brings not only trivial value but more hassle instead metaList uses funcUnit to test controller.
 
-- [run unit tests](http://www.niteshsharma.com/js.metalist/functional/specrunner.html)
+- [run unit tests](http://www.niteshsharma.com/js.metalist/tests/unit/specrunner.html)
 
 ####Functional tests/ Funcunit
 
 >MetaList uses funcUnit to write functional test case. FuncUnit allows you to write functional test cases in jasmine with jquery like syntax and run it on iframe.  
 
-- [run functional tests](http://www.niteshsharma.com/js.metalist/functional/specrunner.html)
-  
+- [run functional tests](http://www.niteshsharma.com/js.metalist/tests/functional/specrunner.html)
+
 ####Build/ Grunt 
 
 >MetaList utilize grunt as a build tool and uses it to runs unit tests and lint Js files. 
