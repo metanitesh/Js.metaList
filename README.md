@@ -5,6 +5,12 @@
 - [unit tests](http://www.niteshsharma.com/js.metalist/tests/unit/specrunner.html)
 - [functional tests](http://www.niteshsharma.com/js.metalist/tests/functional/specrunner.html)
 
+####other version
+
+>with framworks
+- [Angular.metaList](https://github.com/metanitesh/Angular.metaList/)
+- [Backbone.metaList](https://github.com/metanitesh/Backbone.metaList/)
+
 
 ####Object oriented design and MVC ( without any framework ).
 
